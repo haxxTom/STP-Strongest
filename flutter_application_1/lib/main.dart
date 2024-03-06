@@ -85,9 +85,36 @@ class SecondScreen extends StatelessWidget {
         title: Text('Second Screen'),
       ),
       body: Center(
-        child: Text(
-          'This is the second screen.',
-          style: TextStyle(fontSize: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'This is the second screen.',
+              style: TextStyle(fontSize: 24),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Custom Dialog'),
+                      content: Text('halooo'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Close'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Text('Custom Button'),
+            ),
+          ],
         ),
       ),
     );

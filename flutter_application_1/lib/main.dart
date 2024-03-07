@@ -84,16 +84,24 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.pageview),
-            label: 'Search',
+            icon: Icon(Icons.casino),
+            label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Menu',
+            icon: Icon(Icons.add),
+            label: 'Templates',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: 'Exercises',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.alarm),
+            label: 'History',
           )
         ],
       ),
@@ -161,16 +169,24 @@ class SecondScreen extends StatelessWidget {
           
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.pageview),
-            label: 'Second Page',
+            icon: Icon(Icons.casino),
+            label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Third Page',
+            icon: Icon(Icons.add),
+            label: 'Templates',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: 'Exercises',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.alarm),
+            label: 'History',
           )
         ],
       ),
@@ -194,6 +210,15 @@ class ThirdScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+              ),
+              onPressed: () {
+
+              }, 
+              child: const Text('Tlačítko na '),
+              ),
             const Text(
               'This is the third screen.',
               style: TextStyle(fontSize: 24),
@@ -239,16 +264,24 @@ class ThirdScreen extends StatelessWidget {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.pageview),
-            label: 'Second Page',
+            icon: Icon(Icons.casino),
+            label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Third Page',
+            icon: Icon(Icons.add),
+            label: 'Templates',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: 'Exercises',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.alarm),
+            label: 'History',
           )
         ],
       ),

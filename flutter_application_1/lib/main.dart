@@ -108,7 +108,7 @@ class SecondScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
-        title: Text('Second Screen'),
+        title: const Text('Second Screen'),
       ),
       backgroundColor: Colors.black,
       body: Center(
@@ -154,7 +154,7 @@ class SecondScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
         },
@@ -233,7 +233,7 @@ class ThirdScreen extends StatelessWidget {
           if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SecondScreen()),
+              MaterialPageRoute(builder: (context) => const SecondScreen()),
             );
           }
         },

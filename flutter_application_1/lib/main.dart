@@ -4,6 +4,12 @@ void main() {
   runApp(const MyApp());
 }
 
+Color darkItemColor = const Color(0xFF28104E);
+Color mainBackgroundColor = const Color(0xFF6237A0);
+Color midItemColor = const Color(0xFF9754CB);
+Color softItemColor = const Color(0xFFDEACF5);
+
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key});
 
@@ -12,7 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
+        scaffoldBackgroundColor: Colors.black,
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Profile'));
@@ -23,28 +30,24 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title});
 
   final String title;
-
+  
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: mainBackgroundColor,
         title: Text(widget.title),
       ),
-      backgroundColor: Colors.black,
-      
-      
+      backgroundColor: mainBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
+        showUnselectedLabels: true,
+        unselectedItemColor: softItemColor,
+        selectedItemColor: Colors.white,
         currentIndex: 0,
         onTap: (index) {
           if (index == 0) { // Check if the tapped index is 0 (home page)
@@ -75,25 +78,30 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.casino),
             label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.add),
             label: 'Templates',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.fitness_center),
             label: 'Exercises',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.alarm),
             label: 'History',
           )
         ],
@@ -108,15 +116,16 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: mainBackgroundColor,
         title: const Text(
           'Random Generator',
           style: TextStyle(color: Colors.white, fontSize: 30),
           ),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: mainBackgroundColor,
       body: Center(
         child: Column(
+          
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
@@ -124,6 +133,10 @@ class SecondScreen extends StatelessWidget {
               style: TextStyle(fontSize: 24),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: darkItemColor,
+                
+              ),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -148,8 +161,10 @@ class SecondScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
+        bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        unselectedItemColor: softItemColor,
+        selectedItemColor: Colors.white,
         currentIndex: 1,
         onTap: (index) {
           if (index == 0) { // Check if the tapped index is 0 (home page)
@@ -181,27 +196,33 @@ class SecondScreen extends StatelessWidget {
           }
         },
           
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.casino),
             label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.add),
             label: 'Templates',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.fitness_center),
             label: 'Exercises',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.alarm),
             label: 'History',
           )
+          
         ],
       ),
     );
@@ -209,8 +230,6 @@ class SecondScreen extends StatelessWidget {
 }
 
 class ThirdScreen extends StatelessWidget {
-
-  
 
   const ThirdScreen({Key? key}) : super(key: key);
   @override
@@ -229,16 +248,16 @@ class ThirdScreen extends StatelessWidget {
           'Templates',
           style: TextStyle(color: Colors.white, fontSize: 30),
           ),
-        backgroundColor: Colors.purple,
+        backgroundColor: mainBackgroundColor,
       
       ),
+      backgroundColor: mainBackgroundColor,
       floatingActionButton: FloatingActionButton(
         onPressed: plustemplate,
         tooltip: 'Plus template',
-        child: const Icon(Icons.add, ),
-        backgroundColor: Colors.purple,
+        backgroundColor: darkItemColor,
+        child: const  Icon(Icons.add),
       ),
-      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -282,7 +301,9 @@ class ThirdScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
+        showUnselectedLabels: true,
+        unselectedItemColor: softItemColor,
+        selectedItemColor: Colors.white,
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) { // Check if the tapped index is 0 (home page)
@@ -313,25 +334,30 @@ class ThirdScreen extends StatelessWidget {
             );
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.casino),
             label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.add),
             label: 'Templates',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.fitness_center),
             label: 'Exercises',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.alarm),
             label: 'History',
           )
         ],
@@ -352,10 +378,10 @@ class FourthScreen extends StatelessWidget {
           'Exercises',
           style: TextStyle(color: Colors.white, fontSize: 30),
           ),
-        backgroundColor: Colors.purple,
+        backgroundColor: mainBackgroundColor,
       
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: mainBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -399,7 +425,9 @@ class FourthScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
+        showUnselectedLabels: true,
+        unselectedItemColor: softItemColor,
+        selectedItemColor: Colors.white,
         currentIndex: 3,
         onTap: (index) {
           if (index == 0) { // Check if the tapped index is 0 (home page)
@@ -430,25 +458,30 @@ class FourthScreen extends StatelessWidget {
             );
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.casino),
             label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.add),
             label: 'Templates',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.fitness_center),
             label: 'Exercises',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.alarm),
             label: 'History',
           )
         ],
@@ -469,10 +502,10 @@ class FifthScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
   
-        backgroundColor: Colors.purple,
+        backgroundColor: mainBackgroundColor,
       
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: mainBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -502,8 +535,10 @@ class FifthScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
+        bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        unselectedItemColor: softItemColor,
+        selectedItemColor: Colors.white,
         currentIndex: 4,
         onTap: (index) {
           if (index == 0) { // Check if the tapped index is 0 (home page)
@@ -534,25 +569,30 @@ class FifthScreen extends StatelessWidget {
             );
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.casino),
             label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.add),
             label: 'Templates',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.fitness_center),
             label: 'Exercises',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.alarm),
             label: 'History',
           )
         ],
@@ -569,10 +609,10 @@ class SixthScreen extends StatelessWidget {
       
       appBar: AppBar(
         title: const Text('Second Screen'),
-        backgroundColor: Colors.purple,
+        backgroundColor: mainBackgroundColor,
       
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: mainBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -603,7 +643,9 @@ class SixthScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple,
+        showUnselectedLabels: true,
+        unselectedItemColor: softItemColor,
+        selectedItemColor: Colors.white,
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) { // Check if the tapped index is 0 (home page)
@@ -634,25 +676,30 @@ class SixthScreen extends StatelessWidget {
             );
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.casino),
             label: 'Random',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.add),
             label: 'Templates',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.fitness_center),
             label: 'Exercises',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
+            backgroundColor: mainBackgroundColor,
+            icon: const Icon(Icons.alarm),
             label: 'History',
           )
         ],

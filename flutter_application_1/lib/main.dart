@@ -9,20 +9,21 @@ Color mainBackgroundColor = const Color(0xFF6237A0);
 Color midItemColor = const Color(0xFF9754CB);
 Color softItemColor = const Color(0xFFDEACF5);
 
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
-        scaffoldBackgroundColor: Colors.black,
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Profile'));
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
+          scaffoldBackgroundColor: Colors.black,
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'Profile'));
   }
 }
 
@@ -30,7 +31,7 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title});
 
   final String title;
-  
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -50,9 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Colors.white,
         currentIndex: 0,
         onTap: (index) {
-          if (index == 0) { // Check if the tapped index is 0 (home page)
+          if (index == 0) {
+            // Check if the tapped index is 0 (home page)
             Navigator.popUntil(context, ModalRoute.withName('/'));
-            }
+          }
           if (index == 1) {
             Navigator.push(
               context,
@@ -62,19 +64,19 @@ class _MyHomePageState extends State<MyHomePage> {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FourthScreen()),
+              MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FifthScreen()),
+              MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
           }
         },
@@ -120,22 +122,20 @@ class SecondScreen extends StatelessWidget {
         title: const Text(
           'Random Generator',
           style: TextStyle(color: Colors.white, fontSize: 30),
-          ),
+        ),
       ),
       backgroundColor: mainBackgroundColor,
       body: Center(
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'This is the second screen.',
+              'This is the random screen.',
               style: TextStyle(fontSize: 24),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: darkItemColor,
-                
               ),
               onPressed: () {
                 showDialog(
@@ -161,15 +161,16 @@ class SecondScreen extends StatelessWidget {
           ],
         ),
       ),
-        bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,
         selectedItemColor: Colors.white,
         currentIndex: 1,
         onTap: (index) {
-          if (index == 0) { // Check if the tapped index is 0 (home page)
+          if (index == 0) {
+            // Check if the tapped index is 0 (home page)
             Navigator.popUntil(context, ModalRoute.withName('/'));
-            }
+          }
           if (index == 1) {
             Navigator.push(
               context,
@@ -179,23 +180,22 @@ class SecondScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FourthScreen()),
+              MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FifthScreen()),
+              MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
           }
         },
-          
         items: [
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,
@@ -222,7 +222,6 @@ class SecondScreen extends StatelessWidget {
             icon: const Icon(Icons.alarm),
             label: 'History',
           )
-          
         ],
       ),
     );
@@ -230,73 +229,54 @@ class SecondScreen extends StatelessWidget {
 }
 
 class ThirdScreen extends StatelessWidget {
-
   const ThirdScreen({Key? key}) : super(key: key);
   @override
-  
   Widget build(BuildContext context) {
     void plustemplate() {
-    Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SixthScreen()),
-            );
-  }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SixthScreen()),
+      );
+    }
+
     return Scaffold(
-      
       appBar: AppBar(
         title: const Text(
           'Templates',
           style: TextStyle(color: Colors.white, fontSize: 30),
-          ),
+        ),
         backgroundColor: mainBackgroundColor,
-      
       ),
       backgroundColor: mainBackgroundColor,
       floatingActionButton: FloatingActionButton(
         onPressed: plustemplate,
         tooltip: 'Plus template',
         backgroundColor: darkItemColor,
-        child: const  Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+      body: Container(
+        padding: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          children: [
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey,
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey),
+                
               ),
-              onPressed: () {
-
-              }, 
-              child: const Text('Tlačítko na '),
-              ),
-            const Text(
-              'This is the third screen.',
-              style: TextStyle(fontSize: 24),
+              onPressed: null,
+              child: Text('New'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Custom Dialog'),
-                      content: const Text('halooo'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Close'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              child: const  Text('Custom Button'),
-            ),
+            MaterialButton(
+              height: 100,
+              minWidth: 100,
+              splashColor: Colors.black,
+              onPressed: null,
+              child: Text('Random'),
+            )
           ],
         ),
       ),
@@ -306,9 +286,10 @@ class ThirdScreen extends StatelessWidget {
         selectedItemColor: Colors.white,
         currentIndex: 2,
         onTap: (index) {
-          if (index == 0) { // Check if the tapped index is 0 (home page)
+          if (index == 0) {
+            // Check if the tapped index is 0 (home page)
             Navigator.popUntil(context, ModalRoute.withName('/'));
-            }
+          }
           if (index == 1) {
             Navigator.push(
               context,
@@ -318,19 +299,19 @@ class ThirdScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FourthScreen()),
+              MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FifthScreen()),
+              MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
           }
         },
@@ -366,20 +347,17 @@ class ThirdScreen extends StatelessWidget {
   }
 }
 
-
 class FourthScreen extends StatelessWidget {
   const FourthScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         title: const Text(
           'Exercises',
           style: TextStyle(color: Colors.white, fontSize: 30),
-          ),
+        ),
         backgroundColor: mainBackgroundColor,
-      
       ),
       backgroundColor: mainBackgroundColor,
       body: Center(
@@ -390,13 +368,11 @@ class FourthScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey,
               ),
-              onPressed: () {
-
-              }, 
+              onPressed: () {},
               child: const Text('Tlačítko na '),
-              ),
+            ),
             const Text(
-              'This is the third screen.',
+              'This is the exercise screen.',
               style: TextStyle(fontSize: 24),
             ),
             ElevatedButton(
@@ -419,7 +395,7 @@ class FourthScreen extends StatelessWidget {
                   },
                 );
               },
-              child: const  Text('Custom Button'),
+              child: const Text('Custom Button'),
             ),
           ],
         ),
@@ -430,9 +406,10 @@ class FourthScreen extends StatelessWidget {
         selectedItemColor: Colors.white,
         currentIndex: 3,
         onTap: (index) {
-          if (index == 0) { // Check if the tapped index is 0 (home page)
+          if (index == 0) {
+            // Check if the tapped index is 0 (home page)
             Navigator.popUntil(context, ModalRoute.withName('/'));
-            }
+          }
           if (index == 1) {
             Navigator.push(
               context,
@@ -442,19 +419,19 @@ class FourthScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FourthScreen()),
+              MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FifthScreen()),
+              MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
           }
         },
@@ -495,15 +472,12 @@ class FifthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         title: const Text(
           'History',
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
-  
         backgroundColor: mainBackgroundColor,
-      
       ),
       backgroundColor: mainBackgroundColor,
       body: Center(
@@ -530,20 +504,21 @@ class FifthScreen extends StatelessWidget {
                   },
                 );
               },
-              child: const  Text('Custom Button'),
+              child: const Text('Custom Button'),
             ),
           ],
         ),
       ),
-        bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,
         selectedItemColor: Colors.white,
         currentIndex: 4,
         onTap: (index) {
-          if (index == 0) { // Check if the tapped index is 0 (home page)
+          if (index == 0) {
+            // Check if the tapped index is 0 (home page)
             Navigator.popUntil(context, ModalRoute.withName('/'));
-            }
+          }
           if (index == 1) {
             Navigator.push(
               context,
@@ -553,19 +528,19 @@ class FifthScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FourthScreen()),
+              MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FifthScreen()),
+              MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
           }
         },
@@ -606,17 +581,15 @@ class SixthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         title: const Text('Second Screen'),
         backgroundColor: mainBackgroundColor,
-      
       ),
       backgroundColor: mainBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[  
+          children: <Widget>[
             ElevatedButton(
               onPressed: () {
                 showDialog(
@@ -637,7 +610,7 @@ class SixthScreen extends StatelessWidget {
                   },
                 );
               },
-              child: const  Text('Custom Button'),
+              child: const Text('Custom Button'),
             ),
           ],
         ),
@@ -648,9 +621,10 @@ class SixthScreen extends StatelessWidget {
         selectedItemColor: Colors.white,
         currentIndex: 2,
         onTap: (index) {
-          if (index == 0) { // Check if the tapped index is 0 (home page)
+          if (index == 0) {
+            // Check if the tapped index is 0 (home page)
             Navigator.popUntil(context, ModalRoute.withName('/'));
-            }
+          }
           if (index == 1) {
             Navigator.push(
               context,
@@ -660,19 +634,19 @@ class SixthScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FourthScreen()),
+              MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const  FifthScreen()),
+              MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
           }
         },
@@ -707,4 +681,3 @@ class SixthScreen extends StatelessWidget {
     );
   }
 }
-

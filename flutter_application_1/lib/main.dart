@@ -368,6 +368,9 @@ class FourthScreen extends StatelessWidget {
       color: mainBackgroundColor, // Použijte proměnnou s názvem "mainBackgroundColor"
     ),
     // Umístění tlačítek nahoru
+    
+
+
     Positioned(
       top: 50, // Odsazení shora
       left: 20, // Odsazení zleva
@@ -413,7 +416,7 @@ class FourthScreen extends StatelessWidget {
               },
             );
 
-                },
+          },
                 child: Row( // Uspořádání do řádku pro horizontální uspořádání
                   children: <Widget>[
                     Image.asset(

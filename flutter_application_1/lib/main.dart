@@ -359,47 +359,413 @@ class FourthScreen extends StatelessWidget {
         ),
         backgroundColor: mainBackgroundColor,
       ),
-      backgroundColor: mainBackgroundColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey,
+      
+      
+      body: Stack(
+  children: <Widget>[
+    // Pozadí
+    Container(
+      color: mainBackgroundColor, // Použijte proměnnou s názvem "mainBackgroundColor"
+    ),
+    // Umístění tlačítek nahoru
+    Positioned(
+      top: 50, // Odsazení shora
+      left: 20, // Odsazení zleva
+      child: Column(
+        children: <Widget>[
+
+          Container(
+              width: 350,
+              height: 80,
+              decoration: BoxDecoration(
+                color: midItemColor,
+                borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
               ),
-              onPressed: () {},
-              child: const Text('Tlačítko na '),
-            ),
-            const Text(
-              'This is the exercise screen.',
-              style: TextStyle(fontSize: 24),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Custom Dialog'),
-                      content: const Text('halooo'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Close'),
-                        ),
-                      ],
-                    );
-                  },
+              child: TextButton(
+                onPressed: () {
+                  showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: softItemColor,
+                  title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
+                  content: SizedBox(
+                    height: 400.0, // Maximální výška
+                    width: 300.0, // Maximální šířka
+                    child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                    ),
+                  ],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 20.0,
+                  contentPadding: EdgeInsets.all(25.0),
+                  insetPadding: EdgeInsets.all(20.0),
                 );
               },
-              child: const Text('Custom Button'),
+            );
+
+                },
+                child: Row( // Uspořádání do řádku pro horizontální uspořádání
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/Images/bench.png',
+                      width: 100,
+                      height: 100,
+                    ),
+                    SizedBox(width: 10), // Mezera mezi obrázkem a textem
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(right: 50.0), // Přidá odsazení 10px zprava
+                        child: Text(
+                          "Benchpress",
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          textAlign: TextAlign.center, // Zarovnání textu vpravo
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+              ),
             ),
-          ],
+
+          SizedBox(height: 20), // Mezera mezi tlačítky
+          Container(
+            width: 350,
+            height: 80,
+            decoration: BoxDecoration(
+              color: midItemColor,
+              borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
+            ),
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: softItemColor,
+                title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
+                content: SizedBox(
+                  height: 400.0, // Maximální výška
+                  width: 300.0, // Maximální šířka
+                  child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                  ),
+                ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                clipBehavior: Clip.antiAlias,
+                elevation: 20.0,
+                contentPadding: EdgeInsets.all(25.0),
+                insetPadding: EdgeInsets.all(20.0),
+              );
+            },
+          );
+
+              },
+              child: Row( // Uspořádání do řádku pro horizontální uspořádání
+      children: <Widget>[
+        Image.asset(
+          'assets/Images/squat.png',
+          width: 100,
+          height: 100,
         ),
+        SizedBox(width: 10), // Mezera mezi obrázkem a textem
+        Expanded(
+          child: Container(
+            child: Text(
+              "Squat",
+              style: TextStyle(color: Colors.white, fontSize: 25),
+              textAlign: TextAlign.center, // Zarovnání textu vpravo
+            ),
+          ),
+        ),
+      ],
+    ),
+            ),
+          ),
+
+            SizedBox(height: 20), // Mezera mezi tlačítky
+          Container(
+            width: 350,
+            height: 80,
+            decoration: BoxDecoration(
+              color: midItemColor,
+              borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
+            ),
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: softItemColor,
+                title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
+                content: SizedBox(
+                  height: 400.0, // Maximální výška
+                  width: 300.0, // Maximální šířka
+                  child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                  ),
+                ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                clipBehavior: Clip.antiAlias,
+                elevation: 20.0,
+                contentPadding: EdgeInsets.all(25.0),
+                insetPadding: EdgeInsets.all(20.0),
+              );
+            },
+          );
+
+              },
+              child: Row( // Uspořádání do řádku pro horizontální uspořádání
+      children: <Widget>[
+        Image.asset(
+          'assets/Images/squat.png',
+          width: 100,
+          height: 100,
+        ),
+        SizedBox(width: 10), // Mezera mezi obrázkem a textem
+        Expanded(
+          child: Container(
+            child: Text(
+              "Squat",
+              style: TextStyle(color: Colors.white, fontSize: 25),
+              textAlign: TextAlign.center, // Zarovnání textu vpravo
+            ),
+          ),
+        ),
+      ],
+    ),
+            ),
+          ),
+
+          SizedBox(height: 20), // Mezera mezi tlačítky
+          Container(
+            width: 350,
+            height: 80,
+            decoration: BoxDecoration(
+              color: midItemColor,
+              borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
+            ),
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: softItemColor,
+                title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
+                content: SizedBox(
+                  height: 400.0, // Maximální výška
+                  width: 300.0, // Maximální šířka
+                  child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                  ),
+                ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                clipBehavior: Clip.antiAlias,
+                elevation: 20.0,
+                contentPadding: EdgeInsets.all(25.0),
+                insetPadding: EdgeInsets.all(20.0),
+              );
+            },
+          );
+
+              },
+              child: Row( // Uspořádání do řádku pro horizontální uspořádání
+      children: <Widget>[
+        Image.asset(
+          'assets/Images/squat.png',
+          width: 100,
+          height: 100,
+        ),
+        SizedBox(width: 10), // Mezera mezi obrázkem a textem
+        Expanded(
+          child: Container(
+            child: Text(
+              "Squat",
+              style: TextStyle(color: Colors.white, fontSize: 25),
+              textAlign: TextAlign.center, // Zarovnání textu vpravo
+            ),
+          ),
+        ),
+      ],
+    ),
+            ),
+          ),
+
+          SizedBox(height: 20), // Mezera mezi tlačítky
+          Container(
+            width: 350,
+            height: 80,
+            decoration: BoxDecoration(
+              color: midItemColor,
+              borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
+            ),
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: softItemColor,
+                title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
+                content: SizedBox(
+                  height: 400.0, // Maximální výška
+                  width: 300.0, // Maximální šířka
+                  child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                  ),
+                ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                clipBehavior: Clip.antiAlias,
+                elevation: 20.0,
+                contentPadding: EdgeInsets.all(25.0),
+                insetPadding: EdgeInsets.all(20.0),
+              );
+            },
+          );
+
+              },
+              child: Row( // Uspořádání do řádku pro horizontální uspořádání
+      children: <Widget>[
+        Image.asset(
+          'assets/Images/squat.png',
+          width: 100,
+          height: 100,
+        ),
+        SizedBox(width: 10), // Mezera mezi obrázkem a textem
+        Expanded(
+          child: Container(
+            child: Text(
+              "Squat",
+              style: TextStyle(color: Colors.white, fontSize: 25),
+              textAlign: TextAlign.center, // Zarovnání textu vpravo
+            ),
+          ),
+        ),
+      ],
+    ),
+            ),
+          ),
+
+          SizedBox(height: 20), // Mezera mezi tlačítky
+          Container(
+            width: 350,
+            height: 80,
+            decoration: BoxDecoration(
+              color: midItemColor,
+              borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
+            ),
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: softItemColor,
+                title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
+                content: SizedBox(
+                  height: 400.0, // Maximální výška
+                  width: 300.0, // Maximální šířka
+                  child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                  ),
+                ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                clipBehavior: Clip.antiAlias,
+                elevation: 20.0,
+                contentPadding: EdgeInsets.all(25.0),
+                insetPadding: EdgeInsets.all(20.0),
+              );
+            },
+          );
+
+              },
+              child: Row( // Uspořádání do řádku pro horizontální uspořádání
+      children: <Widget>[
+        Image.asset(
+          'assets/Images/squat.png',
+          width: 100,
+          height: 100,
+        ),
+        SizedBox(width: 10), // Mezera mezi obrázkem a textem
+        Expanded(
+          child: Container(
+            child: Text(
+              "Squat",
+              style: TextStyle(color: Colors.white, fontSize: 25),
+              textAlign: TextAlign.center, // Zarovnání textu vpravo
+            ),
+          ),
+        ),
+      ],
+    ),
+            ),
+          ),
+
+          
+
+        ],
       ),
+    ),
+  ],
+),
+
+
+
+
+
+
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,

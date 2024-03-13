@@ -4,9 +4,9 @@ void main() {
   runApp(const MyApp());
 }
 
-Color darkItemColor = const Color(0xFF28104E);
-Color mainBackgroundColor = const Color(0xFF6237A0);
-Color midItemColor = const Color(0xFF9754CB);
+Color darkItemColor = const Color(0xFF9754CB);
+Color mainBackgroundColor = const Color(0xFF28104E);
+Color midItemColor = const Color(0xFF6237A0);
 Color softItemColor = const Color(0xFFDEACF5);
 
 class MyApp extends StatelessWidget {
@@ -254,21 +254,23 @@ class ThirdScreen extends StatelessWidget {
         backgroundColor: darkItemColor,
         child: const Icon(Icons.add),
       ),
-      body: Container(
+      body: 
+      
+      Container(
+        
         padding: const EdgeInsets.only(
             left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+            
         child: GridView.count(
           crossAxisCount: 2,
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
           children: [
-            ElevatedButton(
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey),
-                
-              ),
-              onPressed: null,
-              child: Text('New'),
+            SizedBox(
+              height: 50,
+              width: 150,
+              
+  
             ),
             MaterialButton(
               height: 100,
@@ -369,7 +371,45 @@ class FourthScreen extends StatelessWidget {
     ),
     // Umístění tlačítek nahoru
     
-
+  Container(
+              width: 100,
+              height: 35,
+              decoration: BoxDecoration(
+                color: midItemColor,
+                borderRadius: BorderRadius.circular(15.0), // Přidává zaoblení 15 pixelů
+              ),
+      child: TextButton(onPressed: (){
+        showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: softItemColor,
+                  title: const Text("",  style: TextStyle(fontSize: 30),),
+                  content: const SizedBox(
+                    height: 200.0, // Maximální výška
+                    width: 100.0, // Maximální šířka
+                    child: Text("", style: TextStyle(fontSize: 15,),),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Close", style: TextStyle(color: Colors.black),),
+                    ),
+                  ],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 20.0,
+                  contentPadding: const EdgeInsets.all(25.0),
+                  insetPadding: const EdgeInsets.all(20.0),
+                );
+              },
+            );
+      }, child: Text("Body part", style: TextStyle(color: Colors.white, fontSize: 12.5),)),
+  ),
 
     Positioned(
       top: 50, // Odsazení shora
@@ -391,18 +431,22 @@ class FourthScreen extends StatelessWidget {
               builder: (BuildContext context) {
                 return AlertDialog(
                   backgroundColor: softItemColor,
-                  title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
-                  content: SizedBox(
+                  title: const Text("Benchpress",  style: TextStyle(fontSize: 30),),
+                  content: const SizedBox(
                     height: 400.0, // Maximální výška
                     width: 300.0, // Maximální šířka
-                    child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
+                    child: Text("Lehněte si na lavičku, chodidla pevně na zemi."
+                                "Uchopte činku nadhmatem, šířka úchopu o něco větší než ramena."
+                                "Nadechněte se, spouštějte činku k hrudníku (dotyk na úrovni bradavek)."
+                                "Vydechněte a vytlačte činku zpět do výchozí pozice."
+                                "Opakujte požadovaný počet opakování.", style: TextStyle(fontSize: 15,),),
                   ),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                      child: const Text("Zavřít", style: TextStyle(color: Colors.black),),
                     ),
                   ],
                   shape: RoundedRectangleBorder(
@@ -410,8 +454,8 @@ class FourthScreen extends StatelessWidget {
                   ),
                   clipBehavior: Clip.antiAlias,
                   elevation: 20.0,
-                  contentPadding: EdgeInsets.all(25.0),
-                  insetPadding: EdgeInsets.all(20.0),
+                  contentPadding: const EdgeInsets.all(25.0),
+                  insetPadding: const EdgeInsets.all(20.0),
                 );
               },
             );

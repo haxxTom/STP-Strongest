@@ -4,6 +4,39 @@ void main() {
   runApp(const MyApp());
 }
 
+String buttonText = 'Name';
+void onPressedFunction(BuildContext context, Function(String) updateButtonText) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String enteredText = ''; // Text entered by the user
+
+      return AlertDialog(
+        title: const Text('Enter Text'),
+        content: TextField(
+          onChanged: (value) {
+            enteredText = value; // Update enteredText when the text field changes
+          },
+        ),
+        
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(enteredText); // Close dialog and pass entered text
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  ).then((result) {
+    // This function is called when the dialog is closed
+    if (result != null && result != '') {
+      updateButtonText(result); // Update buttonText with entered text
+    }
+  });
+}
+
 Color darkItemColor = const Color(0xFF9754CB);
 Color mainBackgroundColor = const Color(0xFF28104E);
 Color midItemColor = const Color(0xFF6237A0);
@@ -23,7 +56,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.black,
           useMaterial3: true,
         ),
-        home: const MyHomePage(title: 'Profile'));
+        home: const MyHomePage(title: 'Profile',));
   }
 }
 
@@ -36,18 +69,111 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+
+
 class _MyHomePageState extends State<MyHomePage> {
+  void _updateButtonText(String text) {
+    setState(() {
+      buttonText = text;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainBackgroundColor,
-        title: Text(widget.title),
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: Center(
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.start, 
+        children: [
+          const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () {
+              // Action for the first button
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder( // Button border shape
+                borderRadius: BorderRadius.circular(100.0),
+              ),
+              minimumSize: const Size(200, 200),
+              backgroundColor: midItemColor,
+            ),
+            child: const Icon(
+              Icons.person,
+              size: 50,
+              color: Colors.black,
+              ),
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () => onPressedFunction(context, _updateButtonText),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder( // Button border shape
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              minimumSize: const Size(280, 50),
+              backgroundColor: midItemColor
+            ),
+            
+            child: Text(
+              buttonText,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+              ),
+              ),
+          ),
+          const SizedBox(height: 30),
+          
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FifthScreen()), // Replace HistoryScreen() with the actual screen class for the history
+              );
+              // Action for the fourth button
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder( // Button border shape
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              minimumSize: const Size(280, 150),
+              backgroundColor: midItemColor
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                Text(
+                  'TRAININGS',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30, // Adjust the font size as needed
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 30), // Add some spacing between the text and the button
+                Icon(Icons.alarm, size: 40), // Example icon, you can replace it with any widget you want
+              ],
+            ),
+          ),
+        ],
+      ),
       ),
       backgroundColor: mainBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
-        unselectedItemColor: softItemColor,
+        unselectedItemColor: midItemColor,
         selectedItemColor: Colors.white,
         currentIndex: 0,
         onTap: (index) {

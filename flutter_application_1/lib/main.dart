@@ -5,7 +5,8 @@ void main() {
 }
 
 String buttonText = 'Name';
-void onPressedFunction(BuildContext context, Function(String) updateButtonText) {
+void onPressedFunction(
+    BuildContext context, Function(String) updateButtonText) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -15,14 +16,15 @@ void onPressedFunction(BuildContext context, Function(String) updateButtonText) 
         title: const Text('Enter Text'),
         content: TextField(
           onChanged: (value) {
-            enteredText = value; // Update enteredText when the text field changes
+            enteredText =
+                value; // Update enteredText when the text field changes
           },
         ),
-        
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(enteredText); // Close dialog and pass entered text
+              Navigator.of(context)
+                  .pop(enteredText); // Close dialog and pass entered text
             },
             child: const Text('OK'),
           ),
@@ -56,7 +58,9 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.black,
           useMaterial3: true,
         ),
-        home: const MyHomePage(title: 'Profile',));
+        home: const MyHomePage(
+          title: 'Profile',
+        ));
   }
 }
 
@@ -69,14 +73,13 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<MyHomePage> {
   void _updateButtonText(String text) {
     setState(() {
       buttonText = text;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,82 +96,86 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-        mainAxisAlignment: MainAxisAlignment.start, 
-        children: [
-          const SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: () {
-              // Action for the first button
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder( // Button border shape
-                borderRadius: BorderRadius.circular(100.0),
-              ),
-              minimumSize: const Size(200, 200),
-              backgroundColor: midItemColor,
-            ),
-            child: const Icon(
-              Icons.person,
-              size: 50,
-              color: Colors.black,
-              ),
-          ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: () => onPressedFunction(context, _updateButtonText),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder( // Button border shape
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              minimumSize: const Size(280, 50),
-              backgroundColor: midItemColor
-            ),
-            
-            child: Text(
-              buttonText,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-              ),
-              ),
-          ),
-          const SizedBox(height: 30),
-          
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const FifthScreen()), // Replace HistoryScreen() with the actual screen class for the history
-              );
-              // Action for the fourth button
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder( // Button border shape
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              minimumSize: const Size(280, 150),
-              backgroundColor: midItemColor
-            ),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-                Text(
-                  'TRAININGS',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30, // Adjust the font size as needed
-                    fontWeight: FontWeight.bold,
-                  ),
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                // Action for the first button
+              },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  // Button border shape
+                  borderRadius: BorderRadius.circular(100.0),
                 ),
-                SizedBox(height: 30), // Add some spacing between the text and the button
-                Icon(Icons.alarm, size: 40), // Example icon, you can replace it with any widget you want
-              ],
+                minimumSize: const Size(200, 200),
+                backgroundColor: midItemColor,
+              ),
+              child: const Icon(
+                Icons.person,
+                size: 50,
+                color: Colors.black,
+              ),
             ),
-          ),
-        ],
-      ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () => onPressedFunction(context, _updateButtonText),
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    // Button border shape
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  minimumSize: const Size(280, 50),
+                  backgroundColor: midItemColor),
+              child: Text(
+                buttonText,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const FifthScreen()), // Replace HistoryScreen() with the actual screen class for the history
+                );
+                // Action for the fourth button
+              },
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    // Button border shape
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  minimumSize: const Size(280, 150),
+                  backgroundColor: midItemColor),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'TRAININGS',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30, // Adjust the font size as needed
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                      height:
+                          30), // Add some spacing between the text and the button
+                  Icon(Icons.alarm,
+                      size:
+                          40), // Example icon, you can replace it with any widget you want
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
       backgroundColor: mainBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
@@ -374,36 +381,157 @@ class ThirdScreen extends StatelessWidget {
         backgroundColor: mainBackgroundColor,
       ),
       backgroundColor: mainBackgroundColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: plustemplate,
-        tooltip: 'Plus template',
-        backgroundColor: darkItemColor,
-        child: const Icon(Icons.add),
-      ),
-      body: 
-      
-      Container(
-        
+      body: Container(
         padding: const EdgeInsets.only(
             left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
-            
-        child: GridView.count(
-          crossAxisCount: 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+        child: Column(
           children: [
-            SizedBox(
-              height: 50,
-              width: 150,
-              
-  
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(darkItemColor),
+                      fixedSize:
+                          MaterialStateProperty.all<Size>(Size(150, 75))),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SixthScreen()),
+                    );
+                  },
+                  child: Text(
+                    "New",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(darkItemColor),
+                      fixedSize:
+                          MaterialStateProperty.all<Size>(Size(150, 75))),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: softItemColor,
+                          title: const Text(
+                            "Random training",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text(
+                                "Close",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 20.0,
+                          contentPadding: const EdgeInsets.all(25.0),
+                          insetPadding: const EdgeInsets.all(20.0),
+                        );
+                      },
+                    );
+                  },
+                  child: Text(
+                    "Random",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-            MaterialButton(
-              height: 100,
-              minWidth: 100,
-              splashColor: Colors.black,
-              onPressed: null,
-              child: Text('Random'),
+            Container(
+              margin: EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: darkItemColor,
+                            borderRadius: BorderRadius.circular(20)),
+                        height: 150,
+                        width: 150,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Template 1",
+                            ),
+                            Text("Exercise x reps"),
+                            Text("Exercise x reps"),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: darkItemColor,
+                            borderRadius: BorderRadius.circular(20)),
+                        height: 150,
+                        width: 150,
+                        child: Column(
+                          
+                          children: [
+                            Text(
+                              "Template 2",
+                            ),
+                            Text("Exercise x reps"),
+                            Text("Exercise x reps"),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: darkItemColor,
+                            borderRadius: BorderRadius.circular(20)),
+                        height: 150,
+                        width: 150,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Template 3",
+                            ),
+                            Text("Exercise x reps"),
+                            Text("Exercise x reps"),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: darkItemColor,
+                            borderRadius: BorderRadius.circular(20)),
+                        height: 150,
+                        width: 150,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Template 4",
+                            ),
+                            Text("Exercise x reps"),
+                            Text("Exercise x reps"),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             )
           ],
         ),
@@ -487,480 +615,569 @@ class FourthScreen extends StatelessWidget {
         ),
         backgroundColor: mainBackgroundColor,
       ),
-      
-      
       body: Container(
         color: mainBackgroundColor,
         child: ListView(
           children: <Widget>[
-            
             // Umístění tlačítek nahoru
-            
-          SizedBox(
-            width: 100,
-            child: Container(
-        child: Container(
-                    height: 35,
-                    width: 100,
-                    margin: EdgeInsets.only(top: 20, bottom: 20, left: 21.5, right: 275),
-                    decoration: BoxDecoration(
-                      color: midItemColor,
-                      borderRadius: BorderRadius.circular(12.5), // Přidává zaoblení 15 pixelů
-                    ),
-            child: TextButton(onPressed: (){
-              showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: softItemColor, // Check if this affects button color
-            title: const Text("Choose body part", style: TextStyle(color: Colors.black ,fontSize: 30)),
-            // Removed SizedBox
-            
-            content: TextButton(
-              onPressed: null, // This button has no action
-              
-              style: ButtonStyle(
-                // Set width and height
-                backgroundColor: MaterialStateProperty.all(midItemColor), // Set background color
-              ),
-              child: Text("Chest", style: TextStyle(color: Colors.white),),
-            ),
-            
-            
-        
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Close", style: TextStyle(color: Colors.black)),
-              ),
-            ],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            clipBehavior: Clip.antiAlias,
-            elevation: 20.0,
-            contentPadding: const EdgeInsets.all(25.0), // Check if padding affects button
-            insetPadding: const EdgeInsets.all(20.0),
-          );
-        },
-        );
-        
-            }, child: Text("Body part", style: TextStyle(color: Colors.white, fontSize: 12.5),)),
-        ),
-            ),
-          ),
-        
-            Container(
-        color: mainBackgroundColor,
-        child: Positioned(
-          top: 100, // Odsazení shora
-          left: 20, // Odsazení zleva
-          child: Column(
-            children: <Widget>[
-        
-              Container(
-                  width: 350,
-                  height: 80,
+
+            SizedBox(
+              width: 100,
+              child: Container(
+                child: Container(
+                  height: 35,
+                  width: 100,
+                  margin: EdgeInsets.only(
+                      top: 20, bottom: 20, left: 21.5, right: 275),
                   decoration: BoxDecoration(
                     color: midItemColor,
-                    borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
+                    borderRadius: BorderRadius.circular(
+                        12.5), // Přidává zaoblení 15 pixelů
                   ),
                   child: TextButton(
-                    onPressed: () {
-                      showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      backgroundColor: softItemColor,
-                      title: const Text("Benchpress",  style: TextStyle(fontSize: 30),),
-                      content: const SizedBox(
-                        height: 400.0, // Maximální výška
-                        width: 300.0, // Maximální šířka
-                        child: Text("Lehněte si na lavičku, chodidla pevně na zemi."
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor:
+                                  softItemColor, // Check if this affects button color
+                              title: const Text("Choose body part",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 30)),
+                              // Removed SizedBox
+
+                              content: TextButton(
+                                onPressed: null, // This button has no action
+
+                                style: ButtonStyle(
+                                  // Set width and height
+                                  backgroundColor: MaterialStateProperty.all(
+                                      midItemColor), // Set background color
+                                ),
+                                child: Text(
+                                  "Chest",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Close",
+                                      style: TextStyle(color: Colors.black)),
+                                ),
+                              ],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              clipBehavior: Clip.antiAlias,
+                              elevation: 20.0,
+                              contentPadding: const EdgeInsets.all(
+                                  25.0), // Check if padding affects button
+                              insetPadding: const EdgeInsets.all(20.0),
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        "Body part",
+                        style: TextStyle(color: Colors.white, fontSize: 12.5),
+                      )),
+                ),
+              ),
+            ),
+
+            Container(
+              color: mainBackgroundColor,
+              child: Positioned(
+                top: 100, // Odsazení shora
+                left: 20, // Odsazení zleva
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 350,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(
+                            25.0), // Přidává zaoblení 15 pixelů
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: const Text(
+                                  "Benchpress",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                content: const SizedBox(
+                                  height: 400.0, // Maximální výška
+                                  width: 300.0, // Maximální šířka
+                                  child: Text(
+                                    "Lehněte si na lavičku, chodidla pevně na zemi."
                                     "Uchopte činku nadhmatem, šířka úchopu o něco větší než ramena."
                                     "Nadechněte se, spouštějte činku k hrudníku (dotyk na úrovni bradavek)."
                                     "Vydechněte a vytlačte činku zpět do výchozí pozice."
-                                    "Opakujte požadovaný počet opakování.", style: TextStyle(fontSize: 15,),),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("Zavřít", style: TextStyle(color: Colors.black),),
-                        ),
-                      ],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      elevation: 20.0,
-                      contentPadding: const EdgeInsets.all(25.0),
-                      insetPadding: const EdgeInsets.all(20.0),
-                    );
-                  },
-                );
-        
-              },
-                    child: Row( // Uspořádání do řádku pro horizontální uspořádání
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/Images/bench.png',
-                          width: 100,
-                          height: 100,
-                        ),
-                        SizedBox(width: 10), // Mezera mezi obrázkem a textem
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: 50.0), // Přidá odsazení 10px zprava
-                            child: Text(
-                              "Benchpress",
-                              style: TextStyle(color: Colors.white, fontSize: 25),
-                              textAlign: TextAlign.center, // Zarovnání textu vpravo
+                                    "Opakujte požadovaný počet opakování.",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      "Zavřít",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 20.0,
+                                contentPadding: const EdgeInsets.all(25.0),
+                                insetPadding: const EdgeInsets.all(20.0),
+                              );
+                            },
+                          );
+                        },
+                        child: Row(
+                          // Uspořádání do řádku pro horizontální uspořádání
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/Images/bench.png',
+                              width: 100,
+                              height: 100,
                             ),
-                          ),
+                            SizedBox(
+                                width: 10), // Mezera mezi obrázkem a textem
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    right: 50.0), // Přidá odsazení 10px zprava
+                                child: Text(
+                                  "Benchpress",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                  textAlign: TextAlign
+                                      .center, // Zarovnání textu vpravo
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-        
-                  ),
-                ),
-        
-              SizedBox(height: 20), // Mezera mezi tlačítky
-              Container(
-                width: 350,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: midItemColor,
-                  borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: softItemColor,
-                    title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
-                    content: SizedBox(
-                      height: 400.0, // Maximální výška
-                      width: 300.0, // Maximální šířka
-                      child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("Zavřít", style: TextStyle(color: Colors.black),),
                       ),
-                    ],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
                     ),
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 20.0,
-                    contentPadding: EdgeInsets.all(25.0),
-                    insetPadding: EdgeInsets.all(20.0),
-                  );
-                },
-              );
-        
-                  },
-                  child: Row( // Uspořádání do řádku pro horizontální uspořádání
-          children: <Widget>[
-            Image.asset(
-              'assets/Images/squat.png',
-              width: 100,
-              height: 100,
-            ),
-            SizedBox(width: 10), // Mezera mezi obrázkem a textem
-            Expanded(
-              child: Container(
-                child: Text(
-                  "Squat",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                  textAlign: TextAlign.center, // Zarovnání textu vpravo
-                ),
-              ),
-            ),
-          ],
-        ),
-                ),
-              ),
-        
-                SizedBox(height: 20), // Mezera mezi tlačítky
-              Container(
-                width: 350,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: midItemColor,
-                  borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: softItemColor,
-                    title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
-                    content: SizedBox(
-                      height: 400.0, // Maximální výška
-                      width: 300.0, // Maximální šířka
-                      child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+
+                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    Container(
+                      width: 350,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(
+                            25.0), // Přidává zaoblení 15 pixelů
                       ),
-                    ],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 20.0,
-                    contentPadding: EdgeInsets.all(25.0),
-                    insetPadding: EdgeInsets.all(20.0),
-                  );
-                },
-              );
-        
-                  },
-                  child: Row( // Uspořádání do řádku pro horizontální uspořádání
-          children: <Widget>[
-            Image.asset(
-              'assets/Images/squat.png',
-              width: 100,
-              height: 100,
-            ),
-            SizedBox(width: 10), // Mezera mezi obrázkem a textem
-            Expanded(
-              child: Container(
-                child: Text(
-                  "Squat",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                  textAlign: TextAlign.center, // Zarovnání textu vpravo
-                ),
-              ),
-            ),
-          ],
-        ),
-                ),
-              ),
-        
-              SizedBox(height: 20), // Mezera mezi tlačítky
-              Container(
-                width: 350,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: midItemColor,
-                  borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: softItemColor,
-                    title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
-                    content: SizedBox(
-                      height: 400.0, // Maximální výška
-                      width: 300.0, // Maximální šířka
-                      child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
+                      child: TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: Text(
+                                  "Benchpress",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                content: SizedBox(
+                                  height: 400.0, // Maximální výška
+                                  width: 300.0, // Maximální šířka
+                                  child: Text(
+                                    "Popis cviku",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Zavřít",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 20.0,
+                                contentPadding: EdgeInsets.all(25.0),
+                                insetPadding: EdgeInsets.all(20.0),
+                              );
+                            },
+                          );
                         },
-                        child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                        child: Row(
+                          // Uspořádání do řádku pro horizontální uspořádání
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/Images/squat.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                            SizedBox(
+                                width: 10), // Mezera mezi obrázkem a textem
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  "Squat",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                  textAlign: TextAlign
+                                      .center, // Zarovnání textu vpravo
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
                     ),
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 20.0,
-                    contentPadding: EdgeInsets.all(25.0),
-                    insetPadding: EdgeInsets.all(20.0),
-                  );
-                },
-              );
-        
-                  },
-                  child: Row( // Uspořádání do řádku pro horizontální uspořádání
-          children: <Widget>[
-            Image.asset(
-              'assets/Images/squat.png',
-              width: 100,
-              height: 100,
-            ),
-            SizedBox(width: 10), // Mezera mezi obrázkem a textem
-            Expanded(
-              child: Container(
-                child: Text(
-                  "Squat",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                  textAlign: TextAlign.center, // Zarovnání textu vpravo
-                ),
-              ),
-            ),
-          ],
-        ),
-                ),
-              ),
-        
-              SizedBox(height: 20), // Mezera mezi tlačítky
-              Container(
-                width: 350,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: midItemColor,
-                  borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: softItemColor,
-                    title: Text("Benchpress",  style: TextStyle(fontSize: 30),),
-                    content: SizedBox(
-                      height: 400.0, // Maximální výška
-                      width: 300.0, // Maximální šířka
-                      child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
+
+                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    Container(
+                      width: 350,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(
+                            25.0), // Přidává zaoblení 15 pixelů
+                      ),
+                      child: TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: Text(
+                                  "Benchpress",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                content: SizedBox(
+                                  height: 400.0, // Maximální výška
+                                  width: 300.0, // Maximální šířka
+                                  child: Text(
+                                    "Popis cviku",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Zavřít",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 20.0,
+                                contentPadding: EdgeInsets.all(25.0),
+                                insetPadding: EdgeInsets.all(20.0),
+                              );
+                            },
+                          );
                         },
-                        child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                        child: Row(
+                          // Uspořádání do řádku pro horizontální uspořádání
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/Images/squat.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                            SizedBox(
+                                width: 10), // Mezera mezi obrázkem a textem
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  "Squat",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                  textAlign: TextAlign
+                                      .center, // Zarovnání textu vpravo
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
                     ),
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 20.0,
-                    contentPadding: EdgeInsets.all(25.0),
-                    insetPadding: EdgeInsets.all(20.0),
-                  );
-                },
-              );
-        
-                  },
-                  child: Row( // Uspořádání do řádku pro horizontální uspořádání
-          children: <Widget>[
-            Image.asset(
-              'assets/Images/squat.png',
-              width: 100,
-              height: 100,
-            ),
-            SizedBox(width: 10), // Mezera mezi obrázkem a textem
-            Expanded(
-              child: Container(
-                child: Text(
-                  "Squat",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                  textAlign: TextAlign.center, // Zarovnání textu vpravo
-                ),
-              ),
-            ),
-          ],
-        ),
-                ),
-              ),
-        
-              SizedBox(height: 20), // Mezera mezi tlačítky
-              Container(
-                margin: EdgeInsets.only(bottom: 20),
-                width: 350,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: midItemColor,
-                  borderRadius: BorderRadius.circular(25.0), // Přidává zaoblení 15 pixelů
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: softItemColor,
-                    title: Text("Benchpress1",  style: TextStyle(fontSize: 30),),
-                    content: SizedBox(
-                      height: 400.0, // Maximální výška
-                      width: 300.0, // Maximální šířka
-                      child: Text("Popis cviku", style: TextStyle(fontSize: 15,),),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
+
+                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    Container(
+                      width: 350,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(
+                            25.0), // Přidává zaoblení 15 pixelů
+                      ),
+                      child: TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: Text(
+                                  "Benchpress",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                content: SizedBox(
+                                  height: 400.0, // Maximální výška
+                                  width: 300.0, // Maximální šířka
+                                  child: Text(
+                                    "Popis cviku",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Zavřít",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 20.0,
+                                contentPadding: EdgeInsets.all(25.0),
+                                insetPadding: EdgeInsets.all(20.0),
+                              );
+                            },
+                          );
                         },
-                        child: Text("Zavřít", style: TextStyle(color: Colors.black),),
+                        child: Row(
+                          // Uspořádání do řádku pro horizontální uspořádání
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/Images/squat.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                            SizedBox(
+                                width: 10), // Mezera mezi obrázkem a textem
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  "Squat",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                  textAlign: TextAlign
+                                      .center, // Zarovnání textu vpravo
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
                     ),
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 20.0,
-                    contentPadding: EdgeInsets.all(25.0),
-                    insetPadding: EdgeInsets.all(20.0),
-                  );
-                },
-              );
-        
-                  },
-                  child: Row( // Uspořádání do řádku pro horizontální uspořádání
-          children: <Widget>[
-            Image.asset(
-              'assets/Images/squat.png',
-              width: 100,
-              height: 100,
-            ),
-            SizedBox(width: 10), // Mezera mezi obrázkem a textem
-            Expanded(
-              child: Container(
-                child: Text(
-                  "Squat",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                  textAlign: TextAlign.center, // Zarovnání textu vpravo
+
+                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    Container(
+                      width: 350,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(
+                            25.0), // Přidává zaoblení 15 pixelů
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: Text(
+                                  "Benchpress",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                content: SizedBox(
+                                  height: 400.0, // Maximální výška
+                                  width: 300.0, // Maximální šířka
+                                  child: Text(
+                                    "Popis cviku",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Zavřít",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 20.0,
+                                contentPadding: EdgeInsets.all(25.0),
+                                insetPadding: EdgeInsets.all(20.0),
+                              );
+                            },
+                          );
+                        },
+                        child: Row(
+                          // Uspořádání do řádku pro horizontální uspořádání
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/Images/squat.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                            SizedBox(
+                                width: 10), // Mezera mezi obrázkem a textem
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  "Squat",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                  textAlign: TextAlign
+                                      .center, // Zarovnání textu vpravo
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    Container(
+                      margin: EdgeInsets.only(bottom: 20),
+                      width: 350,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(
+                            25.0), // Přidává zaoblení 15 pixelů
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: Text(
+                                  "Benchpress1",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                content: SizedBox(
+                                  height: 400.0, // Maximální výška
+                                  width: 300.0, // Maximální šířka
+                                  child: Text(
+                                    "Popis cviku",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Zavřít",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 20.0,
+                                contentPadding: EdgeInsets.all(25.0),
+                                insetPadding: EdgeInsets.all(20.0),
+                              );
+                            },
+                          );
+                        },
+                        child: Row(
+                          // Uspořádání do řádku pro horizontální uspořádání
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/Images/squat.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                            SizedBox(
+                                width: 10), // Mezera mezi obrázkem a textem
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  "Squat",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 25),
+                                  textAlign: TextAlign
+                                      .center, // Zarovnání textu vpravo
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
-        ),
-                ),
-              ),
-        
-              
-        
-            ],
-          ),
-        ),
             ),
             // Pozadí
-            
           ],
         ),
       ),
-
-
-
-
-
-
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,
@@ -1143,7 +1360,8 @@ class SixthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Second Screen'),
+        title: const Text('New Template'),
+        foregroundColor: Colors.white,
         backgroundColor: mainBackgroundColor,
       ),
       backgroundColor: mainBackgroundColor,

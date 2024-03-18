@@ -13,21 +13,54 @@ void onPressedFunction(
       String enteredText = ''; // Text entered by the user
 
       return AlertDialog(
-        title: const Text('Enter Text'),
+        title: const Text(
+          'Set Username',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+          ),
+           textAlign: TextAlign.center
+          ),
+          
+        backgroundColor: darkItemColor,
         content: TextField(
+          cursorColor: Colors.white,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+          decoration: const  InputDecoration(
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white), // Change the color here
+                  ),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 2.0), // Change the color here for focused state
+              ),
+          ),
           onChanged: (value) {
             enteredText =
                 value; // Update enteredText when the text field changes
           },
         ),
         actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context)
                   .pop(enteredText); // Close dialog and pass entered text
-            },
-            child: const Text('OK'),
-          ),
+                },
+                child: const Icon(
+                  Icons.check,
+                  size: 50,
+                  color: Colors.white,
+                  ),
+                ),
+            ]
+          )
         ],
       );
     },
@@ -111,10 +144,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 minimumSize: const Size(200, 200),
                 backgroundColor: midItemColor,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.person,
                 size: 50,
-                color: Colors.black,
+                color: softItemColor,
               ),
             ),
             const SizedBox(height: 30),
@@ -125,12 +158,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     // Button border shape
                     borderRadius: BorderRadius.circular(20.0),
                   ),
+                  maximumSize: const Size(280, 50),
                   minimumSize: const Size(280, 50),
                   backgroundColor: midItemColor),
               child: Text(
                 buttonText,
                 style: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),
@@ -151,8 +185,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     // Button border shape
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  minimumSize: const Size(280, 150),
-                  backgroundColor: midItemColor),
+                  maximumSize: const Size(280, 150),
+                  backgroundColor: midItemColor,
+              ),
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -168,9 +203,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(
                       height:
                           30), // Add some spacing between the text and the button
-                  Icon(Icons.alarm,
-                      size:
-                          40), // Example icon, you can replace it with any widget you want
+                  
+                  Row(
+                    children: [
+
+
+                    ],
+
+                  ),
                 ],
               ),
             ),

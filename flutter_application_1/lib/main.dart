@@ -180,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: mainBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
-        unselectedItemColor: midItemColor,
+        unselectedItemColor: softItemColor,
         selectedItemColor: Colors.white,
         currentIndex: 0,
         onTap: (index) {
@@ -401,7 +401,7 @@ class ThirdScreen extends StatelessWidget {
                           builder: (context) => const SixthScreen()),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "New",
                     style: TextStyle(color: Colors.white),
                   ),
@@ -410,7 +410,7 @@ class ThirdScreen extends StatelessWidget {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(darkItemColor),
                       fixedSize:
-                          MaterialStateProperty.all<Size>(Size(150, 75))),
+                          MaterialStateProperty.all<Size>(const Size(150, 75))),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -443,7 +443,7 @@ class ThirdScreen extends StatelessWidget {
                       },
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Random",
                     style: TextStyle(color: Colors.white),
                   ),
@@ -451,7 +451,7 @@ class ThirdScreen extends StatelessWidget {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
+              margin: const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -464,7 +464,7 @@ class ThirdScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
-                        child: Column(
+                        child: const Column(
                           children: [
                             Text(
                               "Template 1",
@@ -480,7 +480,7 @@ class ThirdScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
-                        child: Column(
+                        child: const Column(
                           
                           children: [
                             Text(
@@ -502,7 +502,7 @@ class ThirdScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
-                        child: Column(
+                        child: const Column(
                           children: [
                             Text(
                               "Template 3",
@@ -518,7 +518,7 @@ class ThirdScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
-                        child: Column(
+                        child: const Column(
                           children: [
                             Text(
                               "Template 4",
@@ -627,7 +627,7 @@ class FourthScreen extends StatelessWidget {
                 child: Container(
                   height: 35,
                   width: 100,
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                       top: 20, bottom: 20, left: 21.5, right: 275),
                   decoration: BoxDecoration(
                     color: midItemColor,
@@ -655,7 +655,7 @@ class FourthScreen extends StatelessWidget {
                                   backgroundColor: MaterialStateProperty.all(
                                       midItemColor), // Set background color
                                 ),
-                                child: Text(
+                                child: const Text(
                                   "Chest",
                                   style: TextStyle(color: Colors.white),
                                 ),
@@ -682,7 +682,7 @@ class FourthScreen extends StatelessWidget {
                           },
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Body part",
                         style: TextStyle(color: Colors.white, fontSize: 12.5),
                       )),
@@ -760,13 +760,13 @@ class FourthScreen extends StatelessWidget {
                               width: 100,
                               height: 100,
                             ),
-                            SizedBox(
+                            const SizedBox(
                                 width: 10), // Mezera mezi obrázkem a textem
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     right: 50.0), // Přidá odsazení 10px zprava
-                                child: Text(
+                                child: const Text(
                                   "Benchpress",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 25),

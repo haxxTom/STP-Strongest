@@ -80,7 +80,7 @@ Color midItemColor = const Color(0xFF6237A0);
 Color softItemColor = const Color(0xFFDEACF5);
 
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key });
+  const MyApp({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 

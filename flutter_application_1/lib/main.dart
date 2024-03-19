@@ -31,10 +31,12 @@ void onPressedFunction(
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
+          maxLength: 9,
           decoration: const  InputDecoration(
             enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white), // Change the color here
                   ),
+            counterStyle: TextStyle(color: Colors.white),
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white, width: 2.0), // Change the color here for focused state
               ),
@@ -78,7 +80,7 @@ Color midItemColor = const Color(0xFF6237A0);
 Color softItemColor = const Color(0xFFDEACF5);
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({ Key? key });
 
   @override
   Widget build(BuildContext context) {
@@ -433,7 +435,7 @@ class ThirdScreen extends StatelessWidget {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(darkItemColor),
                       fixedSize:
-                          MaterialStateProperty.all<Size>(Size(150, 75))),
+                          MaterialStateProperty.all<Size>(const Size(150, 75))),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -820,7 +822,7 @@ class FourthScreen extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 20), // Mezera mezi tlačítky
                     Container(
                       width: 350,
                       height: 80,
@@ -836,11 +838,11 @@ class FourthScreen extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
-                                title: Text(
+                                title: const Text(
                                   "Benchpress",
                                   style: TextStyle(fontSize: 30),
                                 ),
-                                content: SizedBox(
+                                content: const SizedBox(
                                   height: 400.0, // Maximální výška
                                   width: 300.0, // Maximální šířka
                                   child: Text(
@@ -855,7 +857,7 @@ class FourthScreen extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Zavřít",
                                       style: TextStyle(color: Colors.black),
                                     ),
@@ -866,8 +868,8 @@ class FourthScreen extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.antiAlias,
                                 elevation: 20.0,
-                                contentPadding: EdgeInsets.all(25.0),
-                                insetPadding: EdgeInsets.all(20.0),
+                                contentPadding: const EdgeInsets.all(25.0),
+                                insetPadding: const EdgeInsets.all(20.0),
                               );
                             },
                           );
@@ -880,11 +882,11 @@ class FourthScreen extends StatelessWidget {
                               width: 100,
                               height: 100,
                             ),
-                            SizedBox(
+                            const SizedBox(
                                 width: 10), // Mezera mezi obrázkem a textem
                             Expanded(
                               child: Container(
-                                child: Text(
+                                child: const Text(
                                   "Squat",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 25),
@@ -898,7 +900,7 @@ class FourthScreen extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 20), // Mezera mezi tlačítky
                     Container(
                       width: 350,
                       height: 80,
@@ -914,11 +916,11 @@ class FourthScreen extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
-                                title: Text(
+                                title: const Text(
                                   "Benchpress",
                                   style: TextStyle(fontSize: 30),
                                 ),
-                                content: SizedBox(
+                                content: const SizedBox(
                                   height: 400.0, // Maximální výška
                                   width: 300.0, // Maximální šířka
                                   child: Text(
@@ -933,7 +935,7 @@ class FourthScreen extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Zavřít",
                                       style: TextStyle(color: Colors.black),
                                     ),
@@ -944,8 +946,8 @@ class FourthScreen extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.antiAlias,
                                 elevation: 20.0,
-                                contentPadding: EdgeInsets.all(25.0),
-                                insetPadding: EdgeInsets.all(20.0),
+                                contentPadding: const EdgeInsets.all(25.0),
+                                insetPadding: const EdgeInsets.all(20.0),
                               );
                             },
                           );
@@ -958,11 +960,11 @@ class FourthScreen extends StatelessWidget {
                               width: 100,
                               height: 100,
                             ),
-                            SizedBox(
+                            const SizedBox(
                                 width: 10), // Mezera mezi obrázkem a textem
                             Expanded(
                               child: Container(
-                                child: Text(
+                                child: const Text(
                                   "Squat",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 25),
@@ -976,7 +978,7 @@ class FourthScreen extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 20), // Mezera mezi tlačítky
                     Container(
                       width: 350,
                       height: 80,
@@ -992,11 +994,11 @@ class FourthScreen extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
-                                title: Text(
+                                title: const Text(
                                   "Benchpress",
                                   style: TextStyle(fontSize: 30),
                                 ),
-                                content: SizedBox(
+                                content: const SizedBox(
                                   height: 400.0, // Maximální výška
                                   width: 300.0, // Maximální šířka
                                   child: Text(
@@ -1011,7 +1013,7 @@ class FourthScreen extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Zavřít",
                                       style: TextStyle(color: Colors.black),
                                     ),
@@ -1022,8 +1024,8 @@ class FourthScreen extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.antiAlias,
                                 elevation: 20.0,
-                                contentPadding: EdgeInsets.all(25.0),
-                                insetPadding: EdgeInsets.all(20.0),
+                                contentPadding: const EdgeInsets.all(25.0),
+                                insetPadding: const EdgeInsets.all(20.0),
                               );
                             },
                           );
@@ -1036,11 +1038,11 @@ class FourthScreen extends StatelessWidget {
                               width: 100,
                               height: 100,
                             ),
-                            SizedBox(
+                            const SizedBox(
                                 width: 10), // Mezera mezi obrázkem a textem
                             Expanded(
                               child: Container(
-                                child: Text(
+                                child: const Text(
                                   "Squat",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 25),
@@ -1054,7 +1056,7 @@ class FourthScreen extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 20), // Mezera mezi tlačítky
                     Container(
                       width: 350,
                       height: 80,
@@ -1070,11 +1072,11 @@ class FourthScreen extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
-                                title: Text(
+                                title: const Text(
                                   "Benchpress",
                                   style: TextStyle(fontSize: 30),
                                 ),
-                                content: SizedBox(
+                                content: const SizedBox(
                                   height: 400.0, // Maximální výška
                                   width: 300.0, // Maximální šířka
                                   child: Text(
@@ -1089,7 +1091,7 @@ class FourthScreen extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Zavřít",
                                       style: TextStyle(color: Colors.black),
                                     ),
@@ -1100,8 +1102,8 @@ class FourthScreen extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.antiAlias,
                                 elevation: 20.0,
-                                contentPadding: EdgeInsets.all(25.0),
-                                insetPadding: EdgeInsets.all(20.0),
+                                contentPadding: const EdgeInsets.all(25.0),
+                                insetPadding: const EdgeInsets.all(20.0),
                               );
                             },
                           );
@@ -1114,11 +1116,11 @@ class FourthScreen extends StatelessWidget {
                               width: 100,
                               height: 100,
                             ),
-                            SizedBox(
+                            const SizedBox(
                                 width: 10), // Mezera mezi obrázkem a textem
                             Expanded(
                               child: Container(
-                                child: Text(
+                                child: const Text(
                                   "Squat",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 25),
@@ -1132,9 +1134,9 @@ class FourthScreen extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 20), // Mezera mezi tlačítky
                     Container(
-                      margin: EdgeInsets.only(bottom: 20),
+                      margin: const EdgeInsets.only(bottom: 20),
                       width: 350,
                       height: 80,
                       decoration: BoxDecoration(
@@ -1149,11 +1151,11 @@ class FourthScreen extends StatelessWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
-                                title: Text(
+                                title: const Text(
                                   "Benchpress1",
                                   style: TextStyle(fontSize: 30),
                                 ),
-                                content: SizedBox(
+                                content: const SizedBox(
                                   height: 400.0, // Maximální výška
                                   width: 300.0, // Maximální šířka
                                   child: Text(
@@ -1168,7 +1170,7 @@ class FourthScreen extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Zavřít",
                                       style: TextStyle(color: Colors.black),
                                     ),
@@ -1179,8 +1181,8 @@ class FourthScreen extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.antiAlias,
                                 elevation: 20.0,
-                                contentPadding: EdgeInsets.all(25.0),
-                                insetPadding: EdgeInsets.all(20.0),
+                                contentPadding: const EdgeInsets.all(25.0),
+                                insetPadding: const EdgeInsets.all(20.0),
                               );
                             },
                           );
@@ -1193,11 +1195,11 @@ class FourthScreen extends StatelessWidget {
                               width: 100,
                               height: 100,
                             ),
-                            SizedBox(
+                            const SizedBox(
                                 width: 10), // Mezera mezi obrázkem a textem
                             Expanded(
                               child: Container(
-                                child: Text(
+                                child: const Text(
                                   "Squat",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 25),

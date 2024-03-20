@@ -794,7 +794,7 @@ class FourthScreen extends StatelessWidget {
             // Umístění tlačítek nahoru
 
             SizedBox(
-              width: 100,
+              
               child: Container(
                 child: Container(
                   height: 35,
@@ -818,20 +818,134 @@ class FourthScreen extends StatelessWidget {
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 30)),
                               // Removed SizedBox
+                              
+                              content: 
+                              Container(
+                                width: 200,
+                                height: 200,
+                                  
+                                  child: Column(
+                                    children: [
+                                      
+                                      SizedBox(
+                                        height: 35,
+                                        width: 125,
+                                        child: TextButton(
+                                        onPressed: null, // This button has no action
+                                      
+                                        style: ButtonStyle(
+                                          // Set width and height
+                                          backgroundColor: MaterialStateProperty.all(
+                                              midItemColor), // Set background color
+                                        ),
+                                        child: const Text(
+                                          "Chest",
+                                          style: TextStyle(color: Colors.white, fontSize: 12.5),
+                                        ),
+                                      ),
+                                      ),
 
-                              content: TextButton(
-                                onPressed: null, // This button has no action
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      
+                                      SizedBox(
+                                        height: 35,
+                                        width: 125,
+                                        child: 
+                                        TextButton(
+                                        onPressed: null, // This button has no action
+                                      
+                                        style: ButtonStyle(
+                                          // Set width and height
+                                          backgroundColor: MaterialStateProperty.all(
+                                              midItemColor), // Set background color
+                                        ),
+                                        child: const Text(
+                                          "Shoulders",
+                                          style: TextStyle(color: Colors.white, fontSize: 12.5),
+                                        ),
+                                      ),
+                                      ), 
 
-                                style: ButtonStyle(
-                                  // Set width and height
-                                  backgroundColor: MaterialStateProperty.all(
-                                      midItemColor), // Set background color
-                                ),
-                                child: const Text(
-                                  "Chest",
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      
+                                      SizedBox(
+                                        height: 35,
+                                        width: 125,
+                                        child: 
+                                        TextButton(
+                                        onPressed: null, // This button has no action
+                                      
+                                        style: ButtonStyle(
+                                          // Set width and height
+                                          backgroundColor: MaterialStateProperty.all(
+                                              midItemColor), // Set background color
+                                        ),
+                                        child: const Text(
+                                          "Arms",
+                                          style: TextStyle(color: Colors.white, fontSize: 12.5),
+                                        ),
+                                      ),
+                                      ), 
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      
+                                      SizedBox(
+                                        height: 35,
+                                        width: 125,
+                                        child: 
+                                        TextButton(
+                                        onPressed: null, // This button has no action
+                                      
+                                        style: ButtonStyle(
+                                          // Set width and height
+                                          backgroundColor: MaterialStateProperty.all(
+                                              midItemColor), // Set background color
+                                        ),
+                                        child: const Text(
+                                          "Back",
+                                          style: TextStyle(color: Colors.white, fontSize: 12.5),
+                                        ),
+                                      ),
+                                      ), 
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      
+                                      SizedBox(
+                                        height: 35,
+                                        width: 125,
+                                        child: 
+                                        TextButton(
+                                        onPressed: null, // This button has no action
+                                      
+                                        style: ButtonStyle(
+                                          // Set width and height
+                                          backgroundColor: MaterialStateProperty.all(
+                                              midItemColor), // Set background color
+                                        ),
+                                        child: const Text(
+                                          "Legs",
+                                          style: TextStyle(color: Colors.white, fontSize: 12.5),
+                                        ),
+                                      ),
+                                      ), 
+                                          
+                                          
+                                          
+                                      
+                                    ],
+                                  ),
+                                
                               ),
+                              
+                              
+                              
+                              
 
                               actions: <Widget>[
                                 TextButton(
@@ -858,8 +972,10 @@ class FourthScreen extends StatelessWidget {
                         "Body part",
                         style: TextStyle(color: Colors.white, fontSize: 12.5),
                       )),
+                      
                 ),
               ),
+              
             ),
 
             Container(
@@ -875,7 +991,8 @@ class FourthScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: midItemColor,
                         borderRadius: BorderRadius.circular(
-                            25.0), // Přidává zaoblení 15 pixelů
+                            25.0),
+                        border: Border.all(color: midItemColor, width: 3.0),
                       ),
                       child: TextButton(
                         onPressed: () {

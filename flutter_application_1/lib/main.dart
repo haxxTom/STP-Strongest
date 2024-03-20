@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 String buttonText = 'Name';
+String? imageFilePath;
+
 void onPressedFunction(
     BuildContext context, Function(String) updateButtonText) {
   showDialog(
@@ -94,13 +98,13 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const MyHomePage(
-          title: 'Profile',
+          title: 'profile',
         ));
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+ const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -120,36 +124,60 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainBackgroundColor,
-        title: const Text(
+        title: const Center(
+        child: Text(
           'Profile',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,
             fontSize: 30,
             fontWeight: FontWeight.bold,
+            
           ),
         ),
       ),
+      ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                // Action for the first button
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  // Button border shape
-                  borderRadius: BorderRadius.circular(100.0),
+            SizedBox(
+              width: 200,
+              height: 200, 
+              child: ElevatedButton(
+                onPressed: () async {
+                  final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+                  if (pickedFile != null) {
+                    setState(() {
+                      imageFilePath = pickedFile.path;
+                    });
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.all(0),
+                  backgroundColor: midItemColor,
                 ),
-                minimumSize: const Size(200, 200),
-                backgroundColor: midItemColor,
-              ),
-              child: Icon(
-                Icons.person,
-                size: 50,
-                color: softItemColor,
+                child: Stack(
+                  children: [
+                    if (imageFilePath != null)
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: FileImage(File(imageFilePath!)),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    if (imageFilePath == null)
+                      Icon(
+                        Icons.person,
+                        size: 50,
+                        color: softItemColor,
+                      ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 30),
@@ -157,7 +185,6 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => onPressedFunction(context, _updateButtonText),
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    // Button border shape
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   maximumSize: const Size(280, 50),
@@ -178,13 +205,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          const FifthScreen()), // Replace HistoryScreen() with the actual screen class for the history
+                          const FifthScreen()),
                 );
-                // Action for the fourth button
               },
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    // Button border shape
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   maximumSize: const Size(280, 150),
@@ -198,20 +223,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     'TRAININGS',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30, // Adjust the font size as needed
+                      fontSize: 30, 
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                      height:
-                          30), // Add some spacing between the text and the button
-                  
+                      height:30,
+                    ),                 
                   Row(
                     children: [
-
-
                     ],
-
                   ),
                 ],
               ),
@@ -231,25 +252,25 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.popUntil(context, ModalRoute.withName('/'));
           }
           if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
           }
           if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
@@ -294,10 +315,18 @@ class SecondScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainBackgroundColor,
-        title: const Text(
+        title: const Center(
+        child: Text(
           'Random Generator',
-          style: TextStyle(color: Colors.white, fontSize: 30),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            
+          ),
         ),
+      ),
       ),
       backgroundColor: mainBackgroundColor,
       body: Center(
@@ -343,29 +372,31 @@ class SecondScreen extends StatelessWidget {
         currentIndex: 1,
         onTap: (index) {
           if (index == 0) {
-            // Check if the tapped index is 0 (home page)
-            Navigator.popUntil(context, ModalRoute.withName('/'));
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+          );
           }
           if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
           }
           if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
@@ -416,10 +447,17 @@ class ThirdScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: const Center(
+        child: Text(
           'Templates',
-          style: TextStyle(color: Colors.white, fontSize: 30),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+      ),
         backgroundColor: mainBackgroundColor,
       ),
       backgroundColor: mainBackgroundColor,
@@ -492,13 +530,11 @@ class ThirdScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Column(
                 children: [
+                  const SizedBox(height: 25,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         decoration: BoxDecoration(
@@ -537,7 +573,6 @@ class ThirdScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(width: 13,),
                       Container(
                         decoration: BoxDecoration(
                             color: midItemColor,
@@ -577,7 +612,7 @@ class ThirdScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 13,),
+                  const SizedBox(height: 15,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -618,7 +653,6 @@ class ThirdScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(width: 13,),
                       Container(
                         decoration: BoxDecoration(
                             color: midItemColor,
@@ -660,7 +694,7 @@ class ThirdScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            
           ],
         ),
       ),
@@ -671,29 +705,31 @@ class ThirdScreen extends StatelessWidget {
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) {
-            // Check if the tapped index is 0 (home page)
-            Navigator.popUntil(context, ModalRoute.withName('/'));
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+          );
           }
           if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
           }
           if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
@@ -737,10 +773,18 @@ class FourthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: const Center(
+        child: Text(
           'Exercises',
-          style: TextStyle(color: Colors.white, fontSize: 30),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+
+          ),
         ),
+      ),
         backgroundColor: mainBackgroundColor,
       ),
       body: Container(
@@ -1312,29 +1356,31 @@ class FourthScreen extends StatelessWidget {
         currentIndex: 3,
         onTap: (index) {
           if (index == 0) {
-            // Check if the tapped index is 0 (home page)
-            Navigator.popUntil(context, ModalRoute.withName('/'));
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+          );
           }
           if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
           }
           if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
@@ -1378,10 +1424,17 @@ class FifthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: const Center(
+        child: Text(
           'History',
-          style: TextStyle(color: Colors.white, fontSize: 30),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+      ),
         backgroundColor: mainBackgroundColor,
       ),
       backgroundColor: mainBackgroundColor,
@@ -1421,29 +1474,31 @@ class FifthScreen extends StatelessWidget {
         currentIndex: 4,
         onTap: (index) {
           if (index == 0) {
-            // Check if the tapped index is 0 (home page)
-            Navigator.popUntil(context, ModalRoute.withName('/'));
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+          );
           }
           if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
           }
           if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FifthScreen()),
             );
@@ -1487,7 +1542,17 @@ class SixthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Template'),
+        title: const Center(
+        child: Text(
+          'New Template',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold, 
+          ),
+        ),
+      ),
         foregroundColor: Colors.white,
         backgroundColor: mainBackgroundColor,
       ),
@@ -1528,29 +1593,31 @@ class SixthScreen extends StatelessWidget {
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) {
-            // Check if the tapped index is 0 (home page)
-            Navigator.popUntil(context, ModalRoute.withName('/'));
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+          );
           }
           if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
           }
           if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
           if (index == 3) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
           if (index == 4) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FifthScreen()),
             );

@@ -433,7 +433,7 @@ class ThirdScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(darkItemColor),
+                      backgroundColor: MaterialStateProperty.all(midItemColor),
                       fixedSize:
                           MaterialStateProperty.all<Size>(const Size(150, 75))),
                   onPressed: () {
@@ -450,7 +450,7 @@ class ThirdScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(darkItemColor),
+                      backgroundColor: MaterialStateProperty.all(midItemColor),
                       fixedSize:
                           MaterialStateProperty.all<Size>(const Size(150, 75))),
                   onPressed: () {
@@ -458,7 +458,7 @@ class ThirdScreen extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          backgroundColor: softItemColor,
+                          backgroundColor: midItemColor,
                           title: const Text(
                             "Random training",
                             style: TextStyle(fontSize: 30),
@@ -498,78 +498,164 @@ class ThirdScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: darkItemColor,
+                            color: midItemColor,
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
                         child: const Column(
                           children: [
+                            SizedBox(height: 15,),
                             Text(
                               "Template 1",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
-                            Text("Exercise x reps"),
-                            Text("Exercise x reps"),
+                            SizedBox(height: 15,),
+                            Column(
+                              children: [
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ]
+                            ),
                           ],
                         ),
                       ),
+                      const SizedBox(width: 13,),
                       Container(
                         decoration: BoxDecoration(
-                            color: darkItemColor,
+                            color: midItemColor,
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
                         child: const Column(
-                          
                           children: [
+                            SizedBox(height: 15,),
                             Text(
                               "Template 2",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
-                            Text("Exercise x reps"),
-                            Text("Exercise x reps"),
+                            SizedBox(height: 15,),
+                            Column(
+                              children: [
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ]
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
+                  const SizedBox(height: 13,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: darkItemColor,
+                            color: midItemColor,
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
                         child: const Column(
                           children: [
+                            SizedBox(height: 15,),
                             Text(
                               "Template 3",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
-                            Text("Exercise x reps"),
-                            Text("Exercise x reps"),
+                            SizedBox(height: 15,),
+                            Column(
+                              children: [
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ]
+                            ),
                           ],
                         ),
                       ),
+                      const SizedBox(width: 13,),
                       Container(
                         decoration: BoxDecoration(
-                            color: darkItemColor,
+                            color: midItemColor,
                             borderRadius: BorderRadius.circular(20)),
                         height: 150,
                         width: 150,
                         child: const Column(
                           children: [
+                            SizedBox(height: 15,),
                             Text(
                               "Template 4",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
-                            Text("Exercise x reps"),
-                            Text("Exercise x reps"),
+                            SizedBox(height: 15,),
+                            Column(
+                              children: [
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  "Exercise x reps",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ]
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ],
@@ -812,8 +898,7 @@ class FourthScreen extends StatelessWidget {
                                   "Benchpress",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 25),
-                                  textAlign: TextAlign
-                                      .center, // Zarovnání textu vpravo
+                                  textAlign: TextAlign.center, // Zarovnání textu vpravo
                                 ),
                               ),
                             ),

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
@@ -205,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          const FifthScreen()),
+                       FifthScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -247,10 +249,6 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Colors.white,
         currentIndex: 0,
         onTap: (index) {
-          if (index == 0) {
-            // Check if the tapped index is 0 (home page)
-            Navigator.popUntil(context, ModalRoute.withName('/'));
-          }
           if (index == 1) {
             Navigator.pushReplacement(
             context,
@@ -266,13 +264,13 @@ class _MyHomePageState extends State<MyHomePage> {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FourthScreen()),
+              MaterialPageRoute(builder: (context) =>  FourthScreen()),
             );
           }
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FifthScreen()),
+              MaterialPageRoute(builder: (context) => FifthScreen()),
             );
           }
         },
@@ -377,12 +375,6 @@ class SecondScreen extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
           );
           }
-          if (index == 1) {
-            Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const SecondScreen()),
-          );
-          }
           if (index == 2) {
             Navigator.pushReplacement(
               context,
@@ -398,7 +390,7 @@ class SecondScreen extends StatelessWidget {
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FifthScreen()),
+              MaterialPageRoute(builder: (context) =>  FifthScreen()),
             );
           }
         },
@@ -716,12 +708,6 @@ class ThirdScreen extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const SecondScreen()),
           );
           }
-          if (index == 2) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const ThirdScreen()),
-            );
-          }
           if (index == 3) {
             Navigator.pushReplacement(
               context,
@@ -731,7 +717,7 @@ class ThirdScreen extends StatelessWidget {
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FifthScreen()),
+              MaterialPageRoute(builder: (context) => FifthScreen()),
             );
           }
         },
@@ -1490,16 +1476,10 @@ class FourthScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const ThirdScreen()),
             );
           }
-          if (index == 3) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const FourthScreen()),
-            );
-          }
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FifthScreen()),
+              MaterialPageRoute(builder: (context) => FifthScreen()),
             );
           }
         },
@@ -1536,7 +1516,13 @@ class FourthScreen extends StatelessWidget {
 }
 
 class FifthScreen extends StatelessWidget {
-  const FifthScreen({Key? key}) : super(key: key);
+  final infoStyle = const TextStyle(
+    fontSize: 12,
+    color: Colors.white,
+  );
+
+
+ FifthScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1557,32 +1543,317 @@ class FifthScreen extends StatelessWidget {
       backgroundColor: mainBackgroundColor,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
+            const SizedBox(height: 30),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                alignment: Alignment.center,
+                fixedSize: const Size(350, 150),
+                backgroundColor: midItemColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                ),
+                
+
+              ),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Custom Dialog'),
-                      content: const Text('halooo'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Close'),
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text(
+                          'Workout1 - Datum',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
+                          ),
+
+                          ),
+                        content: SizedBox(
+                          width: 350,
+                          height: 400,
+                          child: Column(
+                            children: [
+                              const SizedBox( height: 5,),
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Exercise',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                    ),
+                                    Text(
+                                    '1 REP MAX',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                    ),
+                                
+                                ],
+                              ),
+                              const SizedBox(height: 5,),     
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Squat (Barbell) - 3 Sets',
+                                    style: infoStyle,
+                                  ),
+                                  Text(
+                                    '120KG - 12Rep',
+                                    style: infoStyle,
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'BenchPress (Barbell) - 3 Sets',
+                                    style: infoStyle,
+                                  ),
+                                  Text(
+                                    '120KG - 8Rep',
+                                    style: infoStyle,
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'BenchPress (Dumbell) - 3 Sets',
+                                    style: infoStyle,
+                                  ),
+                                  Text(
+                                    '50KG - 8Rep',
+                                    style: infoStyle,
+                                  )
+                                ],
+                              ),
+                
+                            ],                         
+                          ),
                         ),
-                      ],
+                          backgroundColor: midItemColor,
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Close'),
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
-              child: const Text('Custom Button'),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10,),
+                    const Text(
+                      "Workout1 - datum",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      
+                      ),
+                    ),
+                    const SizedBox( height: 5,),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Exercise',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                          ),
+                          Text(
+                          'Best set',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                          ),
+                      
+                      ],
+                    ),
+                    const SizedBox(height: 5,),     
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Squat (Barbell) - 3 Sets',
+                          style: infoStyle,
+                        ),
+                        Text(
+                          '120KG - 12Rep',
+                          style: infoStyle,
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'BenchPress (Barbell) - 3 Sets',
+                          style: infoStyle,
+                        ),
+                        Text(
+                          '120KG - 8Rep',
+                          style: infoStyle,
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'BenchPress (Dumbell) - 3 Sets',
+                          style: infoStyle,
+                        ),
+                        Text(
+                          '50KG - 8Rep',
+                          style: infoStyle,
+                        )
+                      ],
+                    ),
+                    
+
+                
+                  ],
+
+                ),
+              
+            ),
+            const SizedBox(height: 20,),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                alignment: Alignment.center,
+                fixedSize: const Size(350, 150),
+                backgroundColor: midItemColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                ),
+                
+
+              ),
+              onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Custom Dialog'),
+                        content: const Text('halooo'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Close'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              child: Column(
+                children: [
+                  const SizedBox(height: 10,),
+                  const Text(
+                    "Workout2 - datum",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    
+                    ),
+                  ),
+                  const SizedBox( height: 5,),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Exercise',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        ),
+                        Text(
+                        'Best set',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        ),
+                     
+                    ],
+                  ),
+                  const SizedBox(height: 5,),     
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Squat (Barbell) - 3 Sets',
+                        style: infoStyle,
+                      ),
+                      Text(
+                        '120KG - 12Rep',
+                        style: infoStyle,
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'BenchPress (Barbell) - 3 Sets',
+                        style: infoStyle,
+                      ),
+                      Text(
+                        '120KG - 8Rep',
+                        style: infoStyle,
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'BenchPress (Dumbell) - 3 Sets',
+                        style: infoStyle,
+                      ),
+                      Text(
+                        '50KG - 8Rep',
+                        style: infoStyle,
+                      )
+                    ],
+                  ),
+                  
+
+              
+                ],
+
+              ),
+              
             ),
           ],
-        ),
+        ),        
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
@@ -1614,12 +1885,6 @@ class FifthScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const FourthScreen()),
             );
           }
-          if (index == 4) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const FifthScreen()),
-            );
-          }
         },
         items: [
           BottomNavigationBarItem(
@@ -1639,12 +1904,18 @@ class FifthScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.fitness_center),
+            icon: const Padding(
+              padding: EdgeInsets.all(0), // Adjust the padding here
+              child: Icon(Icons.fitness_center),
+            ),
             label: 'Exercises',
           ),
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.alarm),
+            icon: const Padding(
+              padding: EdgeInsets.all(0), // Adjust the padding here
+              child: Icon(Icons.alarm),
+            ),
             label: 'History',
           )
         ],
@@ -1674,8 +1945,7 @@ class SixthScreen extends StatelessWidget {
         backgroundColor: mainBackgroundColor,
       ),
       backgroundColor: mainBackgroundColor,
-      body: Center(
-        child: Column(
+      body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
@@ -1700,8 +1970,7 @@ class SixthScreen extends StatelessWidget {
               },
               child: const Text('Custom Button'),
             ),
-          ],
-        ),
+          ],    
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
@@ -1736,7 +2005,7 @@ class SixthScreen extends StatelessWidget {
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FifthScreen()),
+              MaterialPageRoute(builder: (context) => FifthScreen()),
             );
           }
         },

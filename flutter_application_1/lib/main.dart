@@ -1587,55 +1587,206 @@ class FifthScreen extends StatelessWidget {
                                       fontSize: 16,
                                     ),
                                     ),
-                                    Text(
+                                  Text(
                                     '1 REP MAX',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
-                                    ),
-                                
+                                  ),                                
                                 ],
                               ),
-                              const SizedBox(height: 5,),     
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              const SizedBox(height: 5,), 
+                              Column(
                                 children: [
-                                  Text(
-                                    'Squat (Barbell) - 3 Sets',
-                                    style: infoStyle,
+                                  const Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Squat (Barbell)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        '(165KG)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    '120KG - 12Rep',
-                                    style: infoStyle,
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'BenchPress (Barbell) - 3 Sets',
-                                    style: infoStyle,
+                                  const SizedBox(height: 3,),                                 
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '1: 12x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '165kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
                                   ),
-                                  Text(
-                                    '120KG - 8Rep',
-                                    style: infoStyle,
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'BenchPress (Dumbell) - 3 Sets',
-                                    style: infoStyle,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '2: 12x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '165kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
                                   ),
-                                  Text(
-                                    '50KG - 8Rep',
-                                    style: infoStyle,
-                                  )
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '3: 12x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '165kg',
+                                        style: infoStyle,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5,),
+                                  const Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Bench Press (Barbell)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        '(150KG)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3,),                                 
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '1: 8x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '150kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '2: 6x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '140kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '3: 5x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '135kg',
+                                        style: infoStyle,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5,),
+                                  const Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Bench Press (Dumbell)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        '(65KG)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3,),                                 
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '1: 8x50KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '65kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '2: 6x50KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '60kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '3: 5x50KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '57,5kg',
+                                        style: infoStyle,
+                                      ),
+                                    ],
+                                  ),
+
+
                                 ],
                               ),
                 
@@ -1644,12 +1795,19 @@ class FifthScreen extends StatelessWidget {
                         ),
                           backgroundColor: midItemColor,
                           actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('Close'),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
+                            
                           ],
                         );
                       },
@@ -1755,17 +1913,255 @@ class FifthScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Custom Dialog'),
-                        content: const Text('halooo'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Close'),
+                        title: const Text(
+                          'Workout2 - Datum',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
                           ),
-                        ],
-                      );
+
+                          ),
+                        content: SizedBox(
+                          width: 350,
+                          height: 400,
+                          child: Column(
+                            children: [
+                              const SizedBox( height: 5,),
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Exercise',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                    ),
+                                  Text(
+                                    '1 REP MAX',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),                                
+                                ],
+                              ),
+                              const SizedBox(height: 5,), 
+                              Column(
+                                children: [
+                                  const Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Squat (Barbell)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        '(165KG)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3,),                                 
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '1: 12x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '165kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '2: 12x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '165kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '3: 12x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '165kg',
+                                        style: infoStyle,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5,),
+                                  const Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Bench Press (Barbell)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        '(150KG)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3,),                                 
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '1: 8x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '150kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '2: 6x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '140kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '3: 5x120KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '135kg',
+                                        style: infoStyle,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5,),
+                                  const Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Bench Press (Dumbell)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        '(65KG)',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3,),                                 
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '1: 8x50KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '65kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '2: 6x50KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '60kg',
+                                        style: infoStyle,
+                                        ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [                                  
+                                      Text(
+                                        '3: 5x50KG',
+                                        style: infoStyle,
+                                      ),
+                                      Text(
+                                        '57,5kg',
+                                        style: infoStyle,
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                
+                            ],                         
+                          ),
+                        ),
+                          backgroundColor: midItemColor,
+                          actions: [
+                            Center(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            
+                          ],
+                        );
                     },
                   );
                 },

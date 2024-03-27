@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
+
+
 void main() {
   runApp(const MyApp());
 }
@@ -85,6 +87,8 @@ Color mainBackgroundColor = const Color(0xFF28104E);
 Color midItemColor = const Color(0xFF6237A0);
 Color softItemColor = const Color(0xFFDEACF5);
 
+
+
 class MyApp extends StatelessWidget {
   const MyApp({ Key? key }) : super(key: key);
 
@@ -120,7 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
       buttonText = text;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -331,10 +334,7 @@ class SecondScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'This is the random screen.',
-              style: TextStyle(fontSize: 24),
-            ),
+            
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: darkItemColor,
@@ -344,8 +344,8 @@ class SecondScreen extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Custom Dialog'),
-                      content: const Text('halooo'),
+                      title: const Text('This is random training'),
+                      content: const Text(""),
                       actions: [
                         TextButton(
                           onPressed: () {
@@ -358,7 +358,33 @@ class SecondScreen extends StatelessWidget {
                   },
                 );
               },
-              child: const Text('Custom Button'),
+              child: const Text('Generate training', style: TextStyle(color: Colors.white),),
+            ),
+            SizedBox(height: 10,),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: darkItemColor,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('This is random training'),
+                      content: const Text(""),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: const Text('Generate exercise', style: TextStyle(color: Colors.white),),
             ),
           ],
         ),
@@ -384,7 +410,7 @@ class SecondScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FourthScreen()),
+              MaterialPageRoute(builder: (context) => FourthScreen()),
             );
           }
           if (index == 4) {
@@ -711,7 +737,7 @@ class ThirdScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FourthScreen()),
+              MaterialPageRoute(builder: (context) => FourthScreen()),
             );
           }
           if (index == 4) {
@@ -754,10 +780,22 @@ class ThirdScreen extends StatelessWidget {
 }
 
 class FourthScreen extends StatelessWidget {
-  const FourthScreen({Key? key}) : super(key: key);
+  
+  FourthScreen({Key? key}) : super(key: key);
+  final String C = "Core";
+  final String A = "Arms";
+  final String B =  "Back";
+  final String Ch = "Chest";
+  final String L = "Legs";
+  final String S = "Shoulders";
+  final String O = "Other";
+  final String Fb = "Full Body";
+  final String Ca = "Cardio";
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      
       appBar: AppBar(
         title: const Center(
         child: Text(
@@ -971,6 +1009,14 @@ class FourthScreen extends StatelessWidget {
                 left: 20, // Odsazení zleva
                 child: Column(
                   children: <Widget>[
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("A", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
                     Container(
                       width: 350,
                       height: 80,
@@ -978,7 +1024,6 @@ class FourthScreen extends StatelessWidget {
                         color: midItemColor,
                         borderRadius: BorderRadius.circular(
                             25.0),
-                        border: Border.all(color: midItemColor, width: 3.0),
                       ),
                       child: TextButton(
                         onPressed: () {
@@ -988,18 +1033,14 @@ class FourthScreen extends StatelessWidget {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
                                 title: const Text(
-                                  "Benchpress",
+                                  "Ab Wheel",
                                   style: TextStyle(fontSize: 30),
                                 ),
                                 content: const SizedBox(
                                   height: 400.0, // Maximální výška
                                   width: 300.0, // Maximální šířka
                                   child: Text(
-                                    "Lehněte si na lavičku, chodidla pevně na zemi."
-                                    "Uchopte činku nadhmatem, šířka úchopu o něco větší než ramena."
-                                    "Nadechněte se, spouštějte činku k hrudníku (dotyk na úrovni bradavek)."
-                                    "Vydechněte a vytlačte činku zpět do výchozí pozice."
-                                    "Opakujte požadovaný počet opakování.",
+                                    "Popis",
                                     style: TextStyle(
                                       fontSize: 15,
                                     ),
@@ -1029,32 +1070,55 @@ class FourthScreen extends StatelessWidget {
                         },
                         child: Row(
                           // Uspořádání do řádku pro horizontální uspořádání
-                          children: <Widget>[
+                          children:[
                             Image.asset(
-                              'assets/Images/bench.png',
+                              'assets/Images/icon.png',
                               width: 100,
                               height: 100,
                             ),
-                            const SizedBox(
-                                width: 10), // Mezera mezi obrázkem a textem
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                    right: 50.0), // Přidá odsazení 10px zprava
-                                child: const Text(
-                                  "Benchpress",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                  textAlign: TextAlign.center, // Zarovnání textu vpravo
-                                ),
-                              ),
-                            ),
+                            
+                              Row(
+                                
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 215,
+                                      child: Column(
+                                        
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                    const Text(
+                                      "Ab Wheel",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                       // Zarovnání textu vpravo
+                                    ),
+                                    Text(
+                                      C, 
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 12.5),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ],
+                                    ),
+                                    
+                                  )
+                                
+                              ]
+                              )
+                              
+                            
+                              
+                            
                           ],
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 10), // Mezera mezi tlačítky
                     Container(
                       width: 350,
                       height: 80,
@@ -1071,7 +1135,7 @@ class FourthScreen extends StatelessWidget {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
                                 title: const Text(
-                                  "Benchpress",
+                                  "Aerobics",
                                   style: TextStyle(fontSize: 30),
                                 ),
                                 content: const SizedBox(
@@ -1108,31 +1172,55 @@ class FourthScreen extends StatelessWidget {
                         },
                         child: Row(
                           // Uspořádání do řádku pro horizontální uspořádání
-                          children: <Widget>[
+                          children:[
                             Image.asset(
-                              'assets/Images/squat.png',
+                              'assets/Images/icon.png',
                               width: 100,
                               height: 100,
                             ),
-                            const SizedBox(
-                                width: 10), // Mezera mezi obrázkem a textem
-                            Expanded(
-                              child: Container(
-                                child: const Text(
-                                  "Squat",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                  textAlign: TextAlign
-                                      .center, // Zarovnání textu vpravo
-                                ),
-                              ),
-                            ),
+                            
+                              Row(
+                                
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 215,
+                                      child: Column(
+                                        
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                    const Text(
+                                      "Aerobics",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                       // Zarovnání textu vpravo
+                                    ),
+                                    Text(
+                                      Ca, 
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 12.5),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ],
+                                    ),
+                                    
+                                  )
+                                
+                              ]
+                              )
+                              
+                            
+                              
+                            
                           ],
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 10), // Mezera mezi tlačítky
                     Container(
                       width: 350,
                       height: 80,
@@ -1149,7 +1237,7 @@ class FourthScreen extends StatelessWidget {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
                                 title: const Text(
-                                  "Benchpress",
+                                  "Arnold Press",
                                   style: TextStyle(fontSize: 30),
                                 ),
                                 content: const SizedBox(
@@ -1186,31 +1274,55 @@ class FourthScreen extends StatelessWidget {
                         },
                         child: Row(
                           // Uspořádání do řádku pro horizontální uspořádání
-                          children: <Widget>[
+                          children:[
                             Image.asset(
-                              'assets/Images/squat.png',
+                              'assets/Images/icon.png',
                               width: 100,
                               height: 100,
                             ),
-                            const SizedBox(
-                                width: 10), // Mezera mezi obrázkem a textem
-                            Expanded(
-                              child: Container(
-                                child: const Text(
-                                  "Squat",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                  textAlign: TextAlign
-                                      .center, // Zarovnání textu vpravo
-                                ),
-                              ),
-                            ),
+                            
+                              Row(
+                                
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 215,
+                                      child: Column(
+                                        
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                    const Text(
+                                      "Arnold Press (Dumbell)",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                       // Zarovnání textu vpravo
+                                    ),
+                                    Text(
+                                      S, 
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 12.5),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ],
+                                    ),
+                                    
+                                  )
+                                
+                              ]
+                              )
+                              
+                            
+                              
+                            
                           ],
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 10), // Mezera mezi tlačítky
                     Container(
                       width: 350,
                       height: 80,
@@ -1227,7 +1339,7 @@ class FourthScreen extends StatelessWidget {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
                                 title: const Text(
-                                  "Benchpress",
+                                  "Around the World",
                                   style: TextStyle(fontSize: 30),
                                 ),
                                 content: const SizedBox(
@@ -1264,31 +1376,64 @@ class FourthScreen extends StatelessWidget {
                         },
                         child: Row(
                           // Uspořádání do řádku pro horizontální uspořádání
-                          children: <Widget>[
+                          children:[
                             Image.asset(
-                              'assets/Images/squat.png',
+                              'assets/Images/icon.png',
                               width: 100,
                               height: 100,
                             ),
-                            const SizedBox(
-                                width: 10), // Mezera mezi obrázkem a textem
-                            Expanded(
-                              child: Container(
-                                child: const Text(
-                                  "Squat",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                  textAlign: TextAlign
-                                      .center, // Zarovnání textu vpravo
-                                ),
-                              ),
-                            ),
+                            
+                              Row(
+                                
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 215,
+                                      child: Column(
+                                        
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                    const Text(
+                                      "Around the World",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                       // Zarovnání textu vpravo
+                                    ),
+                                    Text(
+                                      Ch, 
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 12.5),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ],
+                                    ),
+                                    
+                                  )
+                                
+                              ]
+                              )
+                              
+                            
+                              
+                            
                           ],
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("B", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                     
                     Container(
                       width: 350,
                       height: 80,
@@ -1305,7 +1450,7 @@ class FourthScreen extends StatelessWidget {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
                                 title: const Text(
-                                  "Benchpress",
+                                  "Back Extension",
                                   style: TextStyle(fontSize: 30),
                                 ),
                                 content: const SizedBox(
@@ -1342,33 +1487,50 @@ class FourthScreen extends StatelessWidget {
                         },
                         child: Row(
                           // Uspořádání do řádku pro horizontální uspořádání
-                          children: <Widget>[
+                          children:[
                             Image.asset(
-                              'assets/Images/squat.png',
+                              'assets/Images/icon.png',
                               width: 100,
                               height: 100,
                             ),
-                            const SizedBox(
-                                width: 10), // Mezera mezi obrázkem a textem
-                            Expanded(
-                              child: Container(
-                                child: const Text(
-                                  "Squat",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                  textAlign: TextAlign
-                                      .center, // Zarovnání textu vpravo
-                                ),
-                              ),
-                            ),
+                            
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 215,
+                                      child: Column(
+                                        
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                    const Text(
+                                      "Back Extension",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                       // Zarovnání textu vpravo
+                                    ),
+                                    Text(
+                                      B, 
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 12.5),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ],
+                                    ),
+                                    
+                                  ) 
+                              ]
+                              )
                           ],
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 20), // Mezera mezi tlačítky
+                    const SizedBox(height: 10), // Mezera mezi tlačítky
                     Container(
-                      margin: const EdgeInsets.only(bottom: 20),
                       width: 350,
                       height: 80,
                       decoration: BoxDecoration(
@@ -1384,7 +1546,7 @@ class FourthScreen extends StatelessWidget {
                               return AlertDialog(
                                 backgroundColor: softItemColor,
                                 title: const Text(
-                                  "Benchpress1",
+                                  "Back Extension (Machine)",
                                   style: TextStyle(fontSize: 30),
                                 ),
                                 content: const SizedBox(
@@ -1421,27 +1583,358 @@ class FourthScreen extends StatelessWidget {
                         },
                         child: Row(
                           // Uspořádání do řádku pro horizontální uspořádání
-                          children: <Widget>[
+                          children:[
                             Image.asset(
-                              'assets/Images/squat.png',
+                              'assets/Images/icon.png',
                               width: 100,
                               height: 100,
                             ),
-                            const SizedBox(
-                                width: 10), // Mezera mezi obrázkem a textem
-                            Expanded(
-                              child: Container(
-                                child: const Text(
-                                  "Squat",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                  textAlign: TextAlign
-                                      .center, // Zarovnání textu vpravo
-                                ),
-                              ),
-                            ),
+                            
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 215,
+                                      child: Column(
+                                        
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                    const Text(
+                                      "Back Extension (Machine)",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                       // Zarovnání textu vpravo
+                                    ),
+                                    Text(
+                                      B, 
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 12.5),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ],
+                                    ),
+                                    
+                                  ) 
+                              ]
+                              )
                           ],
                         ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10), // Mezera mezi tlačítky
+                    Container(
+                      width: 350,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(
+                            25.0), // Přidává zaoblení 15 pixelů
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: const Text(
+                                  "Back Extension (Machine)",
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                                content: const SizedBox(
+                                  height: 400.0, // Maximální výška
+                                  width: 300.0, // Maximální šířka
+                                  child: Text(
+                                    "Popis cviku",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      "Zavřít",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                elevation: 20.0,
+                                contentPadding: const EdgeInsets.all(25.0),
+                                insetPadding: const EdgeInsets.all(20.0),
+                              );
+                            },
+                          );
+                        },
+                        child: Row(
+                          // Uspořádání do řádku pro horizontální uspořádání
+                          children:[
+                            Image.asset(
+                              'assets/Images/icon.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                            
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 215,
+                                      child: Column(
+                                        
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                    const Text(
+                                      "Ball Slams",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                       // Zarovnání textu vpravo
+                                    ),
+                                    Text(
+                                      Fb, 
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 12.5),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ],
+                                    ),
+                                    
+                                  ) 
+                              ]
+                              )
+                          ],
+                        ),
+                      ),
+                    ),
+
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("C", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("D", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("E", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("F", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("G", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("H", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("I", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("J", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("K", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("L", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("M", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("N", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("O", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("P", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("Q", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("R", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("S", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("T", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("U", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("V", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("W", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("X", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("Y", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                      ),
+                    ),
+
+                    const SizedBox(
+                      width: 350,
+                      height: 30,
+                      child: Text("Z", 
+                      style: TextStyle(fontSize: 17.5, color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
                       ),
                     ),
                   ],
@@ -2278,7 +2771,7 @@ class FifthScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FourthScreen()),
+              MaterialPageRoute(builder: (context) => FourthScreen()),
             );
           }
         },
@@ -2395,7 +2888,7 @@ class SixthScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const FourthScreen()),
+              MaterialPageRoute(builder: (context) => FourthScreen()),
             );
           }
           if (index == 4) {

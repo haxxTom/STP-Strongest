@@ -12,10 +12,45 @@ void main() {
   runApp(const MyApp());
 }
 
-String buttonText = 'Name';
-String? imageFilePath;
+Color darkItemColor = const Color(0xFF9754CB);
+Color mainBackgroundColor = const Color(0xFF28104E);
+Color midItemColor = const Color(0xFF6237A0);
+Color softItemColor = const Color(0xFFDEACF5);
 
-void onPressedFunction(
+class MyApp extends StatelessWidget {
+  const MyApp({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
+          scaffoldBackgroundColor: Colors.black,
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(
+          title: 'profile',
+        ));
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+ const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String buttonText = 'Name';
+  String? imageFilePath;
+
+  void onPressedFunction(
     BuildContext context, Function(String) updateButtonText) {
   showDialog(
     context: context,
@@ -84,43 +119,6 @@ void onPressedFunction(
   });
 }
 
-Color darkItemColor = const Color(0xFF9754CB);
-Color mainBackgroundColor = const Color(0xFF28104E);
-Color midItemColor = const Color(0xFF6237A0);
-Color softItemColor = const Color(0xFFDEACF5);
-
-
-
-class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme:
-              ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
-          scaffoldBackgroundColor: Colors.black,
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(
-          title: 'profile',
-        ));
-  }
-}
-
-class MyHomePage extends StatefulWidget {
- const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
 
   void _updateButtonText(String text) {
     setState(() {

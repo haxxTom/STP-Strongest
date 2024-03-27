@@ -4,7 +4,6 @@ import 'exercises.dart';
 import 'history.dart';
 import 'templates.dart';
 
-
 class SecondScreen extends StatelessWidget {
   const SecondScreen({Key? key}) : super(key: key);
   @override

@@ -4,8 +4,8 @@ import 'exercises.dart';
 import 'history.dart';
 import 'templates.dart';
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({Key? key}) : super(key: key);
+class RandomScreen extends StatelessWidget {
+  const RandomScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +55,7 @@ class SecondScreen extends StatelessWidget {
               },
               child: const Text('Generate training', style: TextStyle(color: Colors.white),),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: darkItemColor,
@@ -93,25 +93,25 @@ class SecondScreen extends StatelessWidget {
           if (index == 0) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
           );
           }
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FourthScreen()),
+              MaterialPageRoute(builder: (context) => ExerciseScreen()),
             );
           }
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) =>  FifthScreen()),
+              MaterialPageRoute(builder: (context) =>  HistoryScreen()),
             );
           }
         },

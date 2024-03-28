@@ -17,8 +17,11 @@ Color mainBackgroundColor = const Color(0xFF28104E);
 Color midItemColor = const Color(0xFF6237A0);
 Color softItemColor = const Color(0xFFDEACF5);
 
+String buttonText = 'Name';
+String? imageFilePath;
+
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({ super.key });
 
   @override
   Widget build(BuildContext context) {
@@ -31,30 +34,29 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.black,
           useMaterial3: true,
         ),
-        home: const MyHomePage(
+        home: const ProfileScreen(
           title: 'profile',
         ));
   }
 }
 
-class MyHomePage extends StatefulWidget {
- const MyHomePage({Key? key, required this.title}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+ const ProfileScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  String buttonText = 'Name';
-  String? imageFilePath;
+class _ProfileScreenState extends State<ProfileScreen> {
+  
 
-  void onPressedFunction(
+  void changeusernameFunction(
     BuildContext context, Function(String) updateButtonText) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
       String enteredText = ''; // Text entered by the user
 
       return AlertDialog(
@@ -188,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () => onPressedFunction(context, _updateButtonText),
+              onPressed: () => changeusernameFunction(context, _updateButtonText),
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -210,8 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                       FifthScreen()),
+                      builder: (context) => const HistoryScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -256,25 +257,25 @@ class _MyHomePageState extends State<MyHomePage> {
           if (index == 1) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const SecondScreen()),
+            MaterialPageRoute(builder: (context) => const RandomScreen()),
           );
           }
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) =>  FourthScreen()),
+              MaterialPageRoute(builder: (context) =>  const ExerciseScreen()),
             );
           }
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FifthScreen()),
+              MaterialPageRoute(builder: (context) =>  const HistoryScreen()),
             );
           }
         },

@@ -4,14 +4,14 @@ import 'templates.dart';
 import 'random.dart';
 import 'exercises.dart';
 
-class FifthScreen extends StatelessWidget {
+class HistoryScreen extends StatelessWidget {
   final infoStyle = const TextStyle(
     fontSize: 12,
     color: Colors.white,
   );
 
 
- FifthScreen({Key? key}) : super(key: key);
+ const HistoryScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -749,25 +749,25 @@ class FifthScreen extends StatelessWidget {
           if (index == 0) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
           );
           }
           if (index == 1) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const SecondScreen()),
+            MaterialPageRoute(builder: (context) => const RandomScreen()),
           );
           }
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FourthScreen()),
+              MaterialPageRoute(builder: (context) => const ExerciseScreen()),
             );
           }
         },

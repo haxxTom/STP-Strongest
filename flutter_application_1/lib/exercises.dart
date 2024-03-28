@@ -4,10 +4,10 @@ import 'templates.dart';
 import 'random.dart';
 import 'history.dart';
 
-class FourthScreen extends StatelessWidget {
+class ExerciseScreen extends StatelessWidget {
   
-  FourthScreen({Key? key}) : super(key: key);
-  
+  const ExerciseScreen({super.key});
+
   final String C = "Core";
   final String A = "Arms";
   final String B =  "Back";
@@ -1181,25 +1181,25 @@ class FourthScreen extends StatelessWidget {
           if (index == 0) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
           );
           }
           if (index == 1) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const SecondScreen()),
+            MaterialPageRoute(builder: (context) => const RandomScreen()),
           );
           }
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FifthScreen()),
+              MaterialPageRoute(builder: (context) => const HistoryScreen()),
             );
           }
         },

@@ -4,9 +4,9 @@ import 'random.dart';
 import 'exercises.dart';
 import 'history.dart';
 
-class ThirdScreen extends StatelessWidget {
+class TemplateScreen extends StatelessWidget {
 
-  const ThirdScreen({Key? key}) : super(key: key);
+  const TemplateScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     void plustemplate() {
@@ -278,25 +278,25 @@ class ThirdScreen extends StatelessWidget {
           if (index == 0) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
           );
           }
           if (index == 1) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const SecondScreen()),
+            MaterialPageRoute(builder: (context) => const RandomScreen()),
           );
           }
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FourthScreen()),
+              MaterialPageRoute(builder: (context) => ExerciseScreen()),
             );
           }
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FifthScreen()),
+              MaterialPageRoute(builder: (context) => HistoryScreen()),
             );
           }
         },
@@ -389,31 +389,31 @@ class SixthScreen extends StatelessWidget {
           if (index == 0) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MyHomePage(title: 'profile')),
+            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
           );
           }
           if (index == 1) {
             Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const SecondScreen()),
+            MaterialPageRoute(builder: (context) => const RandomScreen()),
           );
           }
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const ThirdScreen()),
+              MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FourthScreen()),
+              MaterialPageRoute(builder: (context) => ExerciseScreen()),
             );
           }
           if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => FifthScreen()),
+              MaterialPageRoute(builder: (context) => HistoryScreen()),
             );
           }
         },

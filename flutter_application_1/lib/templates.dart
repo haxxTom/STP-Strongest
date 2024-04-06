@@ -5,30 +5,22 @@ import 'exercises.dart';
 import 'history.dart';
 
 class TemplateScreen extends StatelessWidget {
-
   const TemplateScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    void plustemplate() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SixthScreen()),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-        child: Text(
-          'Templates',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
+          child: Text(
+            'Templates',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
         backgroundColor: mainBackgroundColor,
       ),
       backgroundColor: mainBackgroundColor,
@@ -63,35 +55,10 @@ class TemplateScreen extends StatelessWidget {
                       fixedSize:
                           MaterialStateProperty.all<Size>(const Size(150, 75))),
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: midItemColor,
-                          title: const Text(
-                            "Random training",
-                            style: TextStyle(fontSize: 30),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text(
-                                "Close",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                          ],
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          elevation: 20.0,
-                          contentPadding: const EdgeInsets.all(25.0),
-                          insetPadding: const EdgeInsets.all(20.0),
-                        );
-                      },
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RandomScreen()),
                     );
                   },
                   child: const Text(
@@ -101,171 +68,182 @@ class TemplateScreen extends StatelessWidget {
                 ),
               ],
             ),
-              Column(
-                children: [
-                  const SizedBox(height: 25,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: midItemColor,
-                            borderRadius: BorderRadius.circular(20)),
-                        height: 150,
-                        width: 150,
-                        child: const Column(
-                          children: [
-                            SizedBox(height: 15,),
+            Column(
+              children: [
+                const SizedBox(
+                  height: 25,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: midItemColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      height: 150,
+                      width: 150,
+                      child: const Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Template 1",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Column(children: [
                             Text(
-                              "Template 1",
+                              "Exercise x reps",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
+                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 15,),
-                            Column(
-                              children: [
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ]
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: midItemColor,
-                            borderRadius: BorderRadius.circular(20)),
-                        height: 150,
-                        width: 150,
-                        child: const Column(
-                          children: [
-                            SizedBox(height: 15,),
                             Text(
-                              "Template 2",
+                              "Exercise x reps",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
+                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 15,),
-                            Column(
-                              children: [
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ]
-                            ),
-                          ],
-                        ),
+                          ]),
+                        ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 15,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: midItemColor,
-                            borderRadius: BorderRadius.circular(20)),
-                        height: 150,
-                        width: 150,
-                        child: const Column(
-                          children: [
-                            SizedBox(height: 15,),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: midItemColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      height: 150,
+                      width: 150,
+                      child: const Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Template 2",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Column(children: [
                             Text(
-                              "Template 3",
+                              "Exercise x reps",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
+                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 15,),
-                            Column(
-                              children: [
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ]
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: midItemColor,
-                            borderRadius: BorderRadius.circular(20)),
-                        height: 150,
-                        width: 150,
-                        child: const Column(
-                          children: [
-                            SizedBox(height: 15,),
                             Text(
-                              "Template 4",
+                              "Exercise x reps",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
+                              textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 15,),
-                            Column(
-                              children: [
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  "Exercise x reps",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ]
-                            ),
-                          ],
-                        ),
+                          ]),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
-              ),
-            
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: midItemColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      height: 150,
+                      width: 150,
+                      child: const Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Template 3",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Column(children: [
+                            Text(
+                              "Exercise x reps",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Exercise x reps",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: midItemColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      height: 150,
+                      width: 150,
+                      child: const Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Template 4",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Column(children: [
+                            Text(
+                              "Exercise x reps",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "Exercise x reps",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ]),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -277,15 +255,16 @@ class TemplateScreen extends StatelessWidget {
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
-          );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(title: 'profile')),
+            );
           }
           if (index == 1) {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const RandomScreen()),
-          );
+              context,
+              MaterialPageRoute(builder: (context) => const RandomScreen()),
+            );
           }
           if (index == 3) {
             Navigator.pushReplacement(
@@ -339,46 +318,116 @@ class SixthScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-        child: Text(
-          'New Template',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-            fontWeight: FontWeight.bold, 
+          child: Text(
+            'New Template',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
         foregroundColor: Colors.white,
         backgroundColor: mainBackgroundColor,
       ),
       backgroundColor: mainBackgroundColor,
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Custom Dialog'),
-                      content: const Text('halooo'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Close'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              child: const Text('Custom Button'),
+      body: Container(
+        padding: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+        height: double.infinity,
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+              decoration: BoxDecoration(
+                color: midItemColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    "Exercise 1",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("Type"),
+                      Text("Rep"),
+                      Text("Weight"),
+                      Text("RPE"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("Type"),
+                      Text("Rep"),
+                      Text("Weight"),
+                      Text("RPE"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("Type"),
+                      Text("Rep"),
+                      Text("Weight"),
+                      Text("RPE"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text("Add"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text("Remove"),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-          ],    
+            Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: ElevatedButton(
+                    child: Text("Add exercises"),
+                    onPressed: () {},
+                  ),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: ElevatedButton(
+                    child: Text("Save Template"),
+                    onPressed: () {},
+                  ),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: ElevatedButton(
+                    child: Text("Cancel"),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
@@ -388,15 +437,16 @@ class SixthScreen extends StatelessWidget {
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
-          );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(title: 'profile')),
+            );
           }
           if (index == 1) {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const RandomScreen()),
-          );
+              context,
+              MaterialPageRoute(builder: (context) => const RandomScreen()),
+            );
           }
           if (index == 2) {
             Navigator.pushReplacement(

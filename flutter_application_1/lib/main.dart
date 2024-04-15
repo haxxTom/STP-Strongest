@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/database/test.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'random.dart';
@@ -209,10 +210,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const HistoryScreen()),
+                      builder: (context) => MyHomePage()),
                 );
               },
               style: ElevatedButton.styleFrom(

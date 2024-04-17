@@ -13,7 +13,7 @@ List<Cvik> cviky = [
   Cvik(
     id: 2,
     nazev: "Push-ups",
-    partie: "Chest" "Triceps",
+    partie: "Chest, Triceps",
     obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
   ),
 

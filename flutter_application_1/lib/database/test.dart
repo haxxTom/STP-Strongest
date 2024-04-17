@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'exercisesList.dart';
 import 'database.dart';
 import '../main.dart';
@@ -69,7 +68,6 @@ class ExerciseItem extends StatelessWidget {
                   );
                 },
                 child: Row(
-                          // Uspořádání do řádku pro horizontální uspořádání
                   children:[
                     Image.asset(
                       cvik.obrazek,
@@ -121,68 +119,149 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Cvik> _filteredCviky = scviky;
   String _searchText = "";
   final _focusNode = FocusNode();
+  bool _showSearchBar = false;
   
 
        
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+            appBar: AppBar(
         backgroundColor: mainBackgroundColor,
-        title: const Center(
-          child: Text(
-            'Exercises',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+        toolbarHeight: 130,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 17,
             ),
-          ),
-        ),      
+            const Text(
+              "Exercises",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 100,
+              child: Row(
+                children: [
+                  Container(
+                    width: 100,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: midItemColor,
+                      borderRadius: BorderRadius.circular(15.0), 
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: midItemColor,
+                              title: const Text(
+                                "Search by Body Part",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                ),
+                                textAlign: TextAlign.center
+                              ),
+                              content: const Row(
+                                children: [],
+                              ),
+                            );
+                          }
+                        );
+                      },
+                      child: const Text(
+                        "Body Part",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  SizedBox(
+                    width: 50, 
+                    height: 50, 
+                    child: FloatingActionButton(
+                      backgroundColor: midItemColor,
+                      onPressed: () {
+                        setState(() {
+                          _showSearchBar = !_showSearchBar;
+                          if (_showSearchBar) {
+                            _focusNode.requestFocus();
+                          } else {
+                            _focusNode.unfocus();
+                            _searchText = ""; // Clear search text on close
+                          }
+                        });
+                      },
+                      child: Icon(
+                        _showSearchBar ? Icons.close : Icons.search,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+  
+                if (_showSearchBar)
+                 Expanded( // Ensures the TextField fills the remaining space
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                        cursorColor: Colors.white,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        focusNode: _focusNode,
+                        onChanged: (value) {
+                          setState(() {
+                            _searchText = value;
+                            // Filter exercises based on search term
+                            _filteredCviky = scviky.where((cvik) => cvik.nazev.toLowerCase().contains(_searchText.toLowerCase())).toList();
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Search Exercises",
+                          hintStyle: const TextStyle(
+                            color: Colors.white,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white, width: 3),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                
+              ],
+            ),
+            )
+            
+          ],
+        ),
       ),
       backgroundColor: mainBackgroundColor,
-      body: GestureDetector( // Wrap with GestureDetector
+      body: GestureDetector(
         onTap: () {
-          _focusNode.unfocus(); // Unfocus the TextField on tap outside
+          _focusNode.unfocus(); // Unfocus the TextField on tap outside (optional)
         },
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                cursorColor: Colors.white,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                focusNode: _focusNode, // Assign the FocusNode
-                onChanged: (value) {
-                  setState(() {
-                    _searchText = value;
-                    // Filter exercises based on search term
-                    _filteredCviky = scviky.where((cvik) => cvik.nazev.toLowerCase().contains(_searchText.toLowerCase())).toList();
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: "Search Exercises",
-                  hintStyle: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(color: Colors.white),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white, width: 3),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-              ),
-            ),
+            // Button to toggle search bar visibility
             Expanded( // Ensures the list fills the remaining space
               child: ListView.builder(
                 itemCount: _filteredCviky.length, // Use filtered list for display

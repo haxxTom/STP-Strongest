@@ -90,8 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
           ),
           onChanged: (value) {
-            enteredText =
-                value; // Update enteredText when the text field changes
+            enteredText = value; // Update enteredText when the text field changes
           },
         ),
         actions: <Widget>[

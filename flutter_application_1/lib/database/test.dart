@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'exercisesList.dart';
 import 'database.dart';
@@ -73,7 +75,7 @@ class ExerciseItem extends StatelessWidget {
                       cvik.obrazek,
                       width: 100,
                       height: 100,
-                    ),                            
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -115,6 +117,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  List<Cvik> _filteredCviky = scviky;
+  String _searchText = "";
+  final _focusNode = FocusNode();
+  
+
+       
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,12 +142,58 @@ class _MyHomePageState extends State<MyHomePage> {
         ),      
       ),
       backgroundColor: mainBackgroundColor,
-      body: ListView.builder(
-        itemCount: cviky.length,
-        itemBuilder: (context, index) {
-          final cvik = cviky[index];
-          return ExerciseItem(cvik: cvik);
+      body: GestureDetector( // Wrap with GestureDetector
+        onTap: () {
+          _focusNode.unfocus(); // Unfocus the TextField on tap outside
         },
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                cursorColor: Colors.white,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+                focusNode: _focusNode, // Assign the FocusNode
+                onChanged: (value) {
+                  setState(() {
+                    _searchText = value;
+                    // Filter exercises based on search term
+                    _filteredCviky = scviky.where((cvik) => cvik.nazev.toLowerCase().contains(_searchText.toLowerCase())).toList();
+                  });
+                },
+                decoration: InputDecoration(
+                  hintText: "Search Exercises",
+                  hintStyle: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white, width: 3),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+            ),
+            Expanded( // Ensures the list fills the remaining space
+              child: ListView.builder(
+                itemCount: _filteredCviky.length, // Use filtered list for display
+                itemBuilder: (context, index) {
+                  final cvik = _filteredCviky[index];
+                  return ExerciseItem(cvik: cvik);
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,

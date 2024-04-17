@@ -121,3 +121,11 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
   ),
 ];
+
+int compareNatural(String a, String b) {
+  return a.toLowerCase().compareTo(b.toLowerCase());
+}
+
+List<Cvik>sortedCviky() => cviky.toList()..sort((a, b) => compareNatural(a.nazev, b.nazev));
+
+List<Cvik> scviky = sortedCviky();

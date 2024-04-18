@@ -998,11 +998,374 @@ List<Cvik> cviky = [
 
   Cvik(
     id: 124,
-    nazev: "Lateral Raise Machine",
+    nazev: "Lateral Raise (Machine)",
     partie: "Shoulders",
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
+
+  Cvik(
+    id: 125,
+    nazev: "Leg Extension (Machine)",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 126,
+    nazev: "Leg Press",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 127,
+    nazev: "Lunge (Barbell)",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 128,
+    nazev: "Lunge (Bodyweight)",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 129,
+    nazev: "Lunge (Dumbell)",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 130,
+    nazev: "Lying Leg Curl (Machine)",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 131,
+    nazev: "Mountain Climber",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 132,
+    nazev: "Muscle Up",
+    partie: "Full Body",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 133,
+    nazev: "Oblique Crunch",
+    partie: "Core",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 134,
+    nazev: "Overhead Press (Barbell)",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 135,
+    nazev: "Overhead Press (Cable)",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 136,
+    nazev: "Overhead Press (Dumbell)",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 137,
+    nazev: "Overhead Press (Smith Machine)",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 138,
+    nazev: "Overhead Squat (Barbell)",
+    partie: "Olympic",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 139,
+    nazev: "Pec Deck (Machine)",
+    partie: "Chest",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 140,
+    nazev: "Pendlay Row",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 141,
+    nazev: "Pistol Squat",
+    partie: "Legs",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 142,
+    nazev: "Plank",
+    partie: "Core",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 143,
+    nazev: "Power Clean",
+    partie: "Olympic",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 144,
+    nazev: "Power Snatch (Barbell)",
+    partie: "Olympic",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 145,
+    nazev: "Preacher Curl (Barbell)",
+    partie: "Arms",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 146,
+    nazev: "Preacher Curl (Dumbell)",
+    partie: "Arms",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 147,
+    nazev: "Preacher Curl (Machine)",
+    partie: "Arms",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 148,
+    nazev: "Press Under (Barbell)",
+    partie: "Olympic",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 149,
+    nazev: "Pull Up",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 150,
+    nazev: "Pull Up (Assisted)",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 151,
+    nazev: "Pull Up (Band)",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 152,
+    nazev: "Pullover (Dumbell)",
+    partie: "Chest",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 153,
+    nazev: "Pullover (Machine)",
+    partie: "Chest",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 154,
+    nazev: "Push Press",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 155,
+    nazev: "Push Up",
+    partie: "Chest",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 156,
+    nazev: "Push Up (Band)",
+    partie: "Chest",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 157,
+    nazev: "Push Up (Knees)",
+    partie: "Chest",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 158,
+    nazev: "Rack Pull (Barbell)",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 159,
+    nazev: "Reverse Crunch",
+    partie: "Core",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 160,
+    nazev: "Reverse Curl (Band)",
+    partie: "Arms",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 161,
+    nazev: "Reverse Curl (Barbell)",
+    partie: "Arms",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 162,
+    nazev: "Reverse Curl (Dumbell)",
+    partie: "Arms",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 163,
+    nazev: "Reverse Fly (Cable)",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 164,
+    nazev: "Reverse Fly (Dumbell)",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 165,
+    nazev: "Reverse Fly (Machine)",
+    partie: "Shoulders",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 166,
+    nazev: "Reverse Grip Concentration Curl (Dumbell)",
+    partie: "Arms",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 167,
+    nazev: "Reverse Plank",
+    partie: "Core",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 168,
+    nazev: "Romanian Deadlift (Barbell)",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+  Cvik(
+    id: 169,
+    nazev: "Romanian Deadlift (Dumbell)",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png",
+    popis: "popis",
+  ),
+
+
+
 ];
 
 int compareNatural(String a, String b) {

@@ -7,6 +7,7 @@ import '../templates.dart';
 import '../random.dart';
 import '../history.dart';
 
+
 class ExerciseItem extends StatelessWidget {
   final Cvik cvik;
 
@@ -161,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              backgroundColor: midItemColor,
+                              backgroundColor: softItemColor,
                               title: const Text(
                                 "Search by Body Part",
                                 style: TextStyle(
@@ -171,7 +172,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                 textAlign: TextAlign.center
                               ),
                               content: const Row(
-                                children: [],
+                                children: [
+                                  SizedBox(
+                                    height: 35,
+                                    width: 125,
+                                    child: TextButton(
+                                      onPressed: null, 
+                                      style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFF6237A0))),
+                                      child: Text("Arms"),
+                                    ),
+                                  )
+                                ],
                               ),
                             );
                           }

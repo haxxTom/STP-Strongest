@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/database/exercises.dart';
 import 'main.dart';
-import 'exercises.dart';
 import 'history.dart';
 import 'templates.dart';
 
@@ -105,7 +105,7 @@ class RandomScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ExerciseScreen()),
+              MaterialPageRoute(builder: (context) => MyHomePage()),
             );
           }
           if (index == 4) {

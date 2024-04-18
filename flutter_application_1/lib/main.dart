@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/database/test.dart';
+import 'package:flutter_application_1/database/exercises.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'random.dart';
 import 'templates.dart';
-import 'exercises.dart';
 import 'history.dart';
+
 
 
 
@@ -269,7 +269,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) =>  const ExerciseScreen()),
+              MaterialPageRoute(builder: (context) =>  MyHomePage()),
             );
           }
           if (index == 4) {

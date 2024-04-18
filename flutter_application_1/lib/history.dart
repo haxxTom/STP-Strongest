@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/database/exercises.dart';
 import 'main.dart';
 import 'templates.dart';
 import 'random.dart';
-import 'exercises.dart';
 
 class HistoryScreen extends StatelessWidget {
   final infoStyle = const TextStyle(
@@ -767,7 +767,7 @@ class HistoryScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const ExerciseScreen()),
+              MaterialPageRoute(builder: (context) => MyHomePage()),
             );
           }
         },

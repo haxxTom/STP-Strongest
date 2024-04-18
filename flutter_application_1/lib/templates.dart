@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/database/exercises.dart';
 import 'main.dart';
 import 'random.dart';
-import 'exercises.dart';
+import 'ex1.dart';
 import 'history.dart';
 
 class TemplateScreen extends StatelessWidget {
@@ -269,7 +270,7 @@ class TemplateScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ExerciseScreen()),
+              MaterialPageRoute(builder: (context) => MyHomePage()),
             );
           }
           if (index == 4) {

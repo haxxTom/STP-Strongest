@@ -1375,3 +1375,6 @@ int compareNatural(String a, String b) {
 List<Cvik>sortedCviky() => cviky.toList()..sort((a, b) => compareNatural(a.nazev, b.nazev));
 
 List<Cvik> scviky = sortedCviky();
+
+
+

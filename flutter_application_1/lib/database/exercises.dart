@@ -8,6 +8,7 @@ import '../random.dart';
 import '../history.dart';
 
 
+
 class ExerciseItem extends StatelessWidget {
   final Cvik cvik;
 
@@ -113,7 +114,9 @@ class ExerciseItem extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
-}
+  
+} 
+
 
 class _MyHomePageState extends State<MyHomePage> {
 
@@ -127,6 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
             appBar: AppBar(
         backgroundColor: mainBackgroundColor,
         toolbarHeight: 130,
@@ -145,6 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            
             SizedBox(
               height: 100,
               child: Row(
@@ -166,23 +171,44 @@ class _MyHomePageState extends State<MyHomePage> {
                               title: const Text(
                                 "Search by Body Part",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 30,
                                 ),
                                 textAlign: TextAlign.center
                               ),
-                              content: const Row(
-                                children: [
-                                  SizedBox(
-                                    height: 35,
-                                    width: 125,
-                                    child: TextButton(
-                                      onPressed: null, 
-                                      style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFF6237A0))),
-                                      child: Text("Arms"),
+                              content: 
+                               Container(
+                                height: 400,
+                                width: 60,
+                                child:  const Column(
+                                  
+                                  children: [
+                                    SizedBox(
+                                      height: 35,
+                                      width: 125,
+                                      child:
+                                      TextButton(
+                                        onPressed: null, 
+                                        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFF6237A0)),),
+                                        child: Text("Arms", style: TextStyle(color: Colors.white),),
+                                      ),
                                     ),
-                                  )
-                                ],
+
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+
+                                    SizedBox(
+                                      height: 35,
+                                      width: 125,
+                                      child: TextButton(
+                                        onPressed: null, 
+                                        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFF6237A0)),),
+                                        child: Text("Arms", style: TextStyle(color: Colors.white),),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           }

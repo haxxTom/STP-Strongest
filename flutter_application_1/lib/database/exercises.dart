@@ -35,12 +35,12 @@ class ExerciseItem extends StatelessWidget {
                           cvik.nazev,
                           style: const TextStyle(fontSize: 30),
                         ),
-                        content: const SizedBox(
+                        content: SizedBox(
                           height: 400.0, // Maximální výška
                           width: 300.0, // Maximální šířka
                           child: Text(
-                            "Popis",
-                            style: TextStyle(
+                            cvik.popis,
+                            style: const TextStyle(
                               fontSize: 15,
                             ),
                           ),

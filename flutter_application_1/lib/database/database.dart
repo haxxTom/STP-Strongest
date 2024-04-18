@@ -3,9 +3,10 @@ class Cvik {
   String nazev;
   String partie;
   String obrazek;
+  String popis;
   
 
-  Cvik({required this.id, required this.nazev, required this.partie, required this.obrazek});
+  Cvik({required this.id, required this.nazev, required this.partie, required this.obrazek, required this.popis});
 
   Map<String, dynamic> toMap() {
     return {
@@ -13,6 +14,7 @@ class Cvik {
       'nazev': nazev,
       'partie': partie,
       'obrazek': obrazek,
+      'popis': popis,
     };
   }
 
@@ -22,15 +24,17 @@ class Cvik {
       nazev: map['nazev'],
       partie: map['partie'],
       obrazek: map['obrazek'],
+      popis: map['popis'],
     );
   }
 
-  Cvik copyWith({int? id, String? nazev, String? partie, String? obrazek}) {
+  Cvik copyWith({int? id, String? nazev, String? partie, String? obrazek, String? popis}) {
     return Cvik(
       id: id ?? this.id,
       nazev: nazev ?? this.nazev,
       partie: partie ?? this.partie,
       obrazek: obrazek ?? this.obrazek,
+      popis: popis ?? this.popis
     );
   }
 }

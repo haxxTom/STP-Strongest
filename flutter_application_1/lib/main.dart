@@ -13,10 +13,10 @@ void main() {
   runApp(const MyApp());
 }
 
-Color darkItemColor = const Color(0xFF9754CB);
-Color mainBackgroundColor = const Color(0xFF28104E);
-Color midItemColor = const Color(0xFF6237A0);
-Color softItemColor = const Color(0xFFDEACF5);
+Color darkItemColor = const Color(0xFF0A0901);
+Color mainBackgroundColor = const Color(0xFF3C3C3C);
+Color midItemColor = const Color (0xFF918A00);
+Color softItemColor = const Color(0xFFFFE500);
 
 String buttonText = 'Name';
 String? imageFilePath;

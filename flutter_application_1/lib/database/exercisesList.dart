@@ -1305,7 +1305,7 @@ List<Cvik> cviky = [
     nazev: "Reverse Curl (Dumbell)",
     partie: "Arms",
     obrazek: "assets/Images/icon.png",
-    popis: "popis",
+    popis: "popisss",
   ),
 
   Cvik(

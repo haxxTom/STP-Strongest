@@ -1,133 +1,159 @@
 import 'database.dart';
 
 List<Cvik> cviky = [
-  // 1. Squats
+
   Cvik(
     id: 1,
     nazev: "Ab Wheel",
     partie: "Core",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "Test",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Klekněte si na podložku a oběma rukama uchopte ab wheel (kolečko). "
+           "Umístěte kolečko před sebe a postupně se s ním vyvalte dopředu tak daleko, "
+           "jak jen to jde, aniž byste ztratili kontrolu nad tělem. Poté se vraťte do výchozí polohy. "
+           "Udržujte rovná záda a zpevněný core během celého pohybu.",
   ),
 
-  // 2. Push-ups
   Cvik(
     id: 2,
     nazev: "Aerobics",
     partie: "Cardio",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Aerobik je dynamické cvičení zahrnující různé pohyby, jako jsou poskoky, výpady a zvedání kolen. "
+           "Typické hodiny jsou vedeny instruktorem s hudbou, zaměřují se na zlepšení kondice a spalování kalorií.",
   ),
 
-  // 3. Lunges
   Cvik(
     id: 3,
-    nazev: "Arnold Press (Dumbell)",
+    nazev: "Arnold Press (Dumbbell)",
     partie: "Shoulders",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Sedněte si na lavičku s opěrkou a držte jednoručky před hrudníkem, dlaněmi směrem k vám. "
+           "Při zvedání činek otáčejte dlaně od sebe a tlačte činky nad hlavu. "
+           "Poté se vracejte zpět do výchozí polohy a otočte dlaně zpět směrem k sobě.",
   ),
 
-  // 4. Deadlift
   Cvik(
     id: 4,
     nazev: "Around the World",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Lehněte si na lavičku a držte jednoručky nad tělem. "
+           "Pohybujte činkami do oblouku směrem ven od těla, dolů ke stehnům, a poté zpět do výchozí polohy. "
+           "Cvičení zlepšuje pohyblivost ramenního kloubu a posiluje hrudní svaly.",
   ),
 
-  // 5. Bench press
   Cvik(
     id: 5,
     nazev: "Back Extension",
     partie: "Back",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Lehněte si na lavici na zádech, kotníky zapřete o podpěru. "
+           "Zvedněte trup nahoru pomocí zádových svalů, dokud nebudete v přímé linii s nohama. "
+           "Pomalu se vraťte do výchozí polohy.",
   ),
 
-  // 6. Pull-ups
   Cvik(
     id: 6,
     nazev: "Back Extension (Machine)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Posaďte se na stroj na hyperextenze a umístěte kotníky pod podpěru. "
+           "Opřete se o opěrku a ohýbejte trup směrem dolů. Poté pomocí zádových svalů zvedněte trup zpět do výchozí polohy.",
   ),
 
-  // 7. Dips
   Cvik(
     id: 7,
     nazev: "Ball Slams",
     partie: "Full Body",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Postavte se s nohama na šířku ramen a držte medicinbal oběma rukama. "
+           "Zvedněte míč nad hlavu a prudce ho hoďte na zem. "
+           "Při dopadu míče se ohněte v kolenou a seberte ho. Opakujte.",
   ),
 
-  // 8. Plank
   Cvik(
     id: 8,
     nazev: "Battle Ropes",
     partie: "Cardio",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Uchopte oba konce lana a postavte se s mírně pokrčenými koleny. "
+           "Střídejte pohyb paží nahoru a dolů rychlým tempem, čímž vytváříte vlny v laně. "
+           "Tento cvik zlepšuje kardiorespirační kondici a sílu horní části těla.",
   ),
 
-  // 9. Squats with dumbbells
   Cvik(
     id: 9,
     nazev: "Bench Dip",
     partie: "Arms",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Posaďte se na lavičku, ruce umístěte vedle boků a nohy položte na podlahu nebo druhou lavičku. "
+           "Sklouzněte z lavičky dolů a pokrčte lokty, dokud nejsou paže v pravém úhlu. "
+           "Zvedněte se zpět do výchozí polohy.",
   ),
 
-  // 10. Lunges with dumbbells
   Cvik(
     id: 10,
     nazev: "Bench Press (Barbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Lehněte si na lavičku, uchopte osu širším úchopem a spusťte ji k hrudníku. "
+           "Následně zatlačte osou zpět nahoru, až do propnutí paží. Držte zpevněný hrudník a aktivní lopatky.",
   ),
 
-  // 11. Shoulder press
   Cvik(
     id: 11,
     nazev: "Bench Press (Cable)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Posaďte se na lavičku mezi dvě kabelové kladky, uchopte madla a zatlačte je před sebe. "
+           "Pomalu spusťte madla zpět, dokud nejsou vaše paže v úrovni hrudníku.",
   ),
 
-  // 12. Bicep curls
   Cvik(
     id: 12,
-    nazev: "Bench Press (Dumbell)",
+    nazev: "Bench Press (Dumbbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Lehněte si na lavičku, držte jednoručky v každé ruce a zvedněte je nad hrudník. "
+           "Spusťte činky dolů do úrovně hrudníku a poté je zvedněte zpět do výchozí polohy.",
   ),
 
-  // 13. Triceps extensions
   Cvik(
     id: 13,
-    nazev: "Bench Press\n(Smith Machine)",
+    nazev: "Bench Press (Smith Machine)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
-    popis: "popis",
+    obrazek: "assets/Images/icon.png", 
+    popis: "Lehněte si na lavičku pod Smith machine a uchopte osu širším úchopem. "
+           "Spusťte osu k hrudníku a poté zatlačte zpět nahoru.",
   ),
 
-  // 14. Leg press
   Cvik(
     id: 14,
     nazev: "Bent Over Row (Band)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png", // Use the same image path for all exercises
+    obrazek: "assets/Images/icon.png", 
+    popis: "Postavte se na odporový pás a uchopte ho oběma rukama. "
+           "Nakloňte trup dopředu, udržujte rovná záda a přitahujte pás směrem k břichu. "
+           "Pomalu spusťte zpět do výchozí polohy.",
+  ),
+
+ 
+  Cvik(
+    id: 13,
+    nazev: "Bench Press\n(Smith Machine)",
+    partie: "Chest",
+    obrazek: "assets/Images/icon.png", 
     popis: "popis",
   ),
 
-  // 15. Leg extension
+  Cvik(
+    id: 14,
+    nazev: "Bent Over Row (Band)",
+    partie: "Back",
+    obrazek: "assets/Images/icon.png", 
+    popis: "popis",
+  ),
+
   Cvik(
     id: 15,
     nazev: "Bent Over Row (Barbell)",
@@ -136,7 +162,6 @@ List<Cvik> cviky = [
     popis: "popis",
   ),
 
-  // 16. Leg extension
   Cvik(
     id: 16,
     nazev: "Bent Over Row (Dumbell)",
@@ -144,8 +169,7 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
-  // 17. Leg extension
+ 
   Cvik(
     id: 17,
     nazev: "Bent Over Row - Underhand (Barbell)",
@@ -154,7 +178,6 @@ List<Cvik> cviky = [
     popis: "popis",
   ),
 
-  // 17. Leg extension
   Cvik(
     id: 18,
     nazev: "Bicep Curl (Barbell)",
@@ -163,7 +186,6 @@ List<Cvik> cviky = [
     popis: "popis",
   ),
 
-  // 17. Leg extension
   Cvik(
     id: 19,
     nazev: "Bicep Curl (Cable)",

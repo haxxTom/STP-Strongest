@@ -17,7 +17,14 @@ class Cvik {
       'popis': popis,
     };
   }
-
+Map<String, dynamic> toMapWithoutId() {
+    return {
+      'nazev': nazev,
+      'partie': partie,
+      'obrazek': obrazek,
+      'popis': popis,
+    };
+  }
   factory Cvik.fromMap(Map<String, dynamic> map) {
     return Cvik(
       id: map['id'],

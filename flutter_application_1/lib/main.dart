@@ -5,12 +5,17 @@ import 'package:image_picker/image_picker.dart';
 import 'random.dart';
 import 'templates.dart';
 import 'history.dart';
+import 'database/db_helper.dart';
 
 
 
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized(); // Tento řádek zajišťuje, že Flutter je připraven před spuštěním aplikace.
+
+  await initializeDatabase();  // Zavolá metodu, která inicializuje databázi a naplní ji výchozími cviky
+
+  runApp(MyApp());
 }
 
 Color darkItemColor = const Color(0xFF0A0901);

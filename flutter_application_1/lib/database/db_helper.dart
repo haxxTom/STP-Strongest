@@ -22,7 +22,7 @@ class DatabaseHelper {
   Future<Database> _initDatabase() async {
   final databasesPath = await getDatabasesPath();
   final path = join(databasesPath, 'cviky.db');
-
+  print('Cesta k databázi: $path');
   return openDatabase(path,
     version: 2,  // Zvyš verzi databáze
     onCreate: (db, version) async {

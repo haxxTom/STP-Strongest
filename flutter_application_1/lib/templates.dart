@@ -270,7 +270,7 @@ class TemplateScreen extends StatelessWidget {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MyHomePage()),
+              MaterialPageRoute(builder: (context) => Exercises()),
             );
           }
           if (index == 4) {

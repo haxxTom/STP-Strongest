@@ -111,14 +111,14 @@ class ExerciseItem extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class Exercises extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ExercisesState createState() => _ExercisesState();
   
 } 
 
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ExercisesState extends State<Exercises> {
 
   List<Cvik> _filteredCviky = scviky;
   String _searchText = "";

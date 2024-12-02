@@ -216,8 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => MyHomePage()),
+                  MaterialPageRoute(builder: (context) => Exercises()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -274,7 +273,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (index == 3) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) =>  MyHomePage()),
+              MaterialPageRoute(builder: (context) =>  Exercises()),
             );
           }
           if (index == 4) {

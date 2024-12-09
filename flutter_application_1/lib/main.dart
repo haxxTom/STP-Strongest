@@ -18,12 +18,12 @@ void main() async{
   runApp(MyApp());
 }
 
-Color darkItemColor = const Color(0xFF0A0901);
-Color mainBackgroundColor = const Color(0xFF3C3C3C);
+Color darkItemColor = const Color(0xFF808080);
+Color mainBackgroundColor = const Color(0xFF0A0901);
 Color midItemColor = const Color (0xFF918A00);
-Color softItemColor = const Color(0xFFFFE500);
+Color softItemColor = const Color(0xFFFFE500); 
 
-String buttonText = 'Name';
+String buttonText = 'Jméno';
 String? imageFilePath;
 
 class MyApp extends StatelessWidget {
@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       return AlertDialog(
         title: const Text(
-          'Set Username',
+          'Zvolte si uživatelské jméno',
           style: TextStyle(
             color: Colors.white,
             fontSize: 30,
@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
            textAlign: TextAlign.center
           ),
           
-        backgroundColor: darkItemColor,
+        backgroundColor: midItemColor,
         content: TextField(
           cursorColor: Colors.white,
           style: const TextStyle(
@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: mainBackgroundColor,
         title: const Center(
         child: Text(
-          'Profile',
+          'Profil',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,
@@ -231,9 +231,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'TRAININGS',
+                    'Tréninky',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 30, 
                       fontWeight: FontWeight.bold,
                     ),
@@ -255,28 +255,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,
-        selectedItemColor: Colors.white,
+        selectedItemColor: darkItemColor,
         currentIndex: 0,
         onTap: (index) {
           if (index == 1) {
-            Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const RandomScreen()),
-          );
-          }
-          if (index == 2) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
-          if (index == 3) {
+          if (index == 2) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) =>  Exercises()),
             );
           }
-          if (index == 4) {
+          if (index == 3) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) =>  const HistoryScreen()),
@@ -288,11 +282,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             backgroundColor: mainBackgroundColor,
             icon: const Icon(Icons.person),
             label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.casino),
-            label: 'Random',
           ),
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,

@@ -13,7 +13,7 @@ class TemplateScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Templates',
+            'Šablony',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
@@ -46,24 +46,7 @@ class TemplateScreen extends StatelessWidget {
                     );
                   },
                   child: const Text(
-                    "New",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(midItemColor),
-                      fixedSize:
-                          MaterialStateProperty.all<Size>(const Size(150, 75))),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RandomScreen()),
-                    );
-                  },
-                  child: const Text(
-                    "Random",
+                    "Nová šablona",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -252,7 +235,7 @@ class TemplateScreen extends StatelessWidget {
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,
         selectedItemColor: Colors.white,
-        currentIndex: 2,
+        currentIndex: 1,
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacement(
@@ -261,19 +244,13 @@ class TemplateScreen extends StatelessWidget {
                   builder: (context) => const ProfileScreen(title: 'profile')),
             );
           }
-          if (index == 1) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const RandomScreen()),
-            );
-          }
-          if (index == 3) {
+          if (index == 2) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Exercises()),
             );
           }
-          if (index == 4) {
+          if (index == 3) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HistoryScreen()),
@@ -285,11 +262,6 @@ class TemplateScreen extends StatelessWidget {
             backgroundColor: mainBackgroundColor,
             icon: const Icon(Icons.person),
             label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.casino),
-            label: 'Random',
           ),
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,

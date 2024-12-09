@@ -744,7 +744,7 @@ class HistoryScreen extends StatelessWidget {
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,
         selectedItemColor: Colors.white,
-        currentIndex: 4,
+        currentIndex: 3,
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacement(
@@ -754,17 +754,11 @@ class HistoryScreen extends StatelessWidget {
           }
           if (index == 1) {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const RandomScreen()),
-          );
-          }
-          if (index == 2) {
-            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
-          if (index == 3) {
+          if (index == 2) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Exercises()),
@@ -776,11 +770,6 @@ class HistoryScreen extends StatelessWidget {
             backgroundColor: mainBackgroundColor,
             icon: const Icon(Icons.person),
             label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.casino),
-            label: 'Random',
           ),
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,

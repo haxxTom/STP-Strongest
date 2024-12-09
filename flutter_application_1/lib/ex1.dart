@@ -1176,7 +1176,7 @@ class ExerciseScreen extends StatelessWidget {
         showUnselectedLabels: true,
         unselectedItemColor: softItemColor,
         selectedItemColor: Colors.white,
-        currentIndex: 3,
+        currentIndex: 2,
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacement(
@@ -1186,17 +1186,11 @@ class ExerciseScreen extends StatelessWidget {
           }
           if (index == 1) {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const RandomScreen()),
-          );
-          }
-          if (index == 2) {
-            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const TemplateScreen()),
             );
           }
-          if (index == 4) {
+          if (index == 3) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const HistoryScreen()),
@@ -1208,11 +1202,6 @@ class ExerciseScreen extends StatelessWidget {
             backgroundColor: mainBackgroundColor,
             icon: const Icon(Icons.person),
             label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.casino),
-            label: 'Random',
           ),
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,

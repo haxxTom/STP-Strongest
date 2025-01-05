@@ -4,9 +4,20 @@ import 'main.dart';
 import 'random.dart';
 import 'ex1.dart';
 import 'history.dart';
+import 'emptyworkout.dart';
+import 'database/treninky.dart';
 
-class TemplateScreen extends StatelessWidget {
-  const TemplateScreen({Key? key}) : super(key: key);
+class TemplateScreen extends StatefulWidget {
+  TemplateScreen({Key? key}) : super(key: key);
+
+  @override
+  _TemplateScreenState createState() => _TemplateScreenState();
+}
+
+class _TemplateScreenState extends State<TemplateScreen> {
+  // Předpokládám, že activeWorkout je nějaká proměnná, která drží aktivní trénink
+  Trenink? activeWorkout;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +61,33 @@ class TemplateScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(midItemColor),
+                    fixedSize: MaterialStateProperty.all<Size>(const Size(150, 75)),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (activeWorkout == null) {
+                        // Pokud není žádný aktivní trénink, vytvoříme nový
+                        Trenink trenink = startNewWorkout("Nový Trénink");
+                        activeWorkout = trenink;
+                      }
+                      // Navigace s aktivním tréninkem
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NewWorkoutScreen(trenink: activeWorkout!),
+                        ),
+                      );
+                    });
+                  },
+                  child: Text(
+                    activeWorkout == null ? "Nový Trénink" : "Zpět na trénink",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
+
               ],
             ),
             Column(
@@ -286,6 +324,7 @@ class TemplateScreen extends StatelessWidget {
 
 class SixthScreen extends StatelessWidget {
   const SixthScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -320,13 +359,13 @@ class SixthScreen extends StatelessWidget {
                 color: midItemColor,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Column(
+              child:  Column(
                 children: [
-                  Text(
+                  const Text(
                     "Exercise 1",
                     style: TextStyle(fontSize: 20),
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text("Type"),
@@ -335,7 +374,7 @@ class SixthScreen extends StatelessWidget {
                       Text("RPE"),
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text("Type"),
@@ -344,7 +383,7 @@ class SixthScreen extends StatelessWidget {
                       Text("RPE"),
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text("Type"),
@@ -358,11 +397,11 @@ class SixthScreen extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {},
-                        child: Text("Add"),
+                        child: const Text("Add"),
                       ),
                       ElevatedButton(
                         onPressed: () {},
-                        child: Text("Remove"),
+                        child: const Text("Remove"),
                       )
                     ],
                   )
@@ -424,7 +463,7 @@ class SixthScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const TemplateScreen()),
+              MaterialPageRoute(builder: (context) => TemplateScreen()),
             );
           }
           if (index == 3) {
@@ -463,7 +502,7 @@ class SixthScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.alarm),
+            icon: const Icon(Icons.history),
             label: 'History',
           )
         ],

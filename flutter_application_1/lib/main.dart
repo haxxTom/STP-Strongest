@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/database/exercises.dart';
+import 'package:flutter_application_1/database/test.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'random.dart';
 import 'templates.dart';
 import 'history.dart';
 import 'database/db_helper.dart';
-
+import 'database/treninky.dart';
 
 
 
@@ -14,7 +15,6 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized(); // Tento řádek zajišťuje, že Flutter je připraven před spuštěním aplikace.
 
   await initializeDatabase();  // Zavolá metodu, která inicializuje databázi a naplní ji výchozími cviky
-
   runApp(MyApp());
 }
 
@@ -261,7 +261,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const TemplateScreen()),
+              MaterialPageRoute(
+                builder: (context) => TemplateScreen(), // Předání tréninku
+              ),
             );
           }
           if (index == 2) {

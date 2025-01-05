@@ -99,7 +99,7 @@ class RandomScreen extends StatelessWidget {
           if (index == 2) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const TemplateScreen()),
+              MaterialPageRoute(builder: (context) => TemplateScreen()),
             );
           }
           if (index == 3) {

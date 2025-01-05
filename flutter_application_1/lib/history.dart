@@ -755,7 +755,7 @@ class HistoryScreen extends StatelessWidget {
           if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const TemplateScreen()),
+              MaterialPageRoute(builder: (context) => TemplateScreen()),
             );
           }
           if (index == 2) {

@@ -4,6 +4,7 @@ class Cvik {
   String partie;
   String obrazek;
   String popis;
+  //List<int>? lastPerformances;
   
 
   Cvik({required this.id, required this.nazev, required this.partie, required this.obrazek, required this.popis});

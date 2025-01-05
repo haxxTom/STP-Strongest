@@ -326,7 +326,7 @@ class _ExercisesState extends State<Exercises> {
           if (index == 1) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const TemplateScreen()),
+              MaterialPageRoute(builder: (context) => TemplateScreen()),
             );
           }
           if (index == 3) {

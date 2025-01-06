@@ -5,20 +5,58 @@ import 'random.dart';
 import 'ex1.dart';
 import 'history.dart';
 import 'emptyworkout.dart';
-import 'database/treninky.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_application_1/database/database.dart';
+import 'dart:convert';
 
 class TemplateScreen extends StatefulWidget {
   TemplateScreen({Key? key}) : super(key: key);
 
   @override
   _TemplateScreenState createState() => _TemplateScreenState();
+  
 }
 
 class _TemplateScreenState extends State<TemplateScreen> {
   // Předpokládám, že activeWorkout je nějaká proměnná, která drží aktivní trénink
   Trenink? activeWorkout;
+  Future<List<Map<String, String>>> _loadSetsDataFromPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? savedSetsDataString = prefs.getString('setsData');
+
+    List<Map<String, String>> loadedSetsData = [];
+
+    if (savedSetsDataString != null) {
+      List<String> sets = savedSetsDataString.split(',');
+
+      for (var set in sets) {
+        var weight = RegExp(r'"weight": "(.*?)"').firstMatch(set)?.group(1);
+        var reps = RegExp(r'"reps": "(.*?)"').firstMatch(set)?.group(1);
+        
+        if (weight != null && reps != null) {
+          loadedSetsData.add({'weight': weight, 'reps': reps});
+        }
+      }
+    }
+
+    return loadedSetsData;
+  }
+  Future<void> _loadWorkout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? workoutJson = prefs.getString('activeWorkout');
+
+    if (workoutJson != null) {
+      setState(() {
+        activeWorkout = Trenink.fromJson(jsonDecode(workoutJson));
+      });
+    }
+  }
 
   @override
+  void initState() {
+    super.initState();
+    _loadWorkout();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -63,31 +101,29 @@ class _TemplateScreenState extends State<TemplateScreen> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(midItemColor),
-                    fixedSize: MaterialStateProperty.all<Size>(const Size(150, 75)),
-                  ),
+                      backgroundColor: MaterialStateProperty.all(midItemColor),
+                      fixedSize:
+                          MaterialStateProperty.all<Size>(const Size(150, 75))),
                   onPressed: () {
                     setState(() {
                       if (activeWorkout == null) {
-                        // Pokud není žádný aktivní trénink, vytvoříme nový
                         Trenink trenink = startNewWorkout("Nový Trénink");
                         activeWorkout = trenink;
                       }
-                      // Navigace s aktivním tréninkem
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NewWorkoutScreen(trenink: activeWorkout!),
-                        ),
-                      );
                     });
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewWorkoutScreen(trenink: activeWorkout!),
+                      ),
+                    );
                   },
                   child: Text(
-                    activeWorkout == null ? "Nový Trénink" : "Zpět na trénink",
+                    activeWorkout == null ? "Nový Trénink" : "Pokračovat v tréninku",
                     style: TextStyle(color: Colors.white),
                   ),
-                )
-
+                ),
               ],
             ),
             Column(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:async'; // Pro Timer
-import 'package:flutter/services.dart'; // Pro FilteringTextInputFormatter
+import 'dart:async'; // For Timer
+import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
 import 'database/exercisesList.dart';
 import 'database/database.dart';
-import 'database/treninky.dart';
 import 'templates.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class NewWorkoutScreen extends StatefulWidget {
   final Trenink trenink;
@@ -21,19 +22,16 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
   TextEditingController _titleController = TextEditingController();
   bool _isEditingTitle = false;
 
-  // Tato mapa uchovává seznam textových polí pro váhu a opakování pro každý cvik
+  // This map stores a list of text controllers for weight and reps for each exercise set
   Map<int, List<Map<String, TextEditingController>>> setControllers = {};
-
+  
   @override
   void initState() {
     super.initState();
     _titleController.text = widget.trenink.nazev;
-
-    // Spuštění timeru pro sledování času tréninku
-    _startTimer();
+    _startTimer(); // Start the timer to track workout duration
   }
-  
-  // Funkce pro startování časovače
+
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
@@ -42,19 +40,16 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
     });
   }
 
-  // Funkce pro zastavení timeru
   void _stopTimer() {
     _timer?.cancel();
   }
 
-  // Funkce pro přepnutí na editaci názvu
   void _toggleTitleEdit() {
     setState(() {
       _isEditingTitle = !_isEditingTitle;
     });
   }
 
-  // Dialog pro přidání cviku
   void _addExerciseDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -74,10 +69,12 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                   subtitle: Text(cvik.partie),
                   onTap: () {
                     setState(() {
-                      // Přidání cviku do tréninku
                       addExerciseFromList(widget.trenink, cvik.id);
+                      // After adding the exercise, immediately add a set
+                      int exerciseIndex = widget.trenink.exercises.length - 1; // New exercise index
+                      _addSet(exerciseIndex);  // Adds 1 set for this exercise
                     });
-                    Navigator.pop(context); // Zavření dialogu
+                    Navigator.pop(context);
                   },
                 );
               },
@@ -88,108 +85,155 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
     );
   }
 
-  // Funkce pro přidání nové série
   void _addSet(int exerciseIndex) {
     setState(() {
       if (!setControllers.containsKey(exerciseIndex)) {
         setControllers[exerciseIndex] = [];
       }
+
+      // Create controllers for the new set (weight and reps)
+      var weightController = TextEditingController();
+      var repsController = TextEditingController();
+
+      // Save the controllers in the map
       setControllers[exerciseIndex]!.add({
-        'reps': TextEditingController(),
-        'weight': TextEditingController(),
+        'weight': weightController,
+        'reps': repsController,
       });
     });
   }
 
-  // Funkce pro smazání série
   void _deleteSet(int exerciseIndex, int setIndex) {
     setState(() {
       setControllers[exerciseIndex]!.removeAt(setIndex);
     });
   }
 
-  // Funkce pro smazání cviku
   void _deleteExercise(int exerciseIndex) {
     setState(() {
-      widget.trenink.exercises.removeAt(exerciseIndex); // Odstraní cvik
-      setControllers.remove(exerciseIndex); // Odstraní sériové editory pro tento cvik
+      widget.trenink.exercises.removeAt(exerciseIndex);
+      setControllers.remove(exerciseIndex);
     });
   }
 
-  // Funkce pro získání váhy a opakování pro všechny série
   List<Map<String, String>> _getSetsData() {
     List<Map<String, String>> allSetsData = [];
-    // Projdeme všechny cviky a sérií
-    widget.trenink.exercises.forEach((exercise) {
-      int exerciseIndex = widget.trenink.exercises.indexOf(exercise);
-      if (setControllers.containsKey(exerciseIndex)) {
-        // Projdeme všechny série pro tento cvik
-        setControllers[exerciseIndex]?.forEach((setController) {
-          // Každá série bude obsahovat váhu a opakování
-          allSetsData.add({
-            'weight': setController['weight']?.text ?? '',
-            'reps': setController['reps']?.text ?? '',
-          });
+    setControllers.forEach((exerciseIndex, sets) {
+      sets.forEach((setController) {
+        allSetsData.add({
+          'weight': setController['weight']!.text,  // Use 'text' to get value
+          'reps': setController['reps']!.text,      // Use 'text' to get value
         });
-      }
+      });
     });
-
     return allSetsData;
   }
 
-  // Funkce pro dokončení tréninku
-  void _finishWorkout() {
-  // Získání sérií pro uložení
-  List<Map<String, String>> allSetsData = _getSetsData();
-  
-  // Představte si, že zde chcete uložit data do nějaké databáze nebo souboru
-  print('Uloženo ${allSetsData.length} sérií do databáze nebo souboru.');
-
-  // Resetování tréninku
-  setState(() {
-    widget.trenink.exercises.clear();  // Vyčistit cviky
-    activeWorkout = null; // Resetovat aktivní trénink
-  });
-
-  // Navigace zpět na hlavní obrazovku nebo na obrazovku, kde je seznam tréninků
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => TemplateScreen()), // Změňte MainWorkoutScreen na odpovídající obrazovku pro seznam tréninků
-  );
-}
-  // Funkce pro uložení tréninku
-  void _SaveWorkout() {
-    activeWorkout = null;
-    // Představte si, že zde chcete uložit data do nějaké databáze nebo souboru
-    List<Map<String, String>> allSetsData = _getSetsData();
-    
-    // Uložení dat nebo jakýkoliv jiný mechanismus pro trénink
-    print('Uloženo ${allSetsData.length} sérií do databáze nebo souboru.');
-
-    // Ukončení tréninku
-    setState(() {
-      // Resetování treninku, aby se po dokončení tréninku už nenacházel aktivní trénink
-      widget.trenink.exercises.clear(); 
-      // Resetování activeWorkout na null
+  bool _validateSetsData() {
+    bool isValid = true;
+    setControllers.forEach((exerciseIndex, sets) {
+      for (var setController in sets) {
+        // Check if weight or reps is null or empty
+        final weightText = setController['weight']?.text ?? '';
+        final repsText = setController['reps']?.text ?? '';
+        
+        if (weightText.isEmpty || repsText.isEmpty) {
+          isValid = false;
+          break; // Stop checking if any value is invalid
+        }
+      }
     });
-
-    // Zavření obrazovky
-    Navigator.pop(context);
+    return isValid;
   }
 
-  // Zavolání funkce _SaveWorkout při stisknutí šipky zpět
+    Future<void> _saveWorkout() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String workoutJson = jsonEncode(widget.trenink.toJson());
+      await prefs.setString('activeWorkout', workoutJson);
+    }
+
+
+  Future<void> _saveSetsData() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<Map<String, String>> allSetsData = _getSetsData();
+    
+    // Save data as a JSON string (or you can use a different format)
+    String allSetsDataString = allSetsData
+        .map((setData) => '{"weight": "${setData['weight']}", "reps": "${setData['reps']}"}')
+        .join(',');
+    
+    await prefs.setString('setsData', allSetsDataString);
+    print('Data byla uložena.');
+  }
+
+  Future<void> _loadSetsData() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? savedSetsDataString = prefs.getString('setsData');
+
+    if (savedSetsDataString != null) {
+      List<Map<String, String>> loadedSetsData = [];
+      List<String> sets = savedSetsDataString.split(',');
+
+      for (var set in sets) {
+        // Parse each set from the JSON string
+        var weight = RegExp(r'"weight": "(.*?)"').firstMatch(set)?.group(1);
+        var reps = RegExp(r'"reps": "(.*?)"').firstMatch(set)?.group(1);
+        if (weight != null && reps != null) {
+          loadedSetsData.add({'weight': weight, 'reps': reps});
+        }
+      }
+
+      // Load into setControllers to restore the UI
+      setState(() {
+        setControllers.clear();
+        int index = 0;
+        for (var setData in loadedSetsData) {
+          _addSet(index); // Add the set to the correct exercise
+          var lastSet = setControllers[index]?.last;
+          if (lastSet != null) {
+            lastSet['weight']?.text = setData['weight']!;
+            lastSet['reps']?.text = setData['reps']!;
+          }
+          index++;
+        }
+      });
+      print('Data byla načtena.');
+    }
+  }
+
+  void _finishWorkout() {
+    if (!_validateSetsData()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Vyplňte všechny váhy a opakování!")),
+      );
+      return;
+    }
+
+    List<Map<String, String>> allSetsData = _getSetsData();
+    print('Uloženo ${allSetsData.length} sérií do databáze nebo souboru.');
+
+    setState(() {
+      widget.trenink.exercises.clear();
+      activeWorkout = null;
+    });
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => TemplateScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        _SaveWorkout(); // Zavolá funkci pro uložení tréninku
-        return true; // Vrátí true pro povolení návratu na předchozí obrazovku
+        _saveWorkout();
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
           title: Row(
             children: [
-              // Kontrola, zda je titul v režimu úpravy
               _isEditingTitle
                   ? Expanded(
                       child: TextField(
@@ -197,7 +241,7 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                         onSubmitted: (_) {
                           setState(() {
                             widget.trenink.nazev = _titleController.text;
-                            _toggleTitleEdit(); // Ukončí režim úpravy
+                            _toggleTitleEdit();
                           });
                         },
                         autofocus: true,
@@ -205,14 +249,13 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                     )
                   : Expanded(
                       child: GestureDetector(
-                        onTap: _toggleTitleEdit, // Změna názvu tréninku
+                        onTap: _toggleTitleEdit,
                         child: Text(
                           widget.trenink.nazev,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
-              // Zobrazení časovače
               Text(
                 '${_elapsedTime.inMinutes}:${(_elapsedTime.inSeconds % 60).toString().padLeft(2, '0')}',
                 style: TextStyle(fontSize: 20),
@@ -223,7 +266,6 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
         backgroundColor: Colors.white,
         body: ListView(
           children: [
-            // Zobrazení cviků přidaných do tréninku
             ...widget.trenink.exercises.map((exercise) {
               int exerciseIndex = widget.trenink.exercises.indexOf(exercise);
               return Padding(
@@ -235,7 +277,6 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Název a obrázek cviku
                         Row(
                           children: [
                             Image.asset(
@@ -251,17 +292,15 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            // Tlačítko pro smazání cviku
                             IconButton(
                               icon: const Icon(Icons.delete, color: Colors.red),
                               onPressed: () {
-                                _deleteExercise(exerciseIndex); // Smaže cvik
+                                _deleteExercise(exerciseIndex);
                               },
                             ),
                           ],
                         ),
                         const SizedBox(height: 10),
-                        // Dynamické pole pro sérii
                         ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
@@ -271,11 +310,10 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                             return Row(
                               children: [
                                 Text(
-                                  'Série ${setIndex + 1}:', // Automatické zvyšování čísla série
+                                  'Série ${setIndex + 1}:',
                                   style: const TextStyle(fontSize: 16),
                                 ),
                                 const SizedBox(width: 10),
-                                // Políčka pro váhu a opakování
                                 Expanded(
                                   child: TextField(
                                     controller: controllers['weight'],
@@ -285,8 +323,11 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                                     ),
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly, // Umožňuje pouze čísla
+                                      FilteringTextInputFormatter.digitsOnly,
                                     ],
+                                    onChanged: (value) {
+                                      setControllers[exerciseIndex]![setIndex]['weight']?.text = value;
+                                    },
                                   ),
                                 ),
                                 const SizedBox(width: 10),
@@ -299,15 +340,17 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                                     ),
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly, // Umožňuje pouze čísla
+                                      FilteringTextInputFormatter.digitsOnly,
                                     ],
+                                    onChanged: (value) {
+                                      setControllers[exerciseIndex]![setIndex]['reps']?.text = value;
+                                    },
                                   ),
                                 ),
-                                // Tlačítko pro smazání série
                                 IconButton(
                                   icon: const Icon(Icons.delete, color: Colors.red),
                                   onPressed: () {
-                                    _deleteSet(exerciseIndex, setIndex); // Smaže sérii
+                                    _deleteSet(exerciseIndex, setIndex);
                                   },
                                 ),
                               ],
@@ -315,7 +358,6 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                           },
                         ),
                         const SizedBox(height: 20),
-                        // Tlačítko pro přidání nové série
                         ElevatedButton(
                           onPressed: () {
                             _addSet(exerciseIndex);
@@ -328,28 +370,26 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                 ),
               );
             }).toList(),
-            // Tlačítko pro přidání cviku
             ListTile(
               title: const Text("Přidat cvik"),
               trailing: IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
-                  _addExerciseDialog(context); // Otevře dialog pro výběr cviku
+                  _addExerciseDialog(context);
                 },
-                color: Colors.blue, // Barva ikony pro přidání cviku
+                color: Colors.blue,
               ),
             ),
-            // Tlačítko pro dokončení tréninku
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple, // Barva pozadí tlačítka pro dokončení tréninku
-                  foregroundColor: Colors.white, // Barva textu
-                  fixedSize: const Size(200, 50), // Velikost tlačítka
+                  backgroundColor: Colors.purple,
+                  foregroundColor: Colors.white,
+                  fixedSize: const Size(200, 50),
                 ),
                 onPressed: () {
-                  _finishWorkout(); // Uložení tréninku
+                  _finishWorkout();
                 },
                 child: const Text("Dokončit Trénink"),
               ),

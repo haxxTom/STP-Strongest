@@ -7,7 +7,6 @@ import 'random.dart';
 import 'templates.dart';
 import 'history.dart';
 import 'database/db_helper.dart';
-import 'database/treninky.dart';
 
 
 

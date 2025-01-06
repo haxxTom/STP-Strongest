@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/database/treninky.dart';
+import 'package:flutter_application_1/database/database.dart';
 import 'package:flutter_application_1/database/exercises.dart';
 import 'exercisesList.dart';
 

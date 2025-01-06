@@ -1,3 +1,8 @@
+import 'exercisesList.dart';
+import 'database.dart';
+import '../templates.dart';
+import 'dart:convert';
+
 class Cvik {
   int id;
   String nazev;
@@ -18,6 +23,24 @@ class Cvik {
       'popis': popis,
     };
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'nazev': nazev,
+      'obrazek': obrazek,
+      'partie': partie,
+    };
+  }
+
+  static Cvik fromJson(Map<String, dynamic> json) {
+    return Cvik(
+      id: json['id'],
+      nazev: json['nazev'],
+      obrazek: json['obrazek'],
+      partie: json['partie'],
+      popis: json['popis']
+    );
+  }
 Map<String, dynamic> toMapWithoutId() {
     return {
       'nazev': nazev,
@@ -36,6 +59,7 @@ Map<String, dynamic> toMapWithoutId() {
     );
   }
 
+
   Cvik copyWith({int? id, String? nazev, String? partie, String? obrazek, String? popis}) {
     return Cvik(
       id: id ?? this.id,
@@ -47,4 +71,117 @@ Map<String, dynamic> toMapWithoutId() {
   }
 }
 
+class Trenink {
+  String nazev;
+  List<Exercise> exercises = [];
+  DateTime startTime;
+  DateTime? endTime;
+
+  Trenink({
+    required this.nazev,
+    required this.startTime,
+    this.endTime,
+  });
+
+  Duration get duration {
+    if (endTime != null) {
+      return endTime!.difference(startTime);
+    }
+    return DateTime.now().difference(startTime);
+  }
+
+  // Metoda toJson pro serializaci
+  Map<String, dynamic> toJson() {
+    return {
+      'nazev': nazev,
+      'startTime': startTime.toIso8601String(),
+      'endTime': endTime?.toIso8601String(),
+      'exercises': exercises.map((exercise) => exercise.toJson()).toList(),
+    };
+  }
+
+  // Metoda fromJson pro deserializaci
+  static Trenink fromJson(Map<String, dynamic> json) {
+    return Trenink(
+      nazev: json['nazev'],
+      startTime: DateTime.parse(json['startTime']),
+      endTime: json['endTime'] != null ? DateTime.parse(json['endTime']) : null,
+    )..exercises = (json['exercises'] as List)
+        .map((exerciseJson) => Exercise.fromJson(exerciseJson))
+        .toList();
+  }
+}
+
+void addExerciseFromList(Trenink trenink, int cvikId) {
+  // Vyhledání cviku podle ID
+  final cvik = cviky.firstWhere((c) => c.id == cvikId);
+  final exercise = Exercise(cvik: cvik);
+  trenink.exercises.add(exercise);
+}
+
+List<Trenink> treninky = [];
+
+Trenink startNewWorkout(String nazev) {
+  final trenink = Trenink(nazev: nazev, startTime: DateTime.now());
+  treninky.add(trenink);
+  return trenink;
+}
+
+Trenink? activeWorkout;
+
+void addSet(Exercise exercise, int reps, double weight) {
+  final set = Set(reps: reps, weight: weight);
+  exercise.sets.add(set);
+}
+
+void endWorkout(Trenink trenink) {
+  trenink.endTime = DateTime.now();
+}
+
+class Exercise {
+  Cvik cvik;
+  List<Set> sets = [];
+
+  Exercise({required this.cvik});
+
+  // Metoda toJson pro serializaci
+  Map<String, dynamic> toJson() {
+    return {
+      'cvik': cvik.toJson(),
+      'sets': sets.map((set) => set.toJson()).toList(),
+    };
+  }
+
+  // Metoda fromJson pro deserializaci
+  static Exercise fromJson(Map<String, dynamic> json) {
+    return Exercise(
+      cvik: Cvik.fromJson(json['cvik']),
+    )..sets = (json['sets'] as List)
+        .map((setJson) => Set.fromJson(setJson))
+        .toList();
+  }
+}
+
+class Set {
+  int reps;
+  double weight;
+
+  Set({required this.reps, required this.weight});
+
+  // Metoda toJson pro serializaci
+  Map<String, dynamic> toJson() {
+    return {
+      'reps': reps,
+      'weight': weight,
+    };
+  }
+
+  // Metoda fromJson pro deserializaci
+  static Set fromJson(Map<String, dynamic> json) {
+    return Set(
+      reps: json['reps'],
+      weight: json['weight'],
+    );
+  }
+}
 

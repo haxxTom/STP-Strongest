@@ -8,6 +8,7 @@ import 'emptyworkout.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_application_1/database/database.dart';
 import 'dart:convert';
+import 'emptytemplate.dart';
 
 class TemplateScreen extends StatefulWidget {
   TemplateScreen({Key? key}) : super(key: key);
@@ -91,7 +92,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SixthScreen()),
+                          builder: (context) => NewTemplateScreen(trenink: activeWorkout!)),
                     );
                   },
                   child: const Text(
@@ -358,195 +359,6 @@ class _TemplateScreenState extends State<TemplateScreen> {
           BottomNavigationBarItem(
             backgroundColor: mainBackgroundColor,
             icon: const Icon(Icons.alarm),
-            label: 'History',
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class SixthScreen extends StatelessWidget {
-  const SixthScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'New Template',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        foregroundColor: Colors.white,
-        backgroundColor: mainBackgroundColor,
-      ),
-      backgroundColor: mainBackgroundColor,
-      body: Container(
-        padding: const EdgeInsets.only(
-            left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(
-                  left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
-              decoration: BoxDecoration(
-                color: midItemColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child:  Column(
-                children: [
-                  const Text(
-                    "Exercise 1",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text("Type"),
-                      Text("Rep"),
-                      Text("Weight"),
-                      Text("RPE"),
-                    ],
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text("Type"),
-                      Text("Rep"),
-                      Text("Weight"),
-                      Text("RPE"),
-                    ],
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text("Type"),
-                      Text("Rep"),
-                      Text("Weight"),
-                      Text("RPE"),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text("Add"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text("Remove"),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ElevatedButton(
-                    child: Text("Add exercises"),
-                    onPressed: () {},
-                  ),
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ElevatedButton(
-                    child: Text("Save Template"),
-                    onPressed: () {},
-                  ),
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ElevatedButton(
-                    child: Text("Cancel"),
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-        unselectedItemColor: softItemColor,
-        selectedItemColor: Colors.white,
-        currentIndex: 2,
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(title: 'profile')),
-            );
-          }
-          if (index == 1) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const RandomScreen()),
-            );
-          }
-          if (index == 2) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => TemplateScreen()),
-            );
-          }
-          if (index == 3) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => ExerciseScreen()),
-            );
-          }
-          if (index == 4) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HistoryScreen()),
-            );
-          }
-        },
-        items: [
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.person),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.casino),
-            label: 'Random',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.add),
-            label: 'Templates',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.fitness_center),
-            label: 'Exercises',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: mainBackgroundColor,
-            icon: const Icon(Icons.history),
             label: 'History',
           )
         ],

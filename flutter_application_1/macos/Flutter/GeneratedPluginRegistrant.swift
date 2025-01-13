@@ -7,7 +7,7 @@ import Foundation
 
 import file_selector_macos
 import shared_preferences_foundation
-import sqflite_darwin
+import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))

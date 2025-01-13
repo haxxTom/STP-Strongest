@@ -22,9 +22,8 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
   TextEditingController _titleController = TextEditingController();
   bool _isEditingTitle = false;
 
-  // This map stores a list of text controllers for weight and reps for each exercise set
   Map<int, List<Map<String, TextEditingController>>> setControllers = {};
-  
+
   @override
   void initState() {
     super.initState();
@@ -34,9 +33,11 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
 
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        _elapsedTime = DateTime.now().difference(widget.trenink.startTime);
-      });
+      if (mounted) {
+        setState(() {
+          _elapsedTime = DateTime.now().difference(widget.trenink.startTime);
+        });
+      }
     });
   }
 
@@ -70,9 +71,8 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                   onTap: () {
                     setState(() {
                       addExerciseFromList(widget.trenink, cvik.id);
-                      // After adding the exercise, immediately add a set
-                      int exerciseIndex = widget.trenink.exercises.length - 1; // New exercise index
-                      _addSet(exerciseIndex);  // Adds 1 set for this exercise
+                      int exerciseIndex = widget.trenink.exercises.length - 1;
+                      _addSet(exerciseIndex);
                     });
                     Navigator.pop(context);
                   },
@@ -91,11 +91,9 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
         setControllers[exerciseIndex] = [];
       }
 
-      // Create controllers for the new set (weight and reps)
       var weightController = TextEditingController();
       var repsController = TextEditingController();
 
-      // Save the controllers in the map
       setControllers[exerciseIndex]!.add({
         'weight': weightController,
         'reps': repsController,
@@ -121,8 +119,8 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
     setControllers.forEach((exerciseIndex, sets) {
       sets.forEach((setController) {
         allSetsData.add({
-          'weight': setController['weight']!.text,  // Use 'text' to get value
-          'reps': setController['reps']!.text,      // Use 'text' to get value
+          'weight': setController['weight']!.text,
+          'reps': setController['reps']!.text,
         });
       });
     });
@@ -133,35 +131,32 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
     bool isValid = true;
     setControllers.forEach((exerciseIndex, sets) {
       for (var setController in sets) {
-        // Check if weight or reps is null or empty
         final weightText = setController['weight']?.text ?? '';
         final repsText = setController['reps']?.text ?? '';
         
         if (weightText.isEmpty || repsText.isEmpty) {
           isValid = false;
-          break; // Stop checking if any value is invalid
+          break;
         }
       }
     });
     return isValid;
   }
 
-    Future<void> _saveWorkout() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String workoutJson = jsonEncode(widget.trenink.toJson());
-      await prefs.setString('activeWorkout', workoutJson);
-    }
-
+  Future<void> _saveWorkout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String workoutJson = jsonEncode(widget.trenink.toJson());
+    await prefs.setString('activeWorkout', workoutJson);
+  }
 
   Future<void> _saveSetsData() async {
     final prefs = await SharedPreferences.getInstance();
     List<Map<String, String>> allSetsData = _getSetsData();
-    
-    // Save data as a JSON string (or you can use a different format)
+
     String allSetsDataString = allSetsData
         .map((setData) => '{"weight": "${setData['weight']}", "reps": "${setData['reps']}"}')
         .join(',');
-    
+
     await prefs.setString('setsData', allSetsDataString);
     print('Data byla uložena.');
   }
@@ -175,7 +170,6 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
       List<String> sets = savedSetsDataString.split(',');
 
       for (var set in sets) {
-        // Parse each set from the JSON string
         var weight = RegExp(r'"weight": "(.*?)"').firstMatch(set)?.group(1);
         var reps = RegExp(r'"reps": "(.*?)"').firstMatch(set)?.group(1);
         if (weight != null && reps != null) {
@@ -183,12 +177,11 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
         }
       }
 
-      // Load into setControllers to restore the UI
       setState(() {
         setControllers.clear();
         int index = 0;
         for (var setData in loadedSetsData) {
-          _addSet(index); // Add the set to the correct exercise
+          _addSet(index);
           var lastSet = setControllers[index]?.last;
           if (lastSet != null) {
             lastSet['weight']?.text = setData['weight']!;
@@ -212,11 +205,15 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
     List<Map<String, String>> allSetsData = _getSetsData();
     print('Uloženo ${allSetsData.length} sérií do databáze nebo souboru.');
 
-    setState(() {
-      widget.trenink.exercises.clear();
-      activeWorkout = null;
-    });
+    // Kontrola, zda je widget stále přítomný v widgetovém stromu (mounted)
+    if (mounted) {
+      setState(() {
+        widget.trenink.exercises.clear();
+        activeWorkout = null;  // Zajistíme přiřazení null
+      });
+    }
 
+    // Po dokončení tréninku navigujeme zpět na TemplateScreen
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => TemplateScreen()),
@@ -313,38 +310,28 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                                   'Série ${setIndex + 1}:',
                                   style: const TextStyle(fontSize: 16),
                                 ),
-                                const SizedBox(width: 10),
                                 Expanded(
                                   child: TextField(
                                     controller: controllers['weight'],
-                                    decoration: const InputDecoration(
-                                      labelText: 'Váha (kg)',
-                                      border: OutlineInputBorder(),
-                                    ),
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
                                     ],
-                                    onChanged: (value) {
-                                      setControllers[exerciseIndex]![setIndex]['weight']?.text = value;
-                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: "Váha",
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(width: 10),
                                 Expanded(
                                   child: TextField(
                                     controller: controllers['reps'],
-                                    decoration: const InputDecoration(
-                                      labelText: 'Opakování',
-                                      border: OutlineInputBorder(),
-                                    ),
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly,
                                     ],
-                                    onChanged: (value) {
-                                      setControllers[exerciseIndex]![setIndex]['reps']?.text = value;
-                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: "Počet opakování",
+                                    ),
                                   ),
                                 ),
                                 IconButton(
@@ -357,12 +344,11 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                             );
                           },
                         ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
+                        IconButton(
+                          icon: Icon(Icons.add),
                           onPressed: () {
                             _addSet(exerciseIndex);
                           },
-                          child: const Text("Přidat novou sérii"),
                         ),
                       ],
                     ),
@@ -370,29 +356,15 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                 ),
               );
             }).toList(),
-            ListTile(
-              title: const Text("Přidat cvik"),
-              trailing: IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () {
-                  _addExerciseDialog(context);
-                },
-                color: Colors.blue,
-              ),
+            IconButton(
+              icon: const Icon(Icons.add_circle_outline),
+              onPressed: () {
+                _addExerciseDialog(context);
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  foregroundColor: Colors.white,
-                  fixedSize: const Size(200, 50),
-                ),
-                onPressed: () {
-                  _finishWorkout();
-                },
-                child: const Text("Dokončit Trénink"),
-              ),
+            ElevatedButton(
+              onPressed: _finishWorkout,
+              child: const Text("Dokončit trénink"),
             ),
           ],
         ),

@@ -102,16 +102,21 @@ class _TemplateScreenState extends State<TemplateScreen> {
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(midItemColor),
-                      fixedSize:
-                          MaterialStateProperty.all<Size>(const Size(150, 75))),
+                      fixedSize: MaterialStateProperty.all<Size>(const Size(150, 75))),
                   onPressed: () {
                     setState(() {
+                      // Kontrola, zda už máme aktivní trénink
                       if (activeWorkout == null) {
+                        // Vytvoříme nový trénink, pokud žádný není aktivní
                         Trenink trenink = startNewWorkout("Nový Trénink");
                         activeWorkout = trenink;
+                        print("Nový trénink byl vytvořen.");
+                      } else {
+                        print("Pokračujeme v tréninku.");
                       }
                     });
 
+                    // Navigujeme na obrazovku NewWorkoutScreen s aktivním tréninkem.
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -120,10 +125,13 @@ class _TemplateScreenState extends State<TemplateScreen> {
                     );
                   },
                   child: Text(
+                    // Dynamicky měníme text tlačítka
                     activeWorkout == null ? "Nový Trénink" : "Pokračovat v tréninku",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+
+
               ],
             ),
             Column(

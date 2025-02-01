@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'database/exercisesList.dart';
@@ -59,6 +60,7 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: softItemColor,
           title: const Text("Vyberte cvik"),
           content: SizedBox(
             height: 300,
@@ -178,8 +180,7 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
           for (var setData in setsList) {
             var weightController =
                 TextEditingController(text: setData['weight']);
-            var repsController =
-                TextEditingController(text: setData['reps']);
+            var repsController = TextEditingController(text: setData['reps']);
             setControllers[exerciseIndex]!.add({
               'weight': weightController,
               'reps': repsController,
@@ -316,6 +317,8 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
           title: Row(
             children: [
               _isEditingTitle
@@ -337,18 +340,20 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                         child: Text(
                           widget.trenink.nazev,
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
                       ),
                     ),
               Text(
                 '${_elapsedTime.inMinutes}:${(_elapsedTime.inSeconds % 60).toString().padLeft(2, '0')}',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ],
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         body: ListView(
           children: [
             ...widget.trenink.exercises.asMap().entries.map((entry) {
@@ -403,8 +408,11 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                                   child: TextField(
                                     controller: controllers['weight'],
                                     keyboardType: TextInputType.number,
-                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                    decoration: const InputDecoration(labelText: "Váha"),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    decoration: const InputDecoration(
+                                        labelText: "Váha"),
                                     enabled: !completed,
                                   ),
                                 ),
@@ -412,22 +420,29 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                                   child: TextField(
                                     controller: controllers['reps'],
                                     keyboardType: TextInputType.number,
-                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                    decoration: const InputDecoration(labelText: "Počet opakování"),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    decoration: const InputDecoration(
+                                        labelText: "Počet opakování"),
                                     enabled: !completed,
                                   ),
                                 ),
                                 IconButton(
                                   icon: Icon(
                                     completed ? Icons.lock : Icons.lock_open,
-                                    color: completed ? Colors.green : Colors.grey,
+                                    color:
+                                        completed ? Colors.green : Colors.grey,
                                   ),
-                                  tooltip: completed ? "Série zamčena" : "Uzamknout sérii",
-                                  onPressed: () =>
-                                      _toggleSetCompletion(exerciseIndex, setIndex),
+                                  tooltip: completed
+                                      ? "Série zamčena"
+                                      : "Uzamknout sérii",
+                                  onPressed: () => _toggleSetCompletion(
+                                      exerciseIndex, setIndex),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.delete, color: Colors.red),
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.red),
                                   onPressed: () {
                                     _deleteSet(exerciseIndex, setIndex);
                                   },
@@ -454,10 +469,21 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                 _addExerciseDialog(context);
               },
             ),
-            ElevatedButton(
-              onPressed: _finishWorkout,
-              child: const Text("Dokončit trénink"),
-            ),
+            Column(
+              children: [
+                SizedBox(
+                  width: 300,
+                  child: ElevatedButton(
+                    onPressed: _finishWorkout,
+                    style: ElevatedButton.styleFrom(minimumSize: Size(100, 50)),
+                    child: const Text(
+                      "Dokončit trénink",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),

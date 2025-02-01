@@ -26,6 +26,12 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
   // Klíčem je index cviku, hodnotou seznam sérií (každá série obsahuje controllery a stav)
   Map<int, List<Map<String, dynamic>>> setControllers = {};
 
+  bool _showSearchBar = false;
+  FocusNode _focusNode = FocusNode();
+  String _searchText = "";
+  List<Cvik> _filteredCviky = scviky; // Inicializujeme s celým seznamem cviků
+
+
   @override
   void initState() {
     super.initState();
@@ -55,36 +61,113 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
     });
   }
 
-  void _addExerciseDialog(BuildContext context) {
+ void _addExerciseDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          backgroundColor: softItemColor,
-          title: const Text("Vyberte cvik"),
-          content: SizedBox(
-            height: 300,
-            width: 300,
-            child: ListView.builder(
-              itemCount: cviky.length,
-              itemBuilder: (context, index) {
-                final cvik = cviky[index];
-                return ListTile(
-                  leading: Image.asset(cvik.obrazek),
-                  title: Text(cvik.nazev),
-                  subtitle: Text(cvik.partie),
-                  onTap: () {
-                    setState(() {
-                      addExerciseFromList(widget.trenink, cvik.id);
-                      int exerciseIndex = widget.trenink.exercises.length - 1;
-                      _addSet(exerciseIndex);
-                    });
-                    Navigator.pop(context);
-                  },
-                );
-              },
-            ),
-          ),
+        // Použijeme StatefulBuilder pro lokální setState uvnitř dialogu
+        return StatefulBuilder(
+          builder: (context, setStateDialog) {
+            return AlertDialog(
+              backgroundColor: softItemColor,
+              title: const Text("Vyberte cvik"),
+              content: SizedBox(
+                height: 300,
+                width: 300,
+                child: Column(
+                  children: [
+                    // Řádek s vyhledávacím tlačítkem a textovým polem
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: FloatingActionButton(
+                            backgroundColor: midItemColor,
+                            onPressed: () {
+                              setStateDialog(() {
+                                _showSearchBar = !_showSearchBar;
+                                if (_showSearchBar) {
+                                  _focusNode.requestFocus();
+                                } else {
+                                  _focusNode.unfocus();
+                                  _searchText = "";
+                                  _filteredCviky = scviky;
+                                }
+                              });
+                            },
+                            child: Icon(
+                              _showSearchBar ? Icons.close : Icons.search,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        if (_showSearchBar)
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextField(
+                                cursorColor: Colors.white,
+                                style: const TextStyle(color: Colors.white),
+                                focusNode: _focusNode,
+                                onChanged: (value) {
+                                  setStateDialog(() {
+                                    _searchText = value;
+                                    _filteredCviky = scviky
+                                        .where((cvik) => cvik.nazev
+                                            .toLowerCase()
+                                            .contains(_searchText.toLowerCase()))
+                                        .toList();
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  hintText: "Search Exercises",
+                                  hintStyle: const TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: const BorderSide(color: Colors.white),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide:
+                                        const BorderSide(color: Colors.white, width: 3),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    // Seznam cviků – pokud je vyhledávání aktivní, použije se filtrovaný seznam
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount:
+                            _showSearchBar ? _filteredCviky.length : scviky.length,
+                        itemBuilder: (context, index) {
+                          final cvik = _showSearchBar ? _filteredCviky[index] : scviky[index];
+                          return ListTile(
+                            leading: Image.asset(cvik.obrazek),
+                            title: Text(cvik.nazev),
+                            subtitle: Text(cvik.partie),
+                            onTap: () {
+                              // Použijeme setState() z rodičovského widgetu, pokud je třeba aktualizovat data tréninku
+                              setState(() {
+                                addExerciseFromList(widget.trenink, cvik.id);
+                                int exerciseIndex =
+                                    widget.trenink.exercises.length - 1;
+                                _addSet(exerciseIndex);
+                              });
+                              Navigator.pop(context);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         );
       },
     );
@@ -233,14 +316,14 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
       return;
     }
 
-    // Nejprve se zeptáme, jak pojmenovat trénink
     // Předvyplněný text obsahuje dosavadní název a datum a čas začátku tréninku.
     String defaultName =
         "${widget.trenink.nazev} - ${widget.trenink.startTime.toLocal().toString()}";
     TextEditingController nameController =
         TextEditingController(text: defaultName);
 
-    await showDialog(
+    // Zobrazíme dialog pro pojmenování tréninku a zjistíme, zda uživatel potvrzuje dokončení.
+    bool finishConfirmed = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -252,14 +335,14 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(context).pop(false),
               child: const Text(
                 "Zrušit",
                 style: TextStyle(color: Colors.black),
               ),
             ),
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(context).pop(true),
               child: const Text(
                 "OK",
                 style: TextStyle(color: Colors.black),
@@ -269,6 +352,11 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
         );
       },
     );
+
+    // Pokud uživatel klikl na "Zrušit", jednoduše ukončíme metodu a vrátíme se do aktivního workoutu.
+    if (finishConfirmed != true) {
+      return;
+    }
 
     // Aktualizujeme název tréninku podle vstupu uživatele.
     widget.trenink.nazev = nameController.text;
@@ -339,6 +427,13 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                           });
                         },
                         autofocus: true,
+                        style: const TextStyle(color: Colors.white), // Nastaví barvu textu na bílou
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Zadejte název', // případně změňte text nápovědy
+                          hintStyle:
+                              TextStyle(color: Colors.white.withOpacity(0.5)), // nápovědný text (poloprůhledný bílý)
+                        ),
                       ),
                     )
                   : Expanded(
@@ -346,7 +441,7 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                         onTap: _toggleTitleEdit,
                         child: Text(
                           widget.trenink.nazev,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
@@ -355,11 +450,12 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                     ),
               Text(
                 '${_elapsedTime.inMinutes}:${(_elapsedTime.inSeconds % 60).toString().padLeft(2, '0')}',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ],
           ),
         ),
+
         backgroundColor: Colors.black,
         body: ListView(
           children: [
@@ -372,7 +468,7 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
                 child: Card(
-                  color: midItemColor,
+                  color: softItemColor,
                   elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -483,11 +579,11 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
             }).toList(),
             Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 SizedBox(
-                  width: 330,
+                  width: 350,
                   height: 40,
                   child: ElevatedButton(
                     onPressed: () {
@@ -503,21 +599,76 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
               children: [
                 SizedBox(
-                  width: 300,
+                  width: 350,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      bool confirmDelete = await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: midItemColor,
+                            title: const Text("Opravdu chcete zrušit trénink?"),
+                            content: const Text("Tento trénink bude nenávratně smazán."),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: const Text("Ne", style: TextStyle(color: Colors.black)),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(true),
+                                child: const Text("Ano", style: TextStyle(color: Colors.red)),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+
+                      if (confirmDelete == true) {
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        await prefs.remove('activeWorkout');
+                        await prefs.remove('setsData');
+                        await prefs.remove(
+                          'completedSets_${widget.trenink.startTime.millisecondsSinceEpoch}',
+                        );
+
+                        if (mounted) {
+                          setState(() {
+                            widget.trenink.exercises.clear();
+                          });
+                        }
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => TemplateScreen()),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                    child: const Text(
+                      "Zrušit trénink",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox( height: 10,),
+                SizedBox(
+                  width: 350,
                   height: 40,
                   child: ElevatedButton(
                     onPressed: _finishWorkout,
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: softItemColor),
+                        backgroundColor: Colors.green
+                    ),
                     child: const Text(
                       "Dokončit trénink",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 )

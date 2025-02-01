@@ -148,9 +148,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
               itemBuilder: (context, index) {
                 final workout = workoutHistory[index];
                 return Card(
+                  color: midItemColor,
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
                     title: Text(workout['nazev']),
+                    textColor: Colors.white,
                     subtitle: Text(
                       'Start: ${DateTime.parse(workout['startTime']).toLocal()}',
                     ),

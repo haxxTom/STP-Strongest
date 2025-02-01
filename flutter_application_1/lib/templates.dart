@@ -4,7 +4,7 @@ import 'main.dart';
 import 'random.dart';
 import 'ex1.dart';
 import 'history.dart';
-import 'emptyworkout.dart';
+import 'emptyworkout.dart'; // Ujistěte se, že v tomto souboru je definována třída NewEmptyWorkoutScreen
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_application_1/database/database.dart';
 import 'dart:convert';
@@ -15,12 +15,12 @@ class TemplateScreen extends StatefulWidget {
 
   @override
   _TemplateScreenState createState() => _TemplateScreenState();
-  
 }
 
 class _TemplateScreenState extends State<TemplateScreen> {
-  // Předpokládám, že activeWorkout je nějaká proměnná, která drží aktivní trénink
+  // Předpokládáme, že activeWorkout je nějaká proměnná, která drží aktivní trénink
   Trenink? activeWorkout;
+
   Future<List<Map<String, String>>> _loadSetsDataFromPrefs() async {
     final prefs = await SharedPreferences.getInstance();
     String? savedSetsDataString = prefs.getString('setsData');
@@ -33,7 +33,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
       for (var set in sets) {
         var weight = RegExp(r'"weight": "(.*?)"').firstMatch(set)?.group(1);
         var reps = RegExp(r'"reps": "(.*?)"').firstMatch(set)?.group(1);
-        
+
         if (weight != null && reps != null) {
           loadedSetsData.add({'weight': weight, 'reps': reps});
         }
@@ -42,6 +42,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
 
     return loadedSetsData;
   }
+
   Future<void> _loadWorkout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? workoutJson = prefs.getString('activeWorkout');
@@ -58,6 +59,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
     super.initState();
     _loadWorkout();
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -76,8 +79,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
       ),
       backgroundColor: mainBackgroundColor,
       body: Container(
-        padding: const EdgeInsets.only(
-            left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+        padding:
+            const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
         child: Column(
           children: [
             Row(
@@ -85,14 +88,16 @@ class _TemplateScreenState extends State<TemplateScreen> {
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(midItemColor),
-                      fixedSize:
-                          MaterialStateProperty.all<Size>(const Size(150, 75))),
+                    backgroundColor: MaterialStateProperty.all(midItemColor),
+                    fixedSize: MaterialStateProperty.all<Size>(const Size(150, 75)),
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => NewTemplateScreen(trenink: activeWorkout!)),
+                        builder: (context) =>
+                            NewTemplateScreen(trenink: activeWorkout!),
+                      ),
                     );
                   },
                   child: const Text(
@@ -102,8 +107,10 @@ class _TemplateScreenState extends State<TemplateScreen> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(midItemColor),
-                      fixedSize: MaterialStateProperty.all<Size>(const Size(150, 75))),
+                    backgroundColor: MaterialStateProperty.all(midItemColor),
+                    fixedSize:
+                        MaterialStateProperty.all<Size>(const Size(150, 75)),
+                  ),
                   onPressed: () {
                     setState(() {
                       // Kontrola, zda už máme aktivní trénink
@@ -117,22 +124,21 @@ class _TemplateScreenState extends State<TemplateScreen> {
                       }
                     });
 
-                    // Navigujeme na obrazovku NewWorkoutScreen s aktivním tréninkem.
+                    // Navigujeme na obrazovku NewEmptyWorkoutScreen s aktivním tréninkem.
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NewWorkoutScreen(trenink: activeWorkout!),
+                        builder: (context) =>
+                            NewEmptyWorkoutScreen(trenink: activeWorkout!),
                       ),
                     );
                   },
                   child: Text(
                     // Dynamicky měníme text tlačítka
                     activeWorkout == null ? "Nový Trénink" : "Pokračovat v tréninku",
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
-
-
               ],
             ),
             Column(
@@ -145,8 +151,9 @@ class _TemplateScreenState extends State<TemplateScreen> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: midItemColor,
-                          borderRadius: BorderRadius.circular(20)),
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       height: 150,
                       width: 150,
                       child: const Column(
@@ -163,29 +170,32 @@ class _TemplateScreenState extends State<TemplateScreen> {
                           SizedBox(
                             height: 15,
                           ),
-                          Column(children: [
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                          Column(
+                            children: [
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ]),
+                            ],
+                          ),
                         ],
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: midItemColor,
-                          borderRadius: BorderRadius.circular(20)),
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       height: 150,
                       width: 150,
                       child: const Column(
@@ -202,22 +212,24 @@ class _TemplateScreenState extends State<TemplateScreen> {
                           SizedBox(
                             height: 15,
                           ),
-                          Column(children: [
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                          Column(
+                            children: [
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ]),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -231,8 +243,9 @@ class _TemplateScreenState extends State<TemplateScreen> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: midItemColor,
-                          borderRadius: BorderRadius.circular(20)),
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       height: 150,
                       width: 150,
                       child: const Column(
@@ -249,29 +262,32 @@ class _TemplateScreenState extends State<TemplateScreen> {
                           SizedBox(
                             height: 15,
                           ),
-                          Column(children: [
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                          Column(
+                            children: [
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ]),
+                            ],
+                          ),
                         ],
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: midItemColor,
-                          borderRadius: BorderRadius.circular(20)),
+                        color: midItemColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       height: 150,
                       width: 150,
                       child: const Column(
@@ -288,22 +304,24 @@ class _TemplateScreenState extends State<TemplateScreen> {
                           SizedBox(
                             height: 15,
                           ),
-                          Column(children: [
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                          Column(
+                            children: [
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "Exercise x reps",
-                              style: TextStyle(
-                                color: Colors.white,
+                              Text(
+                                "Exercise x reps",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ]),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -324,7 +342,9 @@ class _TemplateScreenState extends State<TemplateScreen> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(title: 'profile')),
+                builder: (context) =>
+                    const ProfileScreen(title: 'profile'),
+              ),
             );
           }
           if (index == 2) {

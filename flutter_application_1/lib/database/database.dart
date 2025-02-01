@@ -161,6 +161,7 @@ class Exercise {
         .toList();
   }
 }
+Map<int, List<bool>> completedSets = {}; // Klíč: index cvičení, Hodnota: seznam bool hodnot pro série
 
 class Set {
   int reps;

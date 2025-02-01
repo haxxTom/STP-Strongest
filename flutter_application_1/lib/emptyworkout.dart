@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
-import 'dart:async'; // For Timer
-import 'package:flutter/services.dart'; // For FilteringTextInputFormatter
+import 'dart:async';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import 'database/exercisesList.dart';
 import 'database/database.dart';
 import 'templates.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
-class NewWorkoutScreen extends StatefulWidget {
+class NewEmptyWorkoutScreen extends StatefulWidget {
   final Trenink trenink;
 
-  NewWorkoutScreen({required this.trenink});
+  NewEmptyWorkoutScreen({required this.trenink});
 
   @override
-  _NewWorkoutScreenState createState() => _NewWorkoutScreenState();
+  _NewEmptyWorkoutScreenState createState() => _NewEmptyWorkoutScreenState();
 }
 
-class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
+class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
   Timer? _timer;
   Duration _elapsedTime = Duration();
   TextEditingController _titleController = TextEditingController();
   bool _isEditingTitle = false;
 
-  Map<int, List<Map<String, TextEditingController>>> setControllers = {};
+  // Klíčem je index cviku, hodnotou seznam sérií (každá série obsahuje controllery a stav)
+  Map<int, List<Map<String, dynamic>>> setControllers = {};
 
   @override
   void initState() {
     super.initState();
     _titleController.text = widget.trenink.nazev;
-    _startTimer(); // Start the timer to track workout duration
+    _startTimer();
+    _loadSetsData();
+    _loadCompletedSets();
   }
 
   void _startTimer() {
@@ -90,13 +93,12 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
       if (!setControllers.containsKey(exerciseIndex)) {
         setControllers[exerciseIndex] = [];
       }
-
       var weightController = TextEditingController();
       var repsController = TextEditingController();
-
       setControllers[exerciseIndex]!.add({
         'weight': weightController,
         'reps': repsController,
+        'completed': false,
       });
     });
   }
@@ -131,10 +133,8 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
     bool isValid = true;
     setControllers.forEach((exerciseIndex, sets) {
       for (var setController in sets) {
-        final weightText = setController['weight']?.text ?? '';
-        final repsText = setController['reps']?.text ?? '';
-        
-        if (weightText.isEmpty || repsText.isEmpty) {
+        if (setController['weight'].text.isEmpty ||
+            setController['reps'].text.isEmpty) {
           isValid = false;
           break;
         }
@@ -151,50 +151,80 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
 
   Future<void> _saveSetsData() async {
     final prefs = await SharedPreferences.getInstance();
-    List<Map<String, String>> allSetsData = _getSetsData();
-
-    String allSetsDataString = allSetsData
-        .map((setData) => '{"weight": "${setData['weight']}", "reps": "${setData['reps']}"}')
-        .join(',');
-
+    Map<String, dynamic> data = {};
+    setControllers.forEach((exerciseIndex, sets) {
+      data[exerciseIndex.toString()] = sets.map((s) {
+        return {
+          'weight': s['weight'].text,
+          'reps': s['reps'].text,
+          'completed': s['completed'],
+        };
+      }).toList();
+    });
+    String allSetsDataString = jsonEncode(data);
     await prefs.setString('setsData', allSetsDataString);
-    print('Data byla uložena.');
   }
 
   Future<void> _loadSetsData() async {
     final prefs = await SharedPreferences.getInstance();
     String? savedSetsDataString = prefs.getString('setsData');
-
     if (savedSetsDataString != null) {
-      List<Map<String, String>> loadedSetsData = [];
-      List<String> sets = savedSetsDataString.split(',');
-
-      for (var set in sets) {
-        var weight = RegExp(r'"weight": "(.*?)"').firstMatch(set)?.group(1);
-        var reps = RegExp(r'"reps": "(.*?)"').firstMatch(set)?.group(1);
-        if (weight != null && reps != null) {
-          loadedSetsData.add({'weight': weight, 'reps': reps});
-        }
-      }
-
+      Map<String, dynamic> data = jsonDecode(savedSetsDataString);
       setState(() {
         setControllers.clear();
-        int index = 0;
-        for (var setData in loadedSetsData) {
-          _addSet(index);
-          var lastSet = setControllers[index]?.last;
-          if (lastSet != null) {
-            lastSet['weight']?.text = setData['weight']!;
-            lastSet['reps']?.text = setData['reps']!;
+        data.forEach((exerciseIndexStr, setsList) {
+          int exerciseIndex = int.parse(exerciseIndexStr);
+          setControllers[exerciseIndex] = [];
+          for (var setData in setsList) {
+            var weightController =
+                TextEditingController(text: setData['weight']);
+            var repsController =
+                TextEditingController(text: setData['reps']);
+            setControllers[exerciseIndex]!.add({
+              'weight': weightController,
+              'reps': repsController,
+              'completed': setData['completed'] ?? false,
+            });
           }
-          index++;
-        }
+        });
       });
-      print('Data byla načtena.');
     }
   }
 
-  void _finishWorkout() {
+  void _toggleSetCompletion(int exerciseIndex, int setIndex) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key =
+        'completedSets_${widget.trenink.startTime.millisecondsSinceEpoch}';
+    List<String> completedSets = prefs.getStringList(key) ?? [];
+    String setKey = '$exerciseIndex-$setIndex';
+    if (completedSets.contains(setKey)) {
+      completedSets.remove(setKey);
+    } else {
+      completedSets.add(setKey);
+    }
+    await prefs.setStringList(key, completedSets);
+    setState(() {
+      setControllers[exerciseIndex]![setIndex]['completed'] =
+          completedSets.contains(setKey);
+    });
+  }
+
+  Future<void> _loadCompletedSets() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key =
+        'completedSets_${widget.trenink.startTime.millisecondsSinceEpoch}';
+    List<String> completedSets = prefs.getStringList(key) ?? [];
+    setState(() {
+      setControllers.forEach((exerciseIndex, sets) {
+        for (int i = 0; i < sets.length; i++) {
+          String setKey = '$exerciseIndex-$i';
+          sets[i]['completed'] = completedSets.contains(setKey);
+        }
+      });
+    });
+  }
+
+  Future<void> _finishWorkout() async {
     if (!_validateSetsData()) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Vyplňte všechny váhy a opakování!")),
@@ -202,18 +232,74 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
       return;
     }
 
-    List<Map<String, String>> allSetsData = _getSetsData();
-    print('Uloženo ${allSetsData.length} sérií do databáze nebo souboru.');
+    // Nejprve se zeptáme, jak pojmenovat trénink
+    // Předvyplněný text obsahuje dosavadní název a datum a čas začátku tréninku.
+    String defaultName =
+        "${widget.trenink.nazev} - ${widget.trenink.startTime.toLocal().toString()}";
+    TextEditingController nameController =
+        TextEditingController(text: defaultName);
 
-    // Kontrola, zda je widget stále přítomný v widgetovém stromu (mounted)
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Pojmenujte trénink"),
+          content: TextField(
+            controller: nameController,
+            decoration: InputDecoration(labelText: "Název tréninku"),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text("Zrušit"),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+
+    // Aktualizujeme název tréninku podle vstupu uživatele.
+    widget.trenink.nazev = nameController.text;
+
+    // Nastavíme konečný čas tréninku.
+    widget.trenink.endTime = DateTime.now();
+
+    // Vytvoříme objekt se všemi daty tréninku včetně sérií.
+    Map<String, dynamic> finishedWorkout = widget.trenink.toJson();
+    finishedWorkout['sets'] = {};
+    setControllers.forEach((exerciseIndex, sets) {
+      finishedWorkout['sets'][exerciseIndex.toString()] = sets.map((s) {
+        return {
+          'weight': s['weight'].text,
+          'reps': s['reps'].text,
+          'completed': s['completed'],
+        };
+      }).toList();
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? historyJson = prefs.getString('workoutHistory');
+    List<dynamic> history = historyJson != null ? jsonDecode(historyJson) : [];
+    history.add(finishedWorkout);
+    await prefs.setString('workoutHistory', jsonEncode(history));
+
+    // Vymažeme data aktuálního tréninku, aby nový trénink začínal od nuly.
+    await prefs.remove('activeWorkout');
+    await prefs.remove('setsData');
+    await prefs.remove(
+      'completedSets_${widget.trenink.startTime.millisecondsSinceEpoch}',
+    );
+
     if (mounted) {
       setState(() {
         widget.trenink.exercises.clear();
-        activeWorkout = null;  // Zajistíme přiřazení null
       });
     }
 
-    // Po dokončení tréninku navigujeme zpět na TemplateScreen
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => TemplateScreen()),
@@ -224,7 +310,8 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        _saveWorkout();
+        await _saveSetsData();
+        await _saveWorkout();
         return true;
       },
       child: Scaffold(
@@ -249,7 +336,8 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                         onTap: _toggleTitleEdit,
                         child: Text(
                           widget.trenink.nazev,
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -263,8 +351,9 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
         backgroundColor: Colors.white,
         body: ListView(
           children: [
-            ...widget.trenink.exercises.map((exercise) {
-              int exerciseIndex = widget.trenink.exercises.indexOf(exercise);
+            ...widget.trenink.exercises.asMap().entries.map((entry) {
+              int exerciseIndex = entry.key;
+              var exercise = entry.value;
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Card(
@@ -285,9 +374,7 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                             Text(
                               exercise.cvik.nazev,
                               style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete, color: Colors.red),
@@ -303,7 +390,9 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: setControllers[exerciseIndex]?.length ?? 0,
                           itemBuilder: (context, setIndex) {
-                            var controllers = setControllers[exerciseIndex]![setIndex];
+                            var controllers =
+                                setControllers[exerciseIndex]![setIndex];
+                            bool completed = controllers['completed'] ?? false;
                             return Row(
                               children: [
                                 Text(
@@ -314,25 +403,28 @@ class _NewWorkoutScreenState extends State<NewWorkoutScreen> {
                                   child: TextField(
                                     controller: controllers['weight'],
                                     keyboardType: TextInputType.number,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
-                                    ],
-                                    decoration: const InputDecoration(
-                                      labelText: "Váha",
-                                    ),
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                    decoration: const InputDecoration(labelText: "Váha"),
+                                    enabled: !completed,
                                   ),
                                 ),
                                 Expanded(
                                   child: TextField(
                                     controller: controllers['reps'],
                                     keyboardType: TextInputType.number,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
-                                    ],
-                                    decoration: const InputDecoration(
-                                      labelText: "Počet opakování",
-                                    ),
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                    decoration: const InputDecoration(labelText: "Počet opakování"),
+                                    enabled: !completed,
                                   ),
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    completed ? Icons.lock : Icons.lock_open,
+                                    color: completed ? Colors.green : Colors.grey,
+                                  ),
+                                  tooltip: completed ? "Série zamčena" : "Uzamknout sérii",
+                                  onPressed: () =>
+                                      _toggleSetCompletion(exerciseIndex, setIndex),
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.delete, color: Colors.red),

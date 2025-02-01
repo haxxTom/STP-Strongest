@@ -244,6 +244,7 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: midItemColor,
           title: const Text("Pojmenujte trénink"),
           content: TextField(
             controller: nameController,
@@ -252,11 +253,17 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text("Zrušit"),
+              child: const Text(
+                "Zrušit",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text("OK"),
+              child: const Text(
+                "OK",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ],
         );
@@ -356,15 +363,19 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
         backgroundColor: Colors.black,
         body: ListView(
           children: [
+            SizedBox(
+              height: 20,
+            ),
             ...widget.trenink.exercises.asMap().entries.map((entry) {
               int exerciseIndex = entry.key;
               var exercise = entry.value;
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
                 child: Card(
+                  color: midItemColor,
                   elevation: 4,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -379,7 +390,7 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                             Text(
                               exercise.cvik.nazev,
                               style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete, color: Colors.red),
@@ -401,8 +412,11 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                             return Row(
                               children: [
                                 Text(
-                                  'Série ${setIndex + 1}:',
+                                  '${setIndex + 1}:',
                                   style: const TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(
+                                  width: 20,
                                 ),
                                 Expanded(
                                   child: TextField(
@@ -412,7 +426,8 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                                       FilteringTextInputFormatter.digitsOnly
                                     ],
                                     decoration: const InputDecoration(
-                                        labelText: "Váha"),
+                                      labelText: "Váha",
+                                    ),
                                     enabled: !completed,
                                   ),
                                 ),
@@ -424,13 +439,16 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                                       FilteringTextInputFormatter.digitsOnly
                                     ],
                                     decoration: const InputDecoration(
-                                        labelText: "Počet opakování"),
+                                      labelText: "Opakování",
+                                    ),
                                     enabled: !completed,
                                   ),
                                 ),
                                 IconButton(
                                   icon: Icon(
-                                    completed ? Icons.lock : Icons.lock_open,
+                                    completed
+                                        ? Icons.check_circle
+                                        : Icons.check_circle,
                                     color:
                                         completed ? Colors.green : Colors.grey,
                                   ),
@@ -463,19 +481,40 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                 ),
               );
             }).toList(),
-            IconButton(
-              icon: const Icon(Icons.add_circle_outline),
-              onPressed: () {
-                _addExerciseDialog(context);
-              },
+            Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                SizedBox(
+                  width: 330,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _addExerciseDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: softItemColor),
+                    child: const Text(
+                      "Přidat cvik",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
             ),
             Column(
               children: [
                 SizedBox(
                   width: 300,
+                  height: 40,
                   child: ElevatedButton(
                     onPressed: _finishWorkout,
-                    style: ElevatedButton.styleFrom(minimumSize: Size(100, 50)),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: softItemColor),
                     child: const Text(
                       "Dokončit trénink",
                       style: TextStyle(color: Colors.black),

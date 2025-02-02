@@ -182,8 +182,12 @@ class Set {
   // Metoda fromJson pro deserializaci
   static Set fromJson(Map<String, dynamic> json) {
     return Set(
-      reps: json['reps'],
-      weight: json['weight'],
+      reps: json['reps'] is int 
+          ? json['reps'] 
+          : int.tryParse(json['reps'].toString()) ?? 0,
+      weight: json['weight'] is double 
+          ? json['weight'] 
+          : double.tryParse(json['weight'].toString()) ?? 0.0,
     );
   }
 }

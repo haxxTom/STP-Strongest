@@ -113,15 +113,27 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
                 // Pokud existují data o sériích uložené v samostatném klíči 'sets',
                 // sloučíme je do příslušných cvičení.
-                if (workoutData.containsKey('sets')) {
-                  Map<String, dynamic> setsData =
-                      Map<String, dynamic>.from(workoutData['sets']);
-                  List<dynamic> exercises = workoutData['exercises'];
-                  for (int i = 0; i < exercises.length; i++) {
-                    if (setsData.containsKey(i.toString())) {
-                      exercises[i]['sets'] = setsData[i.toString()];
+                if (workoutData.containsKey('sets') && workoutData['sets'] is Map) {
+                  Map<String, dynamic> setsData = Map<String, dynamic>.from(workoutData['sets']);
+
+                  // 🔥 **Převod klíčů v `setsData` ze String na int**
+                  Map<int, dynamic> convertedSetsData = {
+                    for (var key in setsData.keys) int.tryParse(key) ?? -1: setsData[key]
+                  }..remove(-1); // Odstraní nevalidní klíče
+
+                  if (workoutData.containsKey('exercises') && workoutData['exercises'] is List) {
+                    List<dynamic> exercises = List<dynamic>.from(workoutData['exercises']);
+
+                    for (int i = 0; i < exercises.length; i++) {
+                      if (exercises[i] is Map<String, dynamic> && convertedSetsData.containsKey(i)) {
+                        exercises[i]['sets'] = convertedSetsData[i];
+                      }
                     }
+
+                    // Aktualizujeme seznam cviků v `workoutData`
+                    workoutData['exercises'] = exercises;
                   }
+
                   // Odstraníme samostatný klíč 'sets', protože jsme je již sloučili
                   workoutData.remove('sets');
                 }
@@ -143,7 +155,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 "Zopakovat trénink",
                 style: TextStyle(color: Colors.white),
               ),
-            ),          
+            ),
+
           ],
         );
       },

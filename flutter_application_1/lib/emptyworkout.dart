@@ -37,9 +37,40 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
     super.initState();
     _titleController.text = widget.trenink.nazev;
     _startTimer();
+
+    // Načteme uložená data ze SharedPreferences (pokud existují)
     _loadSetsData();
     _loadCompletedSets();
+
+    // Pokud už má načtený trénink cvičení se sériemi, převedeme je do setControllers
+    _initializeSetControllers();
   }
+
+  void _initializeSetControllers() {
+    for (int exerciseIndex = 0;
+        exerciseIndex < widget.trenink.exercises.length;
+        exerciseIndex++) {
+      final exercise = widget.trenink.exercises[exerciseIndex];
+      // Pokud ještě neexistuje položka pro dané cvičení, vytvoříme ji
+      if (!setControllers.containsKey(exerciseIndex)) {
+        setControllers[exerciseIndex] = [];
+      }
+      // Pro každou sérii vytvoříme controllery
+      for (var set in exercise.sets) {
+        var weightController =
+            TextEditingController(text: set.weight.toString());
+        var repsController =
+            TextEditingController(text: set.reps.toString());
+        setControllers[exerciseIndex]!.add({
+          'weight': weightController,
+          'reps': repsController,
+          'completed': false,
+        });
+      }
+    }
+    setState(() {}); // Aktualizujeme UI
+  }
+
 
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -511,7 +542,7 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
                                   '${setIndex + 1}:',
                                   style: const TextStyle(fontSize: 16),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Expanded(

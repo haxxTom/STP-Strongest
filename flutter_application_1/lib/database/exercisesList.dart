@@ -1,175 +1,117 @@
 import 'database.dart';
 
 List<Cvik> cviky = [
-
   Cvik(
     id: 1,
-    nazev: "Ab Wheel",
-    partie: "Core",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Klekněte si na podložku a oběma rukama uchopte ab wheel (kolečko). "
-           "Umístěte kolečko před sebe a postupně se s ním vyvalte dopředu tak daleko, "
-           "jak jen to jde, aniž byste ztratili kontrolu nad tělem. Poté se vraťte do výchozí polohy. "
-           "Udržujte rovná záda a zpevněný core během celého pohybu.",
-  ),
-
-  Cvik(
-    id: 2,
-    nazev: "Aerobics",
-    partie: "Cardio",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Aerobik je dynamické cvičení zahrnující různé pohyby, jako jsou poskoky, výpady a zvedání kolen. "
-           "Typické hodiny jsou vedeny instruktorem s hudbou, zaměřují se na zlepšení kondice a spalování kalorií.",
-  ),
-
-  Cvik(
-    id: 3,
     nazev: "Arnold Press (Dumbbell)",
     partie: "Shoulders",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Sedněte si na lavičku s opěrkou a držte jednoručky před hrudníkem, dlaněmi směrem k vám. "
-           "Při zvedání činek otáčejte dlaně od sebe a tlačte činky nad hlavu. "
-           "Poté se vracejte zpět do výchozí polohy a otočte dlaně zpět směrem k sobě.",
+    obrazek: "assets/Images/icon.png",
+    popis:
+        "Sedněte si na lavičku s opěrkou a držte jednoručky před hrudníkem, dlaněmi směrem k vám. "
+        "Při zvedání činek otáčejte dlaně od sebe a tlačte činky nad hlavu. "
+        "Poté se vracejte zpět do výchozí polohy a otočte dlaně zpět směrem k sobě.",
   ),
-
   Cvik(
-    id: 4,
-    nazev: "Around the World",
-    partie: "Chest",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Lehněte si na lavičku a držte jednoručky nad tělem. "
-           "Pohybujte činkami do oblouku směrem ven od těla, dolů ke stehnům, a poté zpět do výchozí polohy. "
-           "Cvičení zlepšuje pohyblivost ramenního kloubu a posiluje hrudní svaly.",
-  ),
-
-  Cvik(
-    id: 5,
+    id: 2,
     nazev: "Back Extension",
     partie: "Back",
-    obrazek: "assets/Images/icon.png", 
+    obrazek: "assets/Images/icon.png",
     popis: "Lehněte si na lavici na zádech, kotníky zapřete o podpěru. "
-           "Zvedněte trup nahoru pomocí zádových svalů, dokud nebudete v přímé linii s nohama. "
-           "Pomalu se vraťte do výchozí polohy.",
+        "Zvedněte trup nahoru pomocí zádových svalů, dokud nebudete v přímé linii s nohama. "
+        "Pomalu se vraťte do výchozí polohy.",
   ),
-
   Cvik(
-    id: 6,
+    id: 3,
     nazev: "Back Extension (Machine)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Posaďte se na stroj na hyperextenze a umístěte kotníky pod podpěru. "
-           "Opřete se o opěrku a ohýbejte trup směrem dolů. Poté pomocí zádových svalů zvedněte trup zpět do výchozí polohy.",
+    obrazek: "assets/Images/icon.png",
+    popis:
+        "Posaďte se na stroj na hyperextenze a umístěte kotníky pod podpěru. "
+        "Opřete se o opěrku a ohýbejte trup směrem dolů. Poté pomocí zádových svalů zvedněte trup zpět do výchozí polohy.",
   ),
-
   Cvik(
-    id: 7,
-    nazev: "Ball Slams",
-    partie: "Full Body",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Postavte se s nohama na šířku ramen a držte medicinbal oběma rukama. "
-           "Zvedněte míč nad hlavu a prudce ho hoďte na zem. "
-           "Při dopadu míče se ohněte v kolenou a seberte ho. Opakujte.",
-  ),
-
-  Cvik(
-    id: 8,
-    nazev: "Battle Ropes",
-    partie: "Cardio",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Uchopte oba konce lana a postavte se s mírně pokrčenými koleny. "
-           "Střídejte pohyb paží nahoru a dolů rychlým tempem, čímž vytváříte vlny v laně. "
-           "Tento cvik zlepšuje kardiorespirační kondici a sílu horní části těla.",
-  ),
-
-  Cvik(
-    id: 9,
+    id: 4,
     nazev: "Bench Dip",
     partie: "Arms",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Posaďte se na lavičku, ruce umístěte vedle boků a nohy položte na podlahu nebo druhou lavičku. "
-           "Sklouzněte z lavičky dolů a pokrčte lokty, dokud nejsou paže v pravém úhlu. "
-           "Zvedněte se zpět do výchozí polohy.",
+    obrazek: "assets/Images/icon.png",
+    popis:
+        "Posaďte se na lavičku, ruce umístěte vedle boků a nohy položte na podlahu nebo druhou lavičku. "
+        "Sklouzněte z lavičky dolů a pokrčte lokty, dokud nejsou paže v pravém úhlu. "
+        "Zvedněte se zpět do výchozí polohy.",
   ),
-
   Cvik(
-    id: 10,
+    id: 5,
     nazev: "Bench Press (Barbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Lehněte si na lavičku, uchopte osu širším úchopem a spusťte ji k hrudníku. "
-           "Následně zatlačte osou zpět nahoru, až do propnutí paží. Držte zpevněný hrudník a aktivní lopatky.",
+    obrazek: "assets/Images/benchpress-barbell.png",
+    popis:
+        "Lehněte si na lavičku, uchopte osu širším úchopem a spusťte ji k hrudníku. "
+        "Následně zatlačte osou zpět nahoru, až do propnutí paží. Držte zpevněný hrudník a aktivní lopatky.",
   ),
-
   Cvik(
-    id: 11,
+    id: 6,
     nazev: "Bench Press (Cable)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Posaďte se na lavičku mezi dvě kabelové kladky, uchopte madla a zatlačte je před sebe. "
-           "Pomalu spusťte madla zpět, dokud nejsou vaše paže v úrovni hrudníku.",
+    obrazek: "assets/Images/icon.png",
+    popis:
+        "Posaďte se na lavičku mezi dvě kabelové kladky, uchopte madla a zatlačte je před sebe. "
+        "Pomalu spusťte madla zpět, dokud nejsou vaše paže v úrovni hrudníku.",
   ),
-
   Cvik(
     id: 12,
     nazev: "Bench Press (Dumbbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Lehněte si na lavičku, držte jednoručky v každé ruce a zvedněte je nad hrudník. "
-           "Spusťte činky dolů do úrovně hrudníku a poté je zvedněte zpět do výchozí polohy.",
+    obrazek: "assets/Images/bench-dumb.png",
+    popis:
+        "Lehněte si na lavičku, držte jednoručky v každé ruce a zvedněte je nad hrudník. "
+        "Spusťte činky dolů do úrovně hrudníku a poté je zvedněte zpět do výchozí polohy.",
   ),
-
   Cvik(
     id: 13,
     nazev: "Bench Press (Smith Machine)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", 
-    popis: "Lehněte si na lavičku pod Smith machine a uchopte osu širším úchopem. "
-           "Spusťte osu k hrudníku a poté zatlačte zpět nahoru.",
+    obrazek: "assets/Images/icon.png",
+    popis:
+        "Lehněte si na lavičku pod Smith machine a uchopte osu širším úchopem. "
+        "Spusťte osu k hrudníku a poté zatlačte zpět nahoru.",
   ),
-
   Cvik(
     id: 14,
     nazev: "Bent Over Row (Band)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png", 
+    obrazek: "assets/Images/icon.png",
     popis: "Postavte se na odporový pás a uchopte ho oběma rukama. "
-           "Nakloňte trup dopředu, udržujte rovná záda a přitahujte pás směrem k břichu. "
-           "Pomalu spusťte zpět do výchozí polohy.",
+        "Nakloňte trup dopředu, udržujte rovná záda a přitahujte pás směrem k břichu. "
+        "Pomalu spusťte zpět do výchozí polohy.",
   ),
-
- 
   Cvik(
     id: 13,
     nazev: "Bench Press\n(Smith Machine)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png", 
+    obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 14,
     nazev: "Bent Over Row (Band)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png", 
+    obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 15,
     nazev: "Bent Over Row (Barbell)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/bent-over-row.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 16,
     nazev: "Bent Over Row (Dumbell)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/bent-over-row-dumb.png",
     popis: "popis",
   ),
- 
   Cvik(
     id: 17,
     nazev: "Bent Over Row - Underhand (Barbell)",
@@ -177,7 +119,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 18,
     nazev: "Bicep Curl (Barbell)",
@@ -185,7 +126,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 19,
     nazev: "Bicep Curl (Cable)",
@@ -193,7 +133,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 20,
     nazev: "Bicep Curl (Dumbell)",
@@ -201,7 +140,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 21,
     nazev: "Bicep Curl (Machine)",
@@ -209,15 +147,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 22,
-    nazev: "Bicycle Crunch)",
-    partie: "Core",
-    obrazek: "assets/Images/icon.png",
+    nazev: "Triceps pushdown",
+    partie: "Arms",
+    obrazek: "assets/Images/triceps-pushdown.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 23,
     nazev: "Box Jump",
@@ -225,7 +161,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 24,
     nazev: "Box Squat (Barbell)",
@@ -233,7 +168,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 25,
     nazev: "Bulgarian Split Squat",
@@ -241,7 +175,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 26,
     nazev: "Burpee",
@@ -249,15 +182,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 27,
     nazev: "Cable Crossover",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/cable-crossover.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 28,
     nazev: "Cable Crunch",
@@ -265,7 +196,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 29,
     nazev: "Cable Kickback",
@@ -273,7 +203,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 30,
     nazev: "Cable Pull Through",
@@ -281,7 +210,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 31,
     nazev: "Cable Twist",
@@ -289,7 +217,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 32,
     nazev: "Calf Press on Leg Press",
@@ -297,7 +224,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 33,
     nazev: "Calf Press on Seated Leg Press",
@@ -305,7 +231,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 34,
     nazev: "Chest Dip",
@@ -313,15 +238,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 35,
     nazev: "Chest Fly",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/chestfly.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 36,
     nazev: "Chest Fly (Band)",
@@ -329,15 +252,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 37,
     nazev: "Chest Fly (Dumbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/chestfly-dumb.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 38,
     nazev: "Chest Press (Band)",
@@ -345,15 +266,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 39,
     nazev: "Chest Press (Machine)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/chest-press-machine.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 40,
     nazev: "Chin Up",
@@ -361,7 +280,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 41,
     nazev: "Chin Up (Assisted)",
@@ -369,7 +287,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 42,
     nazev: "Clean (Barbell)",
@@ -377,7 +294,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 43,
     nazev: "Clean and Jerk (Barbell)",
@@ -385,7 +301,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 44,
     nazev: "Climbing",
@@ -393,7 +308,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 45,
     nazev: "Concentration Curl",
@@ -401,7 +315,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 46,
     nazev: "Cross Body Crunch",
@@ -409,7 +322,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 47,
     nazev: "Crunch",
@@ -417,7 +329,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 48,
     nazev: "Crunch (Machine)",
@@ -425,7 +336,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 49,
     nazev: "Crunch (Stability Ball)",
@@ -433,7 +343,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 50,
     nazev: "Cycling",
@@ -441,7 +350,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 51,
     nazev: "Cycling (Indoor)",
@@ -449,7 +357,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 52,
     nazev: "Deadlift (Band)",
@@ -457,7 +364,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 53,
     nazev: "Deadlift (Barbell)",
@@ -465,7 +371,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 54,
     nazev: "Deadlift (Dumbell)",
@@ -473,7 +378,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 55,
     nazev: "Deadlift (Smith Machine)",
@@ -481,7 +385,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 56,
     nazev: "Deadlift High Pull (Barbell)",
@@ -489,23 +392,20 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 57,
     nazev: "Decline Bench Press (Barbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/decl-benchpress-barb.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 58,
     nazev: "Decline Bench Press (Dumbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/decl-benchpress-dumb.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 59,
     nazev: "Decline Bench Press (Smith Machine)",
@@ -513,7 +413,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 60,
     nazev: "Decline Crunch",
@@ -521,7 +420,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 61,
     nazev: "Deficit Deadlift (Barbell)",
@@ -529,7 +427,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 62,
     nazev: "Elliptical Machine",
@@ -537,7 +434,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 63,
     nazev: "Face Pull (Cable)",
@@ -545,7 +441,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 64,
     nazev: "Flat Knee Raise",
@@ -553,7 +448,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 65,
     nazev: "Flat Leg Raise",
@@ -561,7 +455,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 66,
     nazev: "Floor Press (Barbell)",
@@ -569,7 +462,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 67,
     nazev: "Front Raise (Band)",
@@ -577,7 +469,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 68,
     nazev: "Front Raise (Barbell)",
@@ -585,7 +476,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 69,
     nazev: "Front Raise (Cable)",
@@ -593,7 +483,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 70,
     nazev: "Front Raise (Dumbell)",
@@ -601,7 +490,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 71,
     nazev: "Front Raise (Plate)",
@@ -609,7 +497,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 72,
     nazev: "Front Squat (Barbell)",
@@ -617,7 +504,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 73,
     nazev: "Glute Ham Raise",
@@ -625,7 +511,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 74,
     nazev: "Glute Kickback (Machine)",
@@ -633,7 +518,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 75,
     nazev: "Goblet Squat (Kettlebell)",
@@ -641,7 +525,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 77,
     nazev: "Good Morning (Barbell)",
@@ -649,7 +532,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 78,
     nazev: "Hack Squat (Barbell)",
@@ -657,7 +539,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 79,
     nazev: "Hammer Curl (Band)",
@@ -665,7 +546,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 80,
     nazev: "Hammer Curl (Cable)",
@@ -673,7 +553,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 81,
     nazev: "Hammer Curl (Dumbell)",
@@ -681,7 +560,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 82,
     nazev: "Handstand Push Up",
@@ -689,7 +567,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 83,
     nazev: "Hang Clean (Barbell)",
@@ -697,7 +574,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 84,
     nazev: "Hang Snatch (Barbell)",
@@ -705,7 +581,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 85,
     nazev: "Hanging Knee Raise",
@@ -713,7 +588,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 86,
     nazev: "Hanging Leg Raise",
@@ -721,7 +595,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 87,
     nazev: "High Knee Skips",
@@ -729,7 +602,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 88,
     nazev: "Hiking",
@@ -737,7 +609,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 89,
     nazev: "Hip Abductor (Machine)",
@@ -745,7 +616,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 90,
     nazev: "Hip Thrust (Barbell)",
@@ -753,7 +623,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 91,
     nazev: "Hip Thrust (Bodyweight)",
@@ -761,15 +630,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 92,
     nazev: "Incline Bench Press (Barbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/incl-bench-barb.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 93,
     nazev: "Incline Bench Press (Cable)",
@@ -777,15 +644,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 94,
     nazev: "Incline Bench Press (Dumbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/incl-bench-dumb.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 95,
     nazev: "Incline Bench Press (Smith Machine)",
@@ -793,15 +658,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 96,
     nazev: "Incline Chest Fly (Dumbell)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/incl-chestfly-dumb.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 97,
     nazev: "Incline Chest Press (Machine)",
@@ -809,7 +672,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 98,
     nazev: "Incline Curl (Dumbell)",
@@ -817,7 +679,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 99,
     nazev: "Incline Row (Dumbell)",
@@ -825,7 +686,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 100,
     nazev: "Inverted Row (Bodyweight)",
@@ -833,7 +693,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 101,
     nazev: "Iso-Lateral Chest Press (Machine)",
@@ -841,7 +700,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 102,
     nazev: "Iso-Lateral Row (Machine)",
@@ -849,7 +707,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 103,
     nazev: "Jackknife Sit Up",
@@ -857,7 +714,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 104,
     nazev: "Jump Rope",
@@ -865,7 +721,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 105,
     nazev: "Jump Shrug (Barbell)",
@@ -873,7 +728,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 106,
     nazev: "Jump Squat",
@@ -881,7 +735,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 107,
     nazev: "Jumping Jack",
@@ -889,7 +742,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 108,
     nazev: "Kettlebell Swing",
@@ -897,7 +749,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 109,
     nazev: "Kettlebell Turkish Get Up",
@@ -905,7 +756,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 110,
     nazev: "Kipping Pull Up",
@@ -913,7 +763,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 111,
     nazev: "Knee Raise (Captain's Chair)",
@@ -921,7 +770,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 112,
     nazev: "Kneeling Pulldown (Band)",
@@ -929,7 +777,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 113,
     nazev: "Knees to Elbows",
@@ -937,15 +784,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 114,
     nazev: "Lat Pulldown (Cable)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/lat-pulldown-close.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 115,
     nazev: "Lat Pulldown (Machine)",
@@ -953,7 +798,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 116,
     nazev: "Lat Pulldown (Single Arm)",
@@ -961,7 +805,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 117,
     nazev: "Lat Pulldown - Underhand (Band)",
@@ -969,7 +812,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 118,
     nazev: "Lat Pulldown - Underhand (Cable)",
@@ -977,15 +819,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 119,
     nazev: "Lat Pulldown - Wide Grip (Cable)",
     partie: "Back",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/lat-pulldown-wide.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 120,
     nazev: "Lateral Box Jump",
@@ -993,7 +833,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 121,
     nazev: "Lateral Raise (Band)",
@@ -1001,7 +840,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 122,
     nazev: "Lateral Raise (Cable)",
@@ -1009,7 +847,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 123,
     nazev: "Lateral Raise (Dumbell)",
@@ -1017,7 +854,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 124,
     nazev: "Lateral Raise (Machine)",
@@ -1025,7 +861,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 125,
     nazev: "Leg Extension (Machine)",
@@ -1033,7 +868,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 126,
     nazev: "Leg Press",
@@ -1041,7 +875,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 127,
     nazev: "Lunge (Barbell)",
@@ -1049,7 +882,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 128,
     nazev: "Lunge (Bodyweight)",
@@ -1057,7 +889,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 129,
     nazev: "Lunge (Dumbell)",
@@ -1065,7 +896,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 130,
     nazev: "Lying Leg Curl (Machine)",
@@ -1073,7 +903,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 131,
     nazev: "Mountain Climber",
@@ -1081,7 +910,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 132,
     nazev: "Muscle Up",
@@ -1089,7 +917,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 133,
     nazev: "Oblique Crunch",
@@ -1097,7 +924,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 134,
     nazev: "Overhead Press (Barbell)",
@@ -1105,7 +931,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 135,
     nazev: "Overhead Press (Cable)",
@@ -1113,7 +938,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 136,
     nazev: "Overhead Press (Dumbell)",
@@ -1121,7 +945,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 137,
     nazev: "Overhead Press (Smith Machine)",
@@ -1129,7 +952,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 138,
     nazev: "Overhead Squat (Barbell)",
@@ -1137,15 +959,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 139,
-    nazev: "Pec Deck (Machine)",
+    nazev: "Peck Deck (Machine)",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/chestfly.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 140,
     nazev: "Pendlay Row",
@@ -1153,7 +973,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 141,
     nazev: "Pistol Squat",
@@ -1161,7 +980,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 142,
     nazev: "Plank",
@@ -1169,7 +987,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 143,
     nazev: "Power Clean",
@@ -1177,7 +994,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 144,
     nazev: "Power Snatch (Barbell)",
@@ -1185,7 +1001,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 145,
     nazev: "Preacher Curl (Barbell)",
@@ -1193,7 +1008,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 146,
     nazev: "Preacher Curl (Dumbell)",
@@ -1201,7 +1015,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 147,
     nazev: "Preacher Curl (Machine)",
@@ -1209,7 +1022,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 148,
     nazev: "Press Under (Barbell)",
@@ -1217,7 +1029,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 149,
     nazev: "Pull Up",
@@ -1225,7 +1036,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 150,
     nazev: "Pull Up (Assisted)",
@@ -1233,7 +1043,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 151,
     nazev: "Pull Up (Band)",
@@ -1241,7 +1050,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 152,
     nazev: "Pullover (Dumbell)",
@@ -1249,7 +1057,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 153,
     nazev: "Pullover (Machine)",
@@ -1257,7 +1064,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 154,
     nazev: "Push Press",
@@ -1265,15 +1071,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 155,
     nazev: "Push Up",
     partie: "Chest",
-    obrazek: "assets/Images/icon.png",
+    obrazek: "assets/Images/pushups.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 156,
     nazev: "Push Up (Band)",
@@ -1281,7 +1085,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 157,
     nazev: "Push Up (Knees)",
@@ -1289,7 +1092,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 158,
     nazev: "Rack Pull (Barbell)",
@@ -1297,7 +1099,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 159,
     nazev: "Reverse Crunch",
@@ -1305,7 +1106,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 160,
     nazev: "Reverse Curl (Band)",
@@ -1313,7 +1113,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 161,
     nazev: "Reverse Curl (Barbell)",
@@ -1321,7 +1120,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 162,
     nazev: "Reverse Curl (Dumbell)",
@@ -1329,7 +1127,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popisss",
   ),
-
   Cvik(
     id: 163,
     nazev: "Reverse Fly (Cable)",
@@ -1337,7 +1134,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 164,
     nazev: "Reverse Fly (Dumbell)",
@@ -1345,7 +1141,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 165,
     nazev: "Reverse Fly (Machine)",
@@ -1353,7 +1148,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 166,
     nazev: "Reverse Grip Concentration Curl (Dumbell)",
@@ -1361,7 +1155,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 167,
     nazev: "Reverse Plank",
@@ -1369,7 +1162,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 168,
     nazev: "Romanian Deadlift (Barbell)",
@@ -1377,7 +1169,6 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
   Cvik(
     id: 169,
     nazev: "Romanian Deadlift (Dumbell)",
@@ -1385,18 +1176,13 @@ List<Cvik> cviky = [
     obrazek: "assets/Images/icon.png",
     popis: "popis",
   ),
-
-
-
 ];
 
 int compareNatural(String a, String b) {
   return a.toLowerCase().compareTo(b.toLowerCase());
 }
 
-List<Cvik>sortedCviky() => cviky.toList()..sort((a, b) => compareNatural(a.nazev, b.nazev));
+List<Cvik> sortedCviky() =>
+    cviky.toList()..sort((a, b) => compareNatural(a.nazev, b.nazev));
 
 List<Cvik> scviky = sortedCviky();
-
-
-

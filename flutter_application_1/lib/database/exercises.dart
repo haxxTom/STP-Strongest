@@ -7,8 +7,6 @@ import '../templates.dart';
 import '../random.dart';
 import '../history.dart';
 
-
-
 class ExerciseItem extends StatelessWidget {
   final Cvik cvik;
 
@@ -27,85 +25,102 @@ class ExerciseItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: TextButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        backgroundColor: softItemColor,
-                        title: Text(
-                          cvik.nazev,
-                          style: const TextStyle(fontSize: 30),
-                        ),
-                        content: SizedBox(
-                          height: 400.0, // Maximální výška
-                          width: 300.0, // Maximální šířka
-                          child: Text(
-                            cvik.popis,
-                            style: const TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              "Zavřít",
-                              style: TextStyle(color: Colors.black),
-                              ),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: softItemColor,
+                  title: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            cvik.obrazek,
+                            width: 100,
+                            height: 100,
                           ),
                         ],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        child: Wrap(
+                          alignment: WrapAlignment.start,
+                          children: [
+                            Text(
+                              cvik.nazev,
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                          ],
                         ),
-                        clipBehavior: Clip.antiAlias,
-                        elevation: 20.0,
-                        contentPadding: const EdgeInsets.all(25.0),
-                        insetPadding: const EdgeInsets.all(20.0),
-                      );
-                    },
-                  );
-                },
-                child: Row(
-                  children:[
-                    Image.asset(
-                      cvik.obrazek,
-                      width: 100,
-                      height: 100,
+                      ),
+                    ],
+                  ),
+                  content: SizedBox(
+                    height: 400.0, // Maximální výška
+                    width: 300.0, // Maximální šířka
+                    child: Text(
+                      cvik.popis,
+                      style: const TextStyle(
+                        fontSize: 15,
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 215,
-                          child: Column(                                        
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                cvik.nazev,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              Text(
-                                cvik.partie,
-                                style: const TextStyle(
-                                  color: Colors.white, fontSize: 12.5),
-                                  textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),                                   
-                        )
-                      ]
-                    )
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        "Zavřít",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                   ],
-                ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 20.0,
+                  contentPadding: const EdgeInsets.all(25.0),
+                  insetPadding: const EdgeInsets.all(20.0),
+                );
+              },
+            );
+          },
+          child: Row(
+            children: [
+              Image.asset(
+                cvik.obrazek,
+                width: 100,
+                height: 100,
               ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                SizedBox(
+                  width: 215,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        cvik.nazev,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        cvik.partie,
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 12.5),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                )
+              ])
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -114,24 +129,18 @@ class ExerciseItem extends StatelessWidget {
 class Exercises extends StatefulWidget {
   @override
   _ExercisesState createState() => _ExercisesState();
-  
-} 
-
+}
 
 class _ExercisesState extends State<Exercises> {
-
   List<Cvik> _filteredCviky = scviky;
   String _searchText = "";
   final _focusNode = FocusNode();
   bool _showSearchBar = false;
-  
 
-       
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-            appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: mainBackgroundColor,
         toolbarHeight: 130,
         title: Column(
@@ -149,7 +158,6 @@ class _ExercisesState extends State<Exercises> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            
             SizedBox(
               height: 100,
               child: Row(
@@ -159,60 +167,68 @@ class _ExercisesState extends State<Exercises> {
                     height: 50,
                     decoration: BoxDecoration(
                       color: midItemColor,
-                      borderRadius: BorderRadius.circular(15.0), 
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: TextButton(
                       onPressed: () {
                         showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: softItemColor,
-                              title: const Text(
-                                "Search by Body Part",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 30,
-                                ),
-                                textAlign: TextAlign.center
-                              ),
-                              content: 
-                               Container(
-                                height: 400,
-                                width: 60,
-                                child:  const Column(
-                                  
-                                  children: [
-                                    SizedBox(
-                                      height: 35,
-                                      width: 125,
-                                      child:
-                                      TextButton(
-                                        onPressed: null, 
-                                        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFF6237A0)),),
-                                        child: Text("Arms", style: TextStyle(color: Colors.white),),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: softItemColor,
+                                title: const Text("Search by Body Part",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 30,
+                                    ),
+                                    textAlign: TextAlign.center),
+                                content: Container(
+                                  height: 400,
+                                  width: 60,
+                                  child: const Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 35,
+                                        width: 125,
+                                        child: TextButton(
+                                          onPressed: null,
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Color(0xFF6237A0)),
+                                          ),
+                                          child: Text(
+                                            "Arms",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-
-                                    SizedBox(
-                                      height: 35,
-                                      width: 125,
-                                      child: TextButton(
-                                        onPressed: null, 
-                                        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xFF6237A0)),),
-                                        child: Text("Arms", style: TextStyle(color: Colors.white),),
+                                      SizedBox(
+                                        height: 10,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        height: 35,
+                                        width: 125,
+                                        child: TextButton(
+                                          onPressed: null,
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Color(0xFF6237A0)),
+                                          ),
+                                          child: Text(
+                                            "Arms",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          }
-                        );
+                              );
+                            });
                       },
                       child: const Text(
                         "Body Part",
@@ -227,8 +243,8 @@ class _ExercisesState extends State<Exercises> {
                     width: 10,
                   ),
                   SizedBox(
-                    width: 50, 
-                    height: 50, 
+                    width: 50,
+                    height: 50,
                     child: FloatingActionButton(
                       backgroundColor: midItemColor,
                       onPressed: () {
@@ -248,60 +264,66 @@ class _ExercisesState extends State<Exercises> {
                       ),
                     ),
                   ),
-  
-                if (_showSearchBar)
-                 Expanded( // Ensures the TextField fills the remaining space
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextField(
-                        cursorColor: Colors.white,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        focusNode: _focusNode,
-                        onChanged: (value) {
-                          setState(() {
-                            _searchText = value;
-                            // Filter exercises based on search term
-                            _filteredCviky = scviky.where((cvik) => cvik.nazev.toLowerCase().contains(_searchText.toLowerCase())).toList();
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Search Exercises",
-                          hintStyle: const TextStyle(
+                  if (_showSearchBar)
+                    Expanded(
+                      // Ensures the TextField fills the remaining space
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextField(
+                          cursorColor: Colors.white,
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(color: Colors.white),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white, width: 3),
-                            borderRadius: BorderRadius.circular(10.0),
+                          focusNode: _focusNode,
+                          onChanged: (value) {
+                            setState(() {
+                              _searchText = value;
+                              // Filter exercises based on search term
+                              _filteredCviky = scviky
+                                  .where((cvik) => cvik.nazev
+                                      .toLowerCase()
+                                      .contains(_searchText.toLowerCase()))
+                                  .toList();
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Search Exercises",
+                            hintStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.white, width: 3),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                
-              ],
-            ),
+                ],
+              ),
             )
-            
           ],
         ),
       ),
       backgroundColor: mainBackgroundColor,
       body: GestureDetector(
         onTap: () {
-          _focusNode.unfocus(); // Unfocus the TextField on tap outside (optional)
+          _focusNode
+              .unfocus(); // Unfocus the TextField on tap outside (optional)
         },
         child: Column(
           children: [
             // Button to toggle search bar visibility
-            Expanded( // Ensures the list fills the remaining space
+            Expanded(
+              // Ensures the list fills the remaining space
               child: ListView.builder(
-                itemCount: _filteredCviky.length, // Use filtered list for display
+                itemCount:
+                    _filteredCviky.length, // Use filtered list for display
                 itemBuilder: (context, index) {
                   final cvik = _filteredCviky[index];
                   return ExerciseItem(cvik: cvik);
@@ -319,9 +341,10 @@ class _ExercisesState extends State<Exercises> {
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const ProfileScreen(title: 'profile')),
-          );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(title: 'profile')),
+            );
           }
           if (index == 1) {
             Navigator.pushReplacement(

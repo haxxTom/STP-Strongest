@@ -34,14 +34,16 @@ class Cvik {
 
   static Cvik fromJson(Map<String, dynamic> json) {
     return Cvik(
-      id: json['id'],
-      nazev: json['nazev'],
-      obrazek: json['obrazek'],
-      partie: json['partie'],
-      popis: json['popis']
+      id: json['id'] is int 
+          ? json['id'] 
+          : int.tryParse(json['id']?.toString() ?? '0') ?? 0,
+      nazev: json['nazev'] ?? '',
+      obrazek: json['obrazek'] ?? '',
+      partie: json['partie'] ?? '',
+      popis: json['popis'] ?? '',
     );
   }
-Map<String, dynamic> toMapWithoutId() {
+  Map<String, dynamic> toMapWithoutId() {
     return {
       'nazev': nazev,
       'partie': partie,

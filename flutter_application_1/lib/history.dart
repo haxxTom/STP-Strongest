@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'main.dart'; // zde by měly být definovány mainBackgroundColor, midItemColor, softItemColor apod.
-import 'templates.dart'; // obrazovka se šablonami
-import 'database/exercises.dart'; // obrazovka cvičení
+import 'main.dart'; 
+import 'templates.dart'; 
+import 'database/exercises.dart'; 
+import 'emptyworkout.dart';
+import 'database/database.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({Key? key}) : super(key: key);
@@ -33,10 +35,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
     }
   }
 
-  /// V této metodě sestavujeme detailní zobrazení tréninku.
-  /// Pro každý cvik (z workout['exercises']) se vypíše název cviku a pod ním jednotlivé série
-  /// získané z workout['sets'] (kde klíč odpovídá indexu cviku).
-  void _showWorkoutDetail(Map<String, dynamic> workout) {
+  /// Zobrazí detail tréninku (stávající kód)
+ void _showWorkoutDetail(Map<String, dynamic> workout) {
     // Získáme seznam cviků a mapu sérií
     List<dynamic> exercises = workout['exercises'] ?? [];
     Map<String, dynamic> setsMap = workout['sets'] ?? {};
@@ -45,6 +45,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: midItemColor,
           title: Text(
             '${workout['nazev']}',
             textAlign: TextAlign.center,
@@ -60,8 +61,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 const SizedBox(height: 10),
                 // Projdeme jednotlivé cviky
                 for (int i = 0; i < exercises.length; i++) ...[
-                  // Předpokládáme, že každý cvik je uložený jako Map a má vnořený objekt 'cvik'
-                  // s názvem v 'nazev'
                   Text(
                     exercises[i]['cvik'] != null && exercises[i]['cvik']['nazev'] != null
                         ? exercises[i]['cvik']['nazev']
@@ -70,7 +69,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   const SizedBox(height: 5),
-                  // Načteme seznam sérií pro tento cvik (klíč jako string indexu)
                   Builder(
                     builder: (context) {
                       List<dynamic> series = setsMap[i.toString()] ?? [];
@@ -96,21 +94,183 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
           ),
           actions: [
-            Center(
-              child: TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Icon(
-                  Icons.close,
-                  size: 30,
-                  color: Colors.white,
-                ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.close,
+                size: 30,
+                color: Colors.white,
               ),
             ),
+            // Tlačítko pro zopakování tréninku
+            TextButton.icon(
+              onPressed: () {
+                Navigator.pop(context); // Zavře detailní dialog
+                // Vytvoříme kopii původních dat tréninku
+                Map<String, dynamic> workoutData = Map<String, dynamic>.from(workout);
+
+                // Pokud existují data o sériích uložené v samostatném klíči 'sets',
+                // sloučíme je do příslušných cvičení.
+                if (workoutData.containsKey('sets')) {
+                  Map<String, dynamic> setsData =
+                      Map<String, dynamic>.from(workoutData['sets']);
+                  List<dynamic> exercises = workoutData['exercises'];
+                  for (int i = 0; i < exercises.length; i++) {
+                    if (setsData.containsKey(i.toString())) {
+                      exercises[i]['sets'] = setsData[i.toString()];
+                    }
+                  }
+                  // Odstraníme samostatný klíč 'sets', protože jsme je již sloučili
+                  workoutData.remove('sets');
+                }
+
+                // Aktualizujeme startTime na aktuální čas, abychom nezobrazovali starý čas.
+                workoutData['startTime'] = DateTime.now().toIso8601String();
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewEmptyWorkoutScreen(
+                      trenink: Trenink.fromJson(workoutData),
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.repeat, color: Colors.white),
+              label: const Text(
+                "Zopakovat trénink",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),          
           ],
-          backgroundColor: midItemColor,
         );
       },
     );
+  }
+
+  /// Zobrazí dialog s akcemi "Přejmenovat" (tužka) a "Smazat" (koš) pro daný trénink
+  void _showWorkoutActions(int index) {
+    Map<String, dynamic> workout = workoutHistory[index];
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: midItemColor,
+          title: Text(
+            workout['nazev'],
+            style: const TextStyle(color: Colors.white),
+          ),
+          content: const Text(
+            "Vyberte akci:",
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.edit, color: Colors.white),
+              tooltip: "Přejmenovat",
+              onPressed: () async {
+                Navigator.pop(context); // zavřeme akční dialog
+                await _renameWorkout(index);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete, color: Colors.white),
+              tooltip: "Smazat",
+              onPressed: () async {
+                Navigator.pop(context); // zavřeme akční dialog
+                await _deleteWorkout(index);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  /// Metoda pro přejmenování workoutu
+  Future<void> _renameWorkout(int index) async {
+    Map<String, dynamic> workout = workoutHistory[index];
+    TextEditingController renameController =
+        TextEditingController(text: workout['nazev']);
+    bool renameConfirmed = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: midItemColor,
+          title: const Text("Přejmenujte trénink"),
+          content: TextField(
+            controller: renameController,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              labelText: "Nový název",
+              labelStyle: const TextStyle(color: Colors.white),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white, width: 2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child:
+                  const Text("Zrušit", style: TextStyle(color: Colors.white)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text("OK", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
+    );
+    if (renameConfirmed == true) {
+      setState(() {
+        workoutHistory[index]['nazev'] = renameController.text;
+      });
+      // Uložíme aktualizovanou historii do SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('workoutHistory', jsonEncode(workoutHistory));
+    }
+  }
+
+  /// Metoda pro smazání workoutu
+  Future<void> _deleteWorkout(int index) async {
+    bool confirmDelete = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: midItemColor,
+          title: const Text("Opravdu chcete smazat trénink?"),
+          content: const Text("Tento trénink bude nenávratně smazán.",
+              style: TextStyle(color: Colors.white)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text("Ne", style: TextStyle(color: Colors.white)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text("Ano", style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
+    );
+    if (confirmDelete == true) {
+      setState(() {
+        workoutHistory.removeAt(index);
+      });
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('workoutHistory', jsonEncode(workoutHistory));
+    }
   }
 
   final TextStyle infoStyle = const TextStyle(
@@ -151,11 +311,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   color: midItemColor,
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
-                    title: Text(workout['nazev']),
-                    textColor: Colors.white,
+                    title: Text(
+                      workout['nazev'],
+                      style: const TextStyle(color: Colors.white),
+                    ),
                     subtitle: Text(
                       'Start: ${DateTime.parse(workout['startTime']).toLocal()}',
+                      style: const TextStyle(color: Colors.white70),
                     ),
+                    // Při dlouhém podržení zobrazíme tlačítka pro přejmenování a smazání
+                    onLongPress: () => _showWorkoutActions(index),
                     onTap: () => _showWorkoutDetail(workout),
                   ),
                 );

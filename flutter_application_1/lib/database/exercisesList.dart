@@ -1100,13 +1100,6 @@ List<Cvik> cviky = [
     popis: "popis",
   ),
   Cvik(
-    id: 159,
-    nazev: "Reverse Crunch",
-    partie: "Core",
-    obrazek: "assets/Images/icon.png",
-    popis: "popis",
-  ),
-  Cvik(
     id: 160,
     nazev: "Reverse Curl (Band)",
     partie: "Arms",

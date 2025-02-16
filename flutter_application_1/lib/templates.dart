@@ -4,11 +4,35 @@ import 'main.dart';
 import 'random.dart';
 import 'ex1.dart';
 import 'history.dart';
-import 'emptyworkout.dart'; // Ujistěte se, že v tomto souboru je definována třída NewEmptyWorkoutScreen
+import 'emptyworkout.dart'; // Zde je definována třída NewEmptyWorkoutScreen
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_application_1/database/database.dart';
 import 'dart:convert';
 import 'emptytemplate.dart';
+
+// Předpokládejme, že máte definovaný model WorkoutTemplate, který ukládá název a seznam cvičení.
+class WorkoutTemplate {
+  String nazev;
+  List<dynamic> exercises; // Předpokládáme, že se zde ukládají objekty typu Exercise
+
+  WorkoutTemplate({required this.nazev, required this.exercises});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nazev': nazev,
+      'exercises': exercises.map((e) => e.toJson()).toList(),
+    };
+  }
+
+  factory WorkoutTemplate.fromJson(Map<String, dynamic> json) {
+    return WorkoutTemplate(
+      nazev: json['nazev'],
+      exercises: (json['exercises'] as List)
+          .map((e) => Exercise.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+}
 
 class TemplateScreen extends StatefulWidget {
   TemplateScreen({Key? key}) : super(key: key);
@@ -18,8 +42,9 @@ class TemplateScreen extends StatefulWidget {
 }
 
 class _TemplateScreenState extends State<TemplateScreen> {
-  // Předpokládáme, že activeWorkout je nějaká proměnná, která drží aktivní trénink
   Trenink? activeWorkout;
+  List<WorkoutTemplate> templates = [];
+  bool _isLoadingTemplates = true;
 
   Future<List<Map<String, String>>> _loadSetsDataFromPrefs() async {
     final prefs = await SharedPreferences.getInstance();
@@ -54,10 +79,42 @@ class _TemplateScreenState extends State<TemplateScreen> {
     }
   }
 
+  Future<void> _loadTemplates() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? templatesJson = prefs.getString('workoutTemplates');
+    if (templatesJson != null) {
+      List<dynamic> jsonList = jsonDecode(templatesJson);
+      List<WorkoutTemplate> loadedTemplates = jsonList
+          .map((templateJson) =>
+              WorkoutTemplate.fromJson(templateJson as Map<String, dynamic>))
+          .toList();
+      setState(() {
+        templates = loadedTemplates;
+        _isLoadingTemplates = false;
+      });
+    } else {
+      setState(() {
+        templates = [];
+        _isLoadingTemplates = false;
+      });
+    }
+  }
+
+  Future<void> _deleteTemplate(int index) async {
+    setState(() {
+      templates.removeAt(index);
+    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String updatedJson =
+        jsonEncode(templates.map((t) => t.toJson()).toList());
+    await prefs.setString('workoutTemplates', updatedJson);
+  }
+
   @override
   void initState() {
     super.initState();
     _loadWorkout();
+    _loadTemplates();
   }
 
   @override
@@ -79,26 +136,30 @@ class _TemplateScreenState extends State<TemplateScreen> {
       ),
       backgroundColor: mainBackgroundColor,
       body: Container(
-        padding:
-            const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
+        padding: const EdgeInsets.only(
+            left: 20.0, right: 20.0, top: 20.0, bottom: 20.0),
         child: Column(
           children: [
+            // Řada tlačítek nahoře
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(midItemColor),
-                    fixedSize: MaterialStateProperty.all<Size>(const Size(150, 75)),
+                    backgroundColor:
+                        MaterialStateProperty.all(midItemColor),
+                    fixedSize: MaterialStateProperty.all<Size>(
+                        const Size(150, 75)),
                   ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            TemplateWorkoutScreen()
-                      ),
-                    );
+                          builder: (context) => TemplateWorkoutScreen()),
+                    ).then((_) {
+                      // Po návratu načteme znovu šablony, pokud by mohly být aktualizovány
+                      _loadTemplates();
+                    });
                   },
                   child: const Text(
                     "Nová šablona",
@@ -107,15 +168,15 @@ class _TemplateScreenState extends State<TemplateScreen> {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(midItemColor),
-                    fixedSize:
-                        MaterialStateProperty.all<Size>(const Size(150, 75)),
+                    backgroundColor:
+                        MaterialStateProperty.all(midItemColor),
+                    fixedSize: MaterialStateProperty.all<Size>(
+                        const Size(150, 75)),
                   ),
                   onPressed: () {
                     setState(() {
                       // Kontrola, zda už máme aktivní trénink
                       if (activeWorkout == null) {
-                        // Vytvoříme nový trénink, pokud žádný není aktivní
                         Trenink trenink = startNewWorkout("Nový Trénink");
                         activeWorkout = trenink;
                         print("Nový trénink byl vytvořen.");
@@ -123,8 +184,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                         print("Pokračujeme v tréninku.");
                       }
                     });
-
-                    // Navigujeme na obrazovku NewEmptyWorkoutScreen s aktivním tréninkem.
+                    // Navigace na obrazovku NewEmptyWorkoutScreen s aktivním tréninkem.
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -134,14 +194,178 @@ class _TemplateScreenState extends State<TemplateScreen> {
                     );
                   },
                   child: Text(
-                    // Dynamicky měníme text tlačítka
-                    activeWorkout == null ? "Nový Trénink" : "Pokračovat v tréninku",
+                    activeWorkout == null
+                        ? "Nový Trénink"
+                        : "Pokračovat v tréninku",
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ],
             ),
-            //ListView.builder(itemBuilder: itemBuilder)
+            const SizedBox(height: 20),
+            // Zobrazení uložených šablon
+            Expanded(
+              child: _isLoadingTemplates
+                  ? const Center(child: CircularProgressIndicator())
+                  : templates.isEmpty
+                      ? const Center(
+                          child: Text(
+                            "Žádné šablony",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: templates.length,
+                          itemBuilder: (context, index) {
+                            final template = templates[index];
+                            // Získáme názvy prvních dvou cviků, pokud existují.
+                            String subtitleText = "";
+                            if (template.exercises.isNotEmpty) {
+                              List<dynamic> firstTwo = template.exercises.length > 2
+                                  ? template.exercises.sublist(0, 2)
+                                  : template.exercises;
+                              subtitleText = firstTwo
+                                  .map((ex) => ex.cvik.nazev)
+                                  .join(", ");
+                            }
+                            return Card(
+                              color: midItemColor,
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              child: ListTile(
+                                title: Text(
+                                  template.nazev,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                subtitle: Text(
+                                  subtitleText,
+                                  style:
+                                      const TextStyle(color: Colors.white70),
+                                ),
+                                onTap: () {
+                                  // Po kliknutí se zobrazí dialog s detailem tréninku.
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        backgroundColor: midItemColor,
+                                        title: Text(
+                                          template.nazev,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(color: Colors.white),
+                                        ),
+                                        content: SingleChildScrollView(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              const Text(
+                                                'Detail tréninku:',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              // Projdeme jednotlivé cviky
+                                              for (int i = 0; i < template.exercises.length; i++) ...[
+                                                Text(
+                                                  template.exercises[i].cvik.nazev,
+                                                  style: const TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 16,
+                                                      color: Colors.white),
+                                                ),
+                                                const SizedBox(height: 5),
+                                                Builder(
+                                                  builder: (context) {
+                                                    List<dynamic> series = template.exercises[i].sets;
+                                                    if (series.isEmpty) {
+                                                      return const Text(
+                                                          'Žádné série',
+                                                          style: TextStyle(
+                                                              fontStyle: FontStyle.italic,
+                                                              color: Colors.white70));
+                                                    }
+                                                    return Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        for (int j = 0; j < series.length; j++)
+                                                          Text(
+                                                            '${j + 1}. SERIE: ${series[j].weight} KG - ${series[j].reps}x',
+                                                            style: const TextStyle(fontSize: 14, color: Colors.white),
+                                                          ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ),
+                                                const SizedBox(height: 10),
+                                              ],
+                                            ],
+                                          ),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Icon(
+                                              Icons.close,
+                                              size: 30,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          TextButton.icon(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              // Vytvoříme nový trénink podle šablony s předdefinovanými cviky.
+                                              Trenink newTraining = Trenink(
+                                                nazev: template.nazev,
+                                                startTime: DateTime.now(),
+                                              );
+                                              newTraining.exercises = List<Exercise>.from(template.exercises);
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => NewEmptyWorkoutScreen(trenink: newTraining),
+                                                ),
+                                              );
+                                            },
+                                            icon: const Icon(Icons.repeat, color: Colors.white),
+                                            label: const Text(
+                                              "Spustit trénink",
+                                              style: TextStyle(color: Colors.white),
+                                            ),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                onLongPress: () async {
+                                  bool? confirm = await showDialog<bool>(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text("Odstranit šablonu"),
+                                      content: const Text("Opravdu chcete odstranit tuto šablonu?"),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.of(context).pop(false),
+                                          child: const Text("Ne"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.of(context).pop(true),
+                                          child: const Text("Ano"),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                  if (confirm == true) {
+                                    _deleteTemplate(index);
+                                  }
+                                },
+                              ),
+                            );
+                          },
+                        ),
+            ),
           ],
         ),
       ),
@@ -155,8 +379,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    const ProfileScreen(title: 'profile'),
+                builder: (context) => const ProfileScreen(title: 'profile'),
               ),
             );
           }

@@ -347,13 +347,11 @@ class _NewEmptyWorkoutScreenState extends State<NewEmptyWorkoutScreen> {
       return;
     }
 
-    // Předvyplněný text obsahuje dosavadní název a datum a čas začátku tréninku.
     String defaultName =
         "${widget.trenink.nazev} - ${widget.trenink.startTime.toLocal().toString()}";
     TextEditingController nameController =
         TextEditingController(text: defaultName);
 
-    // Zobrazíme dialog pro pojmenování tréninku a zjistíme, zda uživatel potvrzuje dokončení.
     bool finishConfirmed = await showDialog(
       context: context,
       builder: (BuildContext context) {
